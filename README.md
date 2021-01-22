@@ -4,7 +4,7 @@
 https://github.com/esc/conda-zsh-completion
 
 ## Mac
-Hotkeys for window tiles:  
+### Hotkeys for window tiles:  
 Menu Title | Keyboard Shortcut
 ---------- | -----------------
 Move Window to Left Side of Screen | Cmd + Shift + <-
@@ -17,3 +17,7 @@ Revert | Cmd + Shift + Down
 
 https://apple.stackexchange.com/a/212607  
 https://apple.stackexchange.com/a/377092
+
+### Fonts smoothing. 
+`defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO`   
+https://osxdaily.com/2018/09/26/fix-blurry-thin-fonts-text-macos-mojave/
