@@ -23,3 +23,10 @@ https://apple.stackexchange.com/a/377092
 `defaults -currentHost write -g AppleFontSmoothing -int 0`  
 https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antialiasing/  
 https://osxdaily.com/2018/09/26/fix-blurry-thin-fonts-text-macos-mojave/
+
+## Tools
+#### bat
+[bat](https://github.com/sharkdp/bat) is `cat` with highlighting
+
+#### fzf
+[fzf](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder.
