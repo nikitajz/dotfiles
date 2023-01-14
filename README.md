@@ -30,3 +30,7 @@ https://osxdaily.com/2018/09/26/fix-blurry-thin-fonts-text-macos-mojave/
 
 #### fzf
 [fzf](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder.
+
+#### z.lua
+[z.lua](https://github.com/skywind3000/z.lua) - faster version of `z` to jump around
+> brew install z.lua
