@@ -1,0 +1,5 @@
+tap "homebrew/cask"
+tap "homebrew/core"
+cask "cleanshot"
+cask "notion"
+cask "spotify"

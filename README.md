@@ -4,6 +4,12 @@
 Add key to keychain
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent
 
+## Homebrew
+Install all apps using Brewfile from this repo
+`brew bundle`
+
+https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f
+
 ## Conda autocomplete for zsh:
 https://github.com/esc/conda-zsh-completion
 
