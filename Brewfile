@@ -24,10 +24,13 @@ brew "tree"
 brew "wget"
 brew "zoxide"
 
+# Apps
 cask "1password"
 cask "alfred"
+cask 'docker'
 cask "font-hack-nerd-font"
 cask "firefox"
+cask 'google-chrome'
 cask "iterm2"
 cask "postman"
 cask "spotify"
