@@ -7,9 +7,10 @@ tap "buo/cask-upgrade"
 brew "awscli"
 brew "bat"
 brew "cheat"
-brew 'coreutils' # Those that come with macOS are outdated
+brew "coreutils" # Those that come with macOS are outdated
+brew "curl"
 brew "fd"
-brew 'ffmpeg'
+brew "ffmpeg"
 brew "fzf"
 brew "gh"
 brew "git"
@@ -27,10 +28,10 @@ brew "zoxide"
 # Apps
 cask "1password"
 cask "alfred"
-cask 'docker'
+cask "docker"
 cask "font-hack-nerd-font"
 cask "firefox"
-cask 'google-chrome'
+cask "google-chrome"
 cask "iterm2"
 cask "postman"
 cask "spotify"
