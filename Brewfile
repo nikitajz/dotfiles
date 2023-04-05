@@ -3,10 +3,13 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "buo/cask-upgrade"
+
 brew "awscli"
 brew "bat"
 brew "cheat"
+brew 'coreutils' # Those that come with macOS are outdated
 brew "fd"
+brew 'ffmpeg'
 brew "fzf"
 brew "gh"
 brew "git"
@@ -20,6 +23,7 @@ brew "tmux"
 brew "tree"
 brew "wget"
 brew "zoxide"
+
 cask "1password"
 cask "alfred"
 cask "font-hack-nerd-font"
