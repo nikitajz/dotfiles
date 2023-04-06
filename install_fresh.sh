@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 echo "Setting up your Mac..."
 
@@ -25,4 +26,6 @@ brew update
 # Install all dependencies using bundle (See Brewfile)
 brew tap homebrew/bundle
 brew bundle --file ./Brewfile
+
+./clone_repos.sh
 
