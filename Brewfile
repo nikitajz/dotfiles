@@ -24,6 +24,8 @@ brew "tmux"
 brew "tree"
 brew "wget"
 brew "zoxide"
+brew "zsh-completions"
+brew "zsh-syntax-highlighting"
 
 # Apps
 cask "1password"
