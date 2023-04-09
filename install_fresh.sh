@@ -25,17 +25,17 @@ if ! command -v brew > /dev/null; then
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
-
-# Check for Oh My Zsh and install if we don't have it
-if ! command -v omz > /dev/null; then
-  echo "Installing Oh My Zsh"
-  /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" "" --keep-zshrc
-fi
-
 # Update Homebrew recipes
 brew update
 
 echo "Installing brew dependencies from Brewfile"
 brew tap homebrew/bundle
 brew bundle --file $DOTFILES/Brewfile
+
+
+# Check for Oh My Zsh and install if we don't have it
+if ! command -v omz > /dev/null; then
+  echo "Installing Oh My Zsh"
+  /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" "" --keep-zshrc
+fi
 
