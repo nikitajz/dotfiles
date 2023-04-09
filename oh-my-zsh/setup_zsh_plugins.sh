@@ -5,13 +5,14 @@
 OMZ_PLUGINS=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins
 
 # List of plugin name and repository tuples (github is assumed by default)
-plugins=(
-  ("jq" "reegnz/jq-zsh-plugin")
-  ("powerlevel10k", "romkatv/powerlevel10k")
+declare -a plugins=(
+  "jq reegnz/jq-zsh-plugin"
+  "powerlevel10k romkatv/powerlevel10k"
 )
 
 function clone_plugin_repo() {
-  for plugin in "$@:"; do
+  for elem in "${plugins[@]}"; do
+    read -a plugin <<< "$elem"  # uses default whitespace IFS
     plugin_name="${plugin[0]}"
     repo_url="${plugin[1]}"
    
