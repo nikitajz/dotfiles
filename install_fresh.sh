@@ -9,7 +9,6 @@ export DOTFILES=$HOME/.dotfiles
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
 ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
-
 # Check for Oh My Zsh and install if we don't have it
 if test ! $(which omz); then
   /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
@@ -25,7 +24,7 @@ fi
 
 # Backup previous .zshrc config and use one from the repo
 mv $HOME/.zshrc $HOME/.zshrc_old
-ln -s .zshrc $HOME/.zshrc
+ln -s $DOTFILES/.zshrc $HOME/.zshrc
 
 # Update Homebrew recipes
 brew update
@@ -33,6 +32,4 @@ brew update
 # Install all dependencies using bundle (See Brewfile)
 brew tap homebrew/bundle
 brew bundle --file ./Brewfile
-
-./setup_zsh_plugins.sh
 
