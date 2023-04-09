@@ -1,16 +1,10 @@
-# Load env variables
-# Path to dotfiles
 export DOTFILES=$HOME/.dotfiles
+export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+
+export ZSH="$HOME/.oh-my-zsh"
 
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
 ZSH_CUSTOM=$DOTFILES/oh-my-zsh
-
-bindkey \^U backward-kill-line  # fix Ctrl-U in terminal
-
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
@@ -61,6 +55,8 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # CUSTOM
+
+bindkey \^U backward-kill-line  # fix Ctrl-U in terminal
 
 # Activate Powerlevel10k Instant Prompt.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
