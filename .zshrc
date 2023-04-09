@@ -1,5 +1,6 @@
 export DOTFILES=$HOME/.dotfiles
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+export LANG=en_US.UTF-8
 
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -32,17 +33,16 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 plugins=(
   git
   jq # https://github.com/reegnz/jq-zsh-plugin
-  zsh-autosuggestions
+  zsh-autosuggestions # should be before zsh-syntax-highlighting
   zsh-syntax-highlighting
   )
+
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$USER
 
 source $ZSH/oh-my-zsh.sh
 
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 bindkey '^ ' autosuggest-accept
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
