@@ -63,9 +63,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
-# For completions to work, the above line must be added after compinit is called.
-eval "$(zoxide init zsh)"
+# Use (j, ji) as default commands instead of (z, zi)
+eval "$(zoxide init zsh --cmd j)"
 
 # "sharkdp/fd" file finder, modern replacement for GNU find
 FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules --exclude .zshrc"
