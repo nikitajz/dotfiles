@@ -22,20 +22,30 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Command execution time stamp shown in the history command output.
 HIST_STAMPS="dd.mm.yyyy"
 
+# Install plugins & compile
+source $ZSH_CUSTOM/setup_zsh_plugins.sh
+
+# zsh-completions
+# Don't use zsh-completions as oh-my-zsh plugin (including `compinit`)
+# https://github.com/zsh-users/zsh-completions/issues/603
+fpath+="${ZSH_CUSTOM:-"$ZSH/custom"}/plugins/zsh-completions/src"
+
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
   git
   jq # https://github.com/reegnz/jq-zsh-plugin
-  zsh-syntax-highlighting
   zsh-autosuggestions
-  zsh-completions
+  zsh-syntax-highlighting
   )
 
 source $ZSH/oh-my-zsh.sh
 
-# command for zsh-completions
-autoload -U compinit && compinit
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+bindkey '^ ' autosuggest-accept
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -51,6 +61,12 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # CUSTOM
+
+# Activate Powerlevel10k Instant Prompt.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 
 # For completions to work, the above line must be added after compinit is called.
 eval "$(zoxide init zsh)"

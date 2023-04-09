@@ -2,6 +2,13 @@
 set -eu
 
 echo "Setting up your Mac..."
+# These variables should be the same as in .zshrc
+# Path to dotfiles
+export DOTFILES=$HOME/.dotfiles
+
+# Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
+ZSH_CUSTOM=$DOTFILES/oh-my-zsh
+
 
 # Check for Oh My Zsh and install if we don't have it
 if test ! $(which omz); then
@@ -27,5 +34,5 @@ brew update
 brew tap homebrew/bundle
 brew bundle --file ./Brewfile
 
-./clone_repos.sh
+./setup_zsh_plugins.sh
 
