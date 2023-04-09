@@ -1,5 +1,9 @@
+# Load env variables
 # Path to dotfiles
 export DOTFILES=$HOME/.dotfiles
+
+# Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
+ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
 bindkey \^U backward-kill-line  # fix Ctrl-U in terminal
 
@@ -68,9 +72,6 @@ ZSH_THEME="robbyrussell"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$DOTFILES
-
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -78,10 +79,16 @@ ZSH_CUSTOM=$DOTFILES
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  jq
+  jq # https://github.com/reegnz/jq-zsh-plugin
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  zsh-completions
   )
 
 source $ZSH/oh-my-zsh.sh
+
+# command for zsh-completions
+autoload -U compinit && compinit
 
 # User configuration
 
