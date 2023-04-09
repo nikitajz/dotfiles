@@ -9,6 +9,23 @@ Install all apps using Brewfile from this repo
 
 [Brew Bundle Brewfile Tips](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
 
+## Fonts
+[Fira Code](https://github.com/tonsky/FiraCode) is a good choice
+
+Use a patched version to include various glyphs and icons (already included in Brewfile)
+```
+# Original font
+$ brew cask install font-fira-code
+
+# Patched variant
+$ brew cask install font-firacode-nerd-font
+```
+Might require additional [setup in other apps, e.g. JetBrains products, VSCode, etc](https://github.com/romkatv/powerlevel10k/blob/master/README.md#manual-font-installation)
+
+### Useful links
+[Selected fonts by Joshukraine](https://github.com/joshukraine/dotfiles#my-favorite-programming-fonts)
+[Programming fonts - Test Drive](https://app.programmingfonts.org/)
+
 ## Conda autocomplete for zsh:
 https://github.com/esc/conda-zsh-completion
 

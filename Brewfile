@@ -28,6 +28,9 @@ brew "zsh-autosuggestions"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
 
+# Fonts
+cask "font-fira-code-nerd-font"
+
 # Apps
 cask "1password"
 cask "alfred"

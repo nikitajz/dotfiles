@@ -7,8 +7,11 @@ export ZSH="$HOME/.oh-my-zsh"
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
 ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k"
 
 # Disable marking untracked files under VCS as dirty. 
 # This makes repository status check for large repositories much, much faster.

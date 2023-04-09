@@ -16,6 +16,7 @@ if [ -f $HOME/.zshrc ]; then
   mv $HOME/.zshrc $HOME/.zshrc_old
 fi
 ln -s $DOTFILES/.zshrc $HOME/.zshrc
+ln -s $DOTFILES/.p10k.zsh $HOME/.p10k.zsh
 
 # Check for Homebrew and install if we don't have it
 if ! command -v brew > /dev/null; then

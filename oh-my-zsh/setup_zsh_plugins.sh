@@ -3,11 +3,11 @@
 # https://github.com/romkatv/zsh-bench
 
 OMZ_PLUGINS=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins
+OMZ_THEMES=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes
 
 # List of plugin name and repository tuples (github is assumed by default)
 declare -a plugins=(
   "jq reegnz/jq-zsh-plugin"
-  "powerlevel10k romkatv/powerlevel10k"
 )
 
 function clone_plugin_repo() {
@@ -27,3 +27,7 @@ function clone_plugin_repo() {
   done
 }
 
+if [[ ! -e $OMZ_THEMES ]]; then
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $OMZ_THEMES
+  make -C $OMZ_THEMES/powerlevel10k pkg
+fi
