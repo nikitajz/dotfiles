@@ -1,6 +1,0 @@
-new -s dash -x 110 -y 40 -t 1 
-set-hook -g session-created "splitw -v -p 60 -I 'zsh'"
-splitw -v -l 40 -t 1 'htop'
-splitw -v -l 18 -t 2 'watch -n2 -d nvidia-smi'
-splitw -h -l 22 -t 3 'watch -n2 -d sensors'
-#send-keys -t 4 'zsh' C-m

@@ -1,4 +1,0 @@
-new -s dash -x 110 -y 40 
-neww -n htop 'htop'
-splitw -v -p 50 -t 1 'watch -n2 -d nvidia-smi'
-splitw -h -p 25 -t 2 'watch -n2 -d sensors'
