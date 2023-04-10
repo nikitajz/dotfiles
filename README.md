@@ -22,6 +22,11 @@ $ brew cask install font-firacode-nerd-font
 ```
 Might require additional [setup in other apps, e.g. JetBrains products, VSCode, etc](https://github.com/romkatv/powerlevel10k/blob/master/README.md#manual-font-installation)
 
+## Spellchecking
+Install Ukrainial spellchecking (included in installation script)
+https://github.com/titoBouzout/Dictionaries
+copy to $HOME/Library/Spelling
+
 ### Useful links
 [Selected fonts by Joshukraine](https://github.com/joshukraine/dotfiles#my-favorite-programming-fonts)
 [Programming fonts - Test Drive](https://app.programmingfonts.org/)

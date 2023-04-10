@@ -10,6 +10,13 @@ export DOTFILES=$HOME/.dotfiles
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
 ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
+# Ukrainian spellchecking 
+if [ ! -f $HOME/Library/Spelling/Ukrainian_uk_UA.dic ]; then
+  echo "Installing Ukranian language spelling"
+  curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.aff --output-dir $HOME/Library/Spelling
+  curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.dic --output-dir $HOME/Library/Spelling
+fi
+
 # Backup previous .zshrc config and use one from the repo
 if [ -f $HOME/.zshrc ]; then
   echo "Backing up existing .zshrc file to .zshrc_old"
