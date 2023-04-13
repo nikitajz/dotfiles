@@ -8,6 +8,7 @@ OMZ_THEMES=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes
 # List of plugin name and repository tuples (github is assumed by default)
 declare -a plugins=(
   "jq reegnz/jq-zsh-plugin"
+  "alias-tips djui/alias-tips"
 )
 
 function clone_plugin_repo() {

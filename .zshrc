@@ -34,6 +34,7 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
+  alias-tips
   git
   jq # https://github.com/reegnz/jq-zsh-plugin
   zsh-autosuggestions # should be before zsh-syntax-highlighting
