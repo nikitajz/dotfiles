@@ -12,9 +12,7 @@ declare -a plugins=(
 
 function clone_plugin_repo() {
   for elem in "${plugins[@]}"; do
-    IFS=' ' read -r plugin_name repo_url <<< "$elem"  # uses default whitespace IFS
-#    plugin_name="${plugin[0]}"
-#    repo_url="${plugin[1]}"
+    IFS=' ' read -r plugin_name repo_url <<< "$elem" 
    
     if [[ "$repo_url" != http* ]]; then
       repo_url="https://github.com/$repo_url.git"
