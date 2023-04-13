@@ -23,10 +23,12 @@ function clone_plugin_repo() {
     
     if [[ ! -e "$OMZ_PLUGINS/$plugin_name" ]]; then
       echo "Cloning the repo for plugin ${plugin_name}"
-      git clone --depth=1 "$repo_url" "$OMZ_PLUGIN/$plugin_name"
+      git clone --depth=1 "$repo_url" "$OMZ_PLUGINS/$plugin_name"
     fi
   done
 }
+
+clone_plugin_repo
 
 if [[ ! -e $OMZ_THEMES ]]; then
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $OMZ_THEMES
