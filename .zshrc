@@ -5,7 +5,7 @@ export LANG=en_US.UTF-8
 export ZSH="$HOME/.oh-my-zsh"
 
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
-ZSH_CUSTOM=$DOTFILES/oh-my-zsh
+export ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
