@@ -7,6 +7,8 @@ echo "Setting up your Mac..."
 # Path to dotfiles
 export DOTFILES=$HOME/.dotfiles
 
+$(brew --prefix)/opt/fzf/install
+
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
 ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
@@ -40,6 +42,8 @@ echo "Installing brew dependencies from Brewfile"
 brew tap homebrew/bundle
 brew bundle --file $DOTFILES/Brewfile
 
+# fzf install
+$(brew --prefix)/opt/fzf/install
 
 # Check for Oh My Zsh and install if we don't have it
 if ! command -v omz > /dev/null; then
