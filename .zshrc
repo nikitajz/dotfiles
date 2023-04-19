@@ -86,3 +86,8 @@ export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 # Enable command completion (e.g. for awscli)
 complete -C aws_completer aws
 
+# Include local config
+if [ -f ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi
+
