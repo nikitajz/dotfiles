@@ -56,20 +56,14 @@ https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antial
 https://osxdaily.com/2018/09/26/fix-blurry-thin-fonts-text-macos-mojave/
 
 ## CLI tools
-#### bat
 [bat](https://github.com/sharkdp/bat) is `cat` with highlighting
 
-#### fd
 [fd](https://github.com/sharkdp/fd) - A simple, fast and user-friendly alternative to 'find'
 
-#### fzf
 [fzf](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder.
 
-#### jq
 [jq](https://stedolan.github.io/jq/) - jq is a lightweight and flexible command-line JSON processor.
 
-#### ripgrep
 [ripgrep](https://github.com/BurntSushi/ripgrep) - ripgrep recursively searches directories for a regex pattern while respecting your gitignore (replacement for 'grep')
 
-#### zoxide
 [zoxide](https://github.com/ajeetdsouza/zoxide) - a smarter cd command. Supports all major shells. A faster alternative to z/z.lua
