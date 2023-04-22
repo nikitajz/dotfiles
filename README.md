@@ -67,3 +67,37 @@ https://osxdaily.com/2018/09/26/fix-blurry-thin-fonts-text-macos-mojave/
 [ripgrep](https://github.com/BurntSushi/ripgrep) - ripgrep recursively searches directories for a regex pattern while respecting your gitignore (replacement for 'grep')
 
 [zoxide](https://github.com/ajeetdsouza/zoxide) - a smarter cd command. Supports all major shells. A faster alternative to z/z.lua
+
+
+### fzf keymaps
+*Navigation*
+ctrl-j:     scroll down
+ctrl-k:     scroll up
+ctrl-d:     half-page-down
+ctrl-u:     half-page-up
+
+ctrl-a:     beginning-of-line
+ctrl-e:     end-of-line
+alt-b:      backward-word
+alt-f:      forward-word
+
+Editing
+ctrl-w:     delete prev word (backward-kill-word)
+alt-bs:     delete prev word (backward-kill-word)
+alt-d:      delete word (kill-word)
+ctrl-l:     clear screen
+
+ctrl-y:     yank (copy)
+ctrl-x:     delete selected file
+
+**Navigation Preview**
+shift-up:   up
+shift-down: down
+alt-j:      preview-half-page-down
+alt-k:      preview-half-page-up
+alt-h:      preview-top
+alt-l:      preview-bottom
+
+alt-w:      toggle-preview-wrap
+
+
