@@ -5,6 +5,8 @@ alias ea="source venv/bin/activate"
 alias vea="source ~/.virtualenvs/$(basename $PWD)/bin/activate"
 alias ed="deactivate"
 
+alias zshconf="$EDITOR ~/.zshrc"
+
 # serverless
 alias sls=serverless
 
