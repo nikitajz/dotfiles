@@ -11,6 +11,13 @@ alias ls="exa"
 alias ll="exa -alh"
 alias tree="exa --tree"
 
+# Sometimes bat is installed as batcat.
+if command -v batcat >/dev/null; then
+	alias cat="batcat"
+elif command -v bat >/dev/null; then
+	alias cat="bat"
+fi
+
 # serverless
 alias sls=serverless
 
