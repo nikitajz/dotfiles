@@ -62,6 +62,8 @@ https://osxdaily.com/2018/09/26/fix-blurry-thin-fonts-text-macos-mojave/
 
 [exa](https://github.com/ogham/exa) - A modern replacement for `ls`
 
+[entr](https://github.com/eradman/entr) - Run arbitrary commands when files change
+
 [fd](https://github.com/sharkdp/fd) - A simple, fast and user-friendly alternative to 'find'
 
 [fzf](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder.
