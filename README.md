@@ -108,4 +108,7 @@ alt-l:      preview-bottom
 
 alt-w:      toggle-preview-wrap
 
-
+### zoxide
+`jj`/`zz` jump to previous directory 
+`j`/`z` `+tab` - disambiguate (choose) if z has few options where to jump
+Tip: Using the same command twice jump to the next directory that matches
