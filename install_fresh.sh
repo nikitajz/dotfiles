@@ -12,28 +12,29 @@ $(brew --prefix)/opt/fzf/install
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
 ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
-# Ukrainian spellchecking 
+# Ukrainian spellchecking
 if [ ! -f $HOME/Library/Spelling/Ukrainian_uk_UA.dic ]; then
-  echo "Installing Ukranian language spelling"
-  curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.aff --output-dir $HOME/Library/Spelling
-  curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.dic --output-dir $HOME/Library/Spelling
+	echo "Installing Ukranian language spelling"
+	curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.aff --output-dir $HOME/Library/Spelling
+	curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.dic --output-dir $HOME/Library/Spelling
 fi
 
 # Backup previous .zshrc config and use one from the repo
 if [ -f $HOME/.zshrc ]; then
-  echo "Backing up existing .zshrc file to .zshrc_old"
-  mv $HOME/.zshrc $HOME/.zshrc_old
+	echo "Backing up existing .zshrc file to .zshrc_old"
+	mv $HOME/.zshrc $HOME/.zshrc_old
 fi
 ln -s $DOTFILES/.zshrc $HOME/.zshrc
 ln -s $DOTFILES/.p10k.zsh $HOME/.p10k.zsh
+ln -s $DOTFILES/gitignore_global $HOME/.gitignore
 
 # Check for Homebrew and install if we don't have it
-if ! command -v brew > /dev/null; then
-  echo "Installing homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v brew >/dev/null; then
+	echo "Installing homebrew"
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>$HOME/.zprofile
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 # Update Homebrew recipes
 brew update
@@ -46,8 +47,7 @@ brew bundle --file $DOTFILES/Brewfile
 $(brew --prefix)/opt/fzf/install
 
 # Check for Oh My Zsh and install if we don't have it
-if ! command -v omz > /dev/null; then
-  echo "Installing Oh My Zsh"
-  /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" "" --keep-zshrc
+if ! command -v omz >/dev/null; then
+	echo "Installing Oh My Zsh"
+	/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" "" --keep-zshrc
 fi
-

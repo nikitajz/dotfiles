@@ -2,6 +2,7 @@
 
 ## Github
 [Add key to keychain](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
+`git config --global core.excludesfile ~/.gitignore`
 
 ## Homebrew
 Install all apps using Brewfile from this repo  
