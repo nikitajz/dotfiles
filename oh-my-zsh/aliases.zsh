@@ -7,16 +7,24 @@ alias ed="deactivate"
 
 alias zshconf="$EDITOR ~/.zshrc"
 
+## exa
 alias ls="exa"
 alias ll="exa -alh"
 alias tree="exa --tree"
 
+## bat
 # Sometimes bat is installed as batcat.
 if command -v batcat >/dev/null; then
 	alias cat="batcat"
 elif command -v bat >/dev/null; then
 	alias cat="bat"
 fi
+
+## zoxide
+alias z="j"
+# jump to the previous directory
+alias jj="j -"
+alias zz="z -"
 
 # serverless
 alias sls=serverless
