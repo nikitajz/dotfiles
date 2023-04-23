@@ -7,6 +7,10 @@ alias ed="deactivate"
 
 alias zshconf="$EDITOR ~/.zshrc"
 
+alias ls="exa"
+alias ll="exa -alh"
+alias tree="exa --tree"
+
 # serverless
 alias sls=serverless
 

@@ -49,14 +49,18 @@ Revert | Cmd + Shift + Down
 https://apple.stackexchange.com/a/212607  
 https://apple.stackexchange.com/a/377092
 
-### Fonts smoothing: 
-`defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO`   
+### Fonts smoothing:
+```
+`defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO`  
 `defaults -currentHost write -g AppleFontSmoothing -int 0`  
+```
 https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antialiasing/  
 https://osxdaily.com/2018/09/26/fix-blurry-thin-fonts-text-macos-mojave/
 
-## CLI tools
+## CLI tools 
 [bat](https://github.com/sharkdp/bat) is `cat` with highlighting
+
+[exa](https://github.com/ogham/exa) - A modern replacement for `ls`
 
 [fd](https://github.com/sharkdp/fd) - A simple, fast and user-friendly alternative to 'find'
 
@@ -68,8 +72,12 @@ https://osxdaily.com/2018/09/26/fix-blurry-thin-fonts-text-macos-mojave/
 
 [zoxide](https://github.com/ajeetdsouza/zoxide) - a smarter cd command. Supports all major shells. A faster alternative to z/z.lua
 
+### Links:
+https://github.com/ibraheemdev/modern-unix
+https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/
 
 ### fzf keymaps
+This is a mix of standard hotkeys and custom set in the .zshrc
 *Navigation*
 ctrl-j:     scroll down
 ctrl-k:     scroll up

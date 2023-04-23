@@ -9,6 +9,7 @@ brew "bat"
 brew "cheat"
 # brew "coreutils" # Those that come with macOS are outdated
 brew "curl"
+brew "exa"
 brew "fd"
 brew "ffmpeg"
 brew "fzf"
