@@ -1,8 +1,8 @@
 #!/bin/sh
 # source: https://github.com/romkatv/zsh-bench/blob/master/configs/diy%2B%2B/skel/.zshrc
 # https://github.com/romkatv/zsh-bench
-OMZ_PLUGINS=${ZSH_CUSTOM}/plugins
-OMZ_THEMES=${ZSH_CUSTOM}/themes
+OMZ_PLUGINS=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins
+OMZ_THEMES=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes
 
 # List of plugin name and repository tuples (github is assumed by default)
 declare -a plugins=(
