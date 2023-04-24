@@ -5,13 +5,13 @@ export RIPGREP_CONFIG_PATH=$DOTFILES/.ripgreprc
 
 export ZSH="$HOME/.oh-my-zsh"
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
-export ZSH_CUSTOM=$DOTFILES/oh-my-zsh
+# ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Disable marking untracked files under VCS as dirty. 
 # This makes repository status check for large repositories much, much faster.
@@ -26,7 +26,7 @@ source $ZSH_CUSTOM/setup_zsh_plugins.sh
 # zsh-completions
 # Don't use zsh-completions as oh-my-zsh plugin (including `compinit`)
 # https://github.com/zsh-users/zsh-completions/issues/603
-fpath+="${ZSH_CUSTOM:-"$ZSH/custom"}/plugins/zsh-completions/src"
+$fpath+="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions/src"
 
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
