@@ -12,6 +12,7 @@ $(brew --prefix)/opt/fzf/install
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
 #ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
+<<<<<<< HEAD:install_fresh.sh
 # Ukrainian spellchecking
 if [ ! -f $HOME/Library/Spelling/Ukrainian_uk_UA.dic ]; then
 	echo "Installing Ukranian language spelling"
@@ -19,6 +20,8 @@ if [ ! -f $HOME/Library/Spelling/Ukrainian_uk_UA.dic ]; then
 	curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.dic --output-dir $HOME/Library/Spelling
 fi
 
+=======
+>>>>>>> 934ef1d (refactor: install_macos):install_macos.sh
 # Backup previous .zshrc config and use one from the repo
 if [ -f $HOME/.zshrc ]; then
 	echo "Backing up existing .zshrc file to .zshrc_old"
@@ -28,6 +31,13 @@ ln -s $DOTFILES/.zshrc $HOME/.zshrc
 ln -s $DOTFILES/.p10k.zsh $HOME/.p10k.zsh
 ln -s $DOTFILES/gitignore_global $HOME/.gitignore
 ln -s $DOTFILES/oh-my-zsh/custom ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
+
+# Ukrainian spellchecking 
+if [ ! -f $HOME/Library/Spelling/Ukrainian_uk_UA.dic ]; then
+  echo "Installing Ukranian language spelling"
+  curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.aff --output-dir $HOME/Library/Spelling
+  curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.dic --output-dir $HOME/Library/Spelling
+fi
 
 # Check for Homebrew and install if we don't have it
 if ! command -v brew >/dev/null; then
