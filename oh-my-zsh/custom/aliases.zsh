@@ -8,9 +8,11 @@ alias ed="deactivate"
 alias zshconf="$EDITOR ~/.zshrc"
 
 ## exa
-alias ls="exa"
-alias ll="exa -alh"
-alias tree="exa --tree"
+if command -v exa &>/dev/null; then
+  alias ls="exa"
+  alias ll="exa -alh"
+  alias tree="exa --tree"
+fi
 
 ## bat
 # Sometimes bat is installed as batcat.
