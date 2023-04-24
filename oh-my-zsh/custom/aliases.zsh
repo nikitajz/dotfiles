@@ -10,7 +10,8 @@ alias zshconf="$EDITOR ~/.zshrc"
 ## exa
 if command -v exa &>/dev/null; then
   alias ls="exa"
-  alias ll="exa -alh"
+  alias ll="exa -lh"
+  alias la="exa -alh"
   alias tree="exa --tree"
 fi
 
