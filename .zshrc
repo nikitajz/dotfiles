@@ -21,15 +21,22 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd.mm.yyyy"
 
 # Install plugins & compile
-source $ZSH_CUSTOM/setup_zsh_plugins.sh
+source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/setup_zsh_plugins.sh
 
-# zsh-completions
 # Don't use zsh-completions as oh-my-zsh plugin (including `compinit`)
 # https://github.com/zsh-users/zsh-completions/issues/603
-$fpath+="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions/src"
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
-# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+# zsh-completions
+# if [[ ! -d "$ZSH/completions" || ! -f "$ZSH/completions/_gh" ]]; then
+#     mkdir -pv $ZSH/completions
+#     gh completion --shell zsh > $ZSH/completions/_gh
+# #    echo "gh added completions: gh completion --shell zsh > $ZSH/completions/_gh"
+# fi
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
