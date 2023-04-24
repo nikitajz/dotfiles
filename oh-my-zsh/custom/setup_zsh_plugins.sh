@@ -6,6 +6,8 @@ OMZ_THEMES=${ZSH_CUSTOM}/themes
 
 # List of plugin name and repository tuples (github is assumed by default)
 declare -a plugins=(
+  "zsh-syntax-highlighting zsh-users/zsh-syntax-highlighting"
+  "zsh-autosuggestions zsh-users/zsh-autosuggestions"
   "jq reegnz/jq-zsh-plugin"
   "alias-tips djui/alias-tips"
 )
