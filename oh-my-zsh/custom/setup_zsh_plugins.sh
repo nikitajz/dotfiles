@@ -29,7 +29,7 @@ function clone_plugin_repo() {
 
 clone_plugin_repo
 
-if [[ ! -d $OMZ_THEMES ]]; then
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $OMZ_THEMES
+if [[ ! -d $OMZ_THEMES/powerlevel10k ]]; then
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $OMZ_THEMES/powerlevel10k
   make -C $OMZ_THEMES/powerlevel10k pkg
 fi
