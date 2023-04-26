@@ -3,6 +3,8 @@ export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 export LANG=en_US.UTF-8
 export RIPGREP_CONFIG_PATH=$DOTFILES/.ripgreprc
 
+[[ ! -f ~/.profile ]] || source ~/.profile
+
 export ZSH="$HOME/.oh-my-zsh"
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
 # ZSH_CUSTOM=$DOTFILES/oh-my-zsh
