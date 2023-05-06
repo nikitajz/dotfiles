@@ -15,11 +15,11 @@ Install all apps using Brewfile from this repo
 
 Use a patched version to include various glyphs and icons (already included in Brewfile)
 ```
-# Original font
-$ brew cask install font-fira-code
-
 # Patched variant
 $ brew cask install font-firacode-nerd-font
+
+# Original font
+$ brew cask install font-fira-code
 ```
 Might require additional [setup in other apps, e.g. JetBrains products, VSCode, etc](https://github.com/romkatv/powerlevel10k/blob/master/README.md#manual-font-installation)
 
@@ -36,6 +36,14 @@ copy to $HOME/Library/Spelling
 https://github.com/esc/conda-zsh-completion
 
 ## Mac
+### System Preferences
+Most of the settings can be set using `defaults` command line. See [setup-macos.sh](setup-macos.sh) for details.
+
+References:
+https://www.defaults-write.com/
+https://macos-defaults.com/
+[macOS Commands Reference.md](https://gist.github.com/nikitajz/8ff97fb3e10a8949a2833c0ead7c8263)
+
 ### Hotkeys for window tiles:  
 Menu Title | Keyboard Shortcut
 ---------- | -----------------
@@ -56,7 +64,7 @@ https://apple.stackexchange.com/a/377092
 `defaults -currentHost write -g AppleFontSmoothing -int 0`  
 ```
 https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antialiasing/  
-https://osxdaily.com/2018/09/26/fix-blurry-thin-fonts-text-macos-mojave/
+https://osxdaily.com/2022/04/06/change-remove-font-smoothing-macos/
 
 ## CLI tools 
 [bat](https://github.com/sharkdp/bat) is `cat` with highlighting
