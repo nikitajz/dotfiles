@@ -1,5 +1,8 @@
-alias python="python3.11"
-alias pip="python3.11 -m pip"
+alias python3="python3.10"
+alias pip3="python3 -m pip"
+
+alias python=python3
+alias pip=pip3
 
 alias ea="source venv/bin/activate"
 alias vea="source ~/.virtualenvs/$(basename $PWD)/bin/activate"
