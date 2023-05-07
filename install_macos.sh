@@ -51,6 +51,9 @@ echo "Installing brew dependencies from Brewfile"
 brew tap homebrew/bundle
 brew bundle --file $DOTFILES/Brewfile
 
+# iTerm2 shell integration
+curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+
 # fzf install
 $(brew --prefix)/opt/fzf/install
 
