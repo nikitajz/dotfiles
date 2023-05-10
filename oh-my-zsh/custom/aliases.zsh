@@ -5,8 +5,11 @@ alias python=python3
 alias pip=pip3
 
 alias ea="source venv/bin/activate"
-alias vea="source ~/.virtualenvs/$(basename $PWD)/bin/activate"
 alias ed="deactivate"
+
+vea() {
+  source ~/.virtualenvs/$(basename $PWD)/bin/activate
+}
 
 alias zshconf="$EDITOR ~/.zshrc"
 
