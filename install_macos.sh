@@ -7,8 +7,6 @@ echo "Setting up your Mac..."
 # Path to dotfiles
 export DOTFILES=$HOME/.dotfiles
 
-$(brew --prefix)/opt/fzf/install
-
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
 #ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
@@ -17,6 +15,16 @@ if [ ! -f $HOME/Library/Spelling/Ukrainian_uk_UA.dic ]; then
 	echo "Installing Ukranian language spelling"
 	curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.aff --output-dir $HOME/Library/Spelling
 	curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.dic --output-dir $HOME/Library/Spelling
+fi
+
+
+# Check for Homebrew and install if we don't have it
+if ! command -v brew >/dev/null; then
+	echo "Installing homebrew"
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>$HOME/.zprofile
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Backup previous .zshrc config and use one from the repo
@@ -29,21 +37,6 @@ ln -s $DOTFILES/.p10k.zsh $HOME/.p10k.zsh
 ln -s $DOTFILES/gitignore_global $HOME/.gitignore
 ln -s $DOTFILES/oh-my-zsh/custom ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
 
-# Ukrainian spellchecking
-if [ ! -f $HOME/Library/Spelling/Ukrainian_uk_UA.dic ]; then
-	echo "Installing Ukranian language spelling"
-	curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.aff --output-dir $HOME/Library/Spelling
-	curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.dic --output-dir $HOME/Library/Spelling
-fi
-
-# Check for Homebrew and install if we don't have it
-if ! command -v brew >/dev/null; then
-	echo "Installing homebrew"
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>$HOME/.zprofile
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
 # Update Homebrew recipes
 brew update
 
@@ -62,3 +55,4 @@ if ! command -v omz >/dev/null; then
 	echo "Installing Oh My Zsh"
 	/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" "" --keep-zshrc
 fi
+
