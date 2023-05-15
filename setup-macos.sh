@@ -129,7 +129,7 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 3
+defaults write NSGlobalDomain KeyRepeat -int 4
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Disable automatic capitalization as it’s annoying when typing code
@@ -272,10 +272,10 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 ###############################################################################
 
 # Position dock on the left side of the screen
-# defaults write com.apple.dock orientation -string "left"
+defaults write com.apple.dock orientation -string "left"
 
 # Automatically hide and show the Dock
-# defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool true
 
 # Enable highlight hover effect for the grid view of a stack (Dock)
 # defaults write com.apple.dock mouse-over-hilite-stack -bool true
@@ -302,7 +302,10 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 defaults write com.apple.dock mru-spaces -bool false
 
 # Remove the auto-hiding Dock delay
-# defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-delay -float 0.1
+
+# Autohide animation time
+defaults write com.apple.dock "autohide-time-modifier" -float "0.5"
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
