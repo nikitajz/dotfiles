@@ -15,7 +15,7 @@
 --glob=!.cache/*
 --glob=!.config/htop
 --glob=!.git/*
---glob=!Library/*
+--glob=!**/Library/*
 --glob=!Movies/*
 
 # Set the colors.
