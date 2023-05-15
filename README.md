@@ -39,9 +39,9 @@ https://github.com/esc/conda-zsh-completion
 ### System Preferences
 Most of the settings can be set using `defaults` command line. See [setup-macos.sh](setup-macos.sh) for details.
 
-References:
-https://www.defaults-write.com/
-https://macos-defaults.com/
+References:  
+https://www.defaults-write.com/  
+https://macos-defaults.com/  
 [macOS Commands Reference.md](https://gist.github.com/nikitajz/8ff97fb3e10a8949a2833c0ead7c8263)
 
 ### Hotkeys for window tiles:  
@@ -60,8 +60,8 @@ https://apple.stackexchange.com/a/377092
 
 ### Fonts smoothing:
 ```
-`defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO`  
-`defaults -currentHost write -g AppleFontSmoothing -int 0`  
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO  
+defaults -currentHost write -g AppleFontSmoothing -int 0  
 ```
 https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antialiasing/  
 https://osxdaily.com/2022/04/06/change-remove-font-smoothing-macos/
