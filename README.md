@@ -89,35 +89,39 @@ https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/
 
 ### fzf keymaps
 This is a mix of standard hotkeys and custom set in the .zshrc
-*Navigation*
-ctrl-j:     scroll down
-ctrl-k:     scroll up
-ctrl-d:     half-page-down
-ctrl-u:     half-page-up
 
-ctrl-a:     beginning-of-line
-ctrl-e:     end-of-line
-alt-b:      backward-word
-alt-f:      forward-word
+**Navigation**
+| Hotkey   |    Command         |
+| -------- | ------------------ |
+| ctrl-j   |  scroll down       |
+| ctrl-k   |  scroll up         |
+| ctrl-d   |  half-page-down    | 
+| ctrl-u   |  half-page-up      |
+| ctrl-a   |  beginning-of-line |
+| ctrl-e   |  end-of-line       |
+| alt-b    |  backward-word     |
+| alt-f    |  forward-word      |
 
-Editing
-ctrl-w:     delete prev word (backward-kill-word)
-alt-bs:     delete prev word (backward-kill-word)
-alt-d:      delete word (kill-word)
-ctrl-l:     clear screen
-
-ctrl-y:     yank (copy)
-ctrl-x:     delete selected file
+**Editing**
+| Hotkey   |    Command                            |
+| -------- | --------------------------------------|
+| ctrl-w:  | delete prev word (backward-kill-word) |
+| alt-bs   | delete prev word (backward-kill-word) |
+| alt-d    | delete word (kill-word)               |
+| ctrl-l   | clear screen                          |
+| ctrl-y   | yank (copy)                           |
+| ctrl-x   | delete selected file                  |
 
 **Navigation Preview**
-shift-up:   up
-shift-down: down
-alt-j:      preview-half-page-down
-alt-k:      preview-half-page-up
-alt-h:      preview-top
-alt-l:      preview-bottom
-
-alt-w:      toggle-preview-wrap
+|  Hotkey    |    Command             |
+| ---------- | ---------------------- |
+| shift-up   | up                     |
+| shift-down | down                   |
+| alt-j      | preview-half-page-down |
+| alt-k      | preview-half-page-up   |
+| alt-h      | preview-top            |
+| alt-l      | preview-bottom         |
+| alt-w      | toggle-preview-wrap    |
 
 ### zoxide
 `jj`/`zz` jump to previous directory 
