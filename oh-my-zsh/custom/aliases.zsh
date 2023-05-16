@@ -12,6 +12,7 @@ vea() {
 }
 
 alias zshconf="$EDITOR ~/.zshrc"
+alias diff="code --diff" # use vscode for diff file
 
 ## exa
 if command -v exa &>/dev/null; then
