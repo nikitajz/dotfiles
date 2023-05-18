@@ -17,7 +17,6 @@ if [ ! -f $HOME/Library/Spelling/Ukrainian_uk_UA.dic ]; then
 	curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.dic --output-dir $HOME/Library/Spelling
 fi
 
-
 # Check for Homebrew and install if we don't have it
 if ! command -v brew >/dev/null; then
 	echo "Installing homebrew"
@@ -33,6 +32,7 @@ if [ -f $HOME/.zshrc ]; then
 	mv $HOME/.zshrc $HOME/.zshrc_old
 fi
 ln -s $DOTFILES/.zshrc $HOME/.zshrc
+ln -s $DOTFILES/.profile $HOME/.profile
 ln -s $DOTFILES/.p10k.zsh $HOME/.p10k.zsh
 ln -s $DOTFILES/gitignore_global $HOME/.gitignore
 ln -s $DOTFILES/oh-my-zsh/custom ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
@@ -43,6 +43,14 @@ brew update
 echo "Installing brew dependencies from Brewfile"
 brew tap homebrew/bundle
 brew bundle --file $DOTFILES/Brewfile
+
+# Use pyenv to manage python versions
+
+# verify zlib and sqlite3 are installed (required for pyenv)
+echo '[[ ! -f ~/.profile ]] || source ~/.profile' >>~/.bash_profile
+
+pyenv install 3.10
+pyenv global 3.10
 
 # iTerm2 shell integration
 curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
@@ -55,4 +63,3 @@ if ! command -v omz >/dev/null; then
 	echo "Installing Oh My Zsh"
 	/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" "" --keep-zshrc
 fi
-

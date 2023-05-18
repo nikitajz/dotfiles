@@ -1,9 +1,3 @@
-alias python3="python3.10"
-alias pip3="python3 -m pip"
-
-alias python=python3
-alias pip=pip3
-
 alias ea="source venv/bin/activate"
 alias ed="deactivate"
 
