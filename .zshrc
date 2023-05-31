@@ -8,8 +8,8 @@ export RIPGREP_CONFIG_PATH=$DOTFILES/.ripgreprc
 [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$HOME/.dotfiles/oh-my-zsh/custom/"
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
-# ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

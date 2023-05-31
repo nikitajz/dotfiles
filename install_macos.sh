@@ -35,7 +35,6 @@ ln -s $DOTFILES/.zshrc $HOME/.zshrc
 ln -s $DOTFILES/.profile $HOME/.profile
 ln -s $DOTFILES/.p10k.zsh $HOME/.p10k.zsh
 ln -s $DOTFILES/gitignore_global $HOME/.gitignore
-ln -s $DOTFILES/oh-my-zsh/custom ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
 
 # Update Homebrew recipes
 brew update
