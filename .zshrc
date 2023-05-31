@@ -5,6 +5,7 @@ export RIPGREP_CONFIG_PATH=$DOTFILES/.ripgreprc
 
 # Use pyenv to manage python version
 [[ ! -f ~/.profile ]] || source ~/.profile
+[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
 export ZSH="$HOME/.oh-my-zsh"
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
