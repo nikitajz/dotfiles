@@ -8,6 +8,9 @@ vea() {
 alias zshconf="$EDITOR ~/.zshrc"
 alias diff="code --diff" # use vscode for diff file
 
+alias t2="tree -L 2"
+alias t3="tree -L 3"
+
 ## exa
 if command -v exa &>/dev/null; then
   alias ls="exa"
