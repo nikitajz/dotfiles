@@ -3,35 +3,65 @@ set -euo pipefail
 
 # install optional, e.g. ripgrep, zoxide
 OPTIONAL=${OPTIONAL:-yes}
+DOTF=${DOTF:-yes}
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BOLD='\033[1m'
-NC='\033[0m' # No Color
+# source: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+
+# The [ -t 1 ] check only works when the function is not called from
+# a subshell (like in `$(...)` or `(...)`, so this hack redefines the
+# function at the top level to always return false when stdout is not
+# a tty.
+if [ -t 1 ]; then
+	is_tty() {
+		true
+	}
+else
+	is_tty() {
+		false
+	}
+fi
+
+setup_color() {
+	# Only use colors if connected to a terminal
+	if ! is_tty; then
+		FMT_RAINBOW=""
+		FMT_RED=""
+		FMT_GREEN=""
+		FMT_YELLOW=""
+		FMT_BLUE=""
+		FMT_BOLD=""
+		FMT_RESET=""
+		return
+	fi
+
+	FMT_RED=$(printf '\033[31m')
+	FMT_GREEN=$(printf '\033[32m')
+	FMT_YELLOW=$(printf '\033[33m')
+	FMT_BLUE=$(printf '\033[34m')
+	FMT_BOLD=$(printf '\033[1m')
+	FMT_RESET=$(printf '\033[0m')
+
+}
 
 print_step() {
-	echo -e "${BOLD}${YELLOW}--> ${NC}${BOLD} $1${NC}"
+	echo "${FMT_BOLD}${FMT_YELLOW}--> ${FMT_RESET}${FMT_BOLD} $1${FMT_RESET}"
 }
 
 print_warning() {
-	echo -e "${GREEN}[!] $1${NC} "
+	echo "${FMT_GREEN}[!] $1${FMT_RESET} "
 }
 
-echo "Setting up your Ubuntu machine"
-export DOTFILES=$HOME/.dotfiles
-
-print_step "Installing the packages"
-sudo apt-get update -q
-sudo apt-get install -y python3-dev unzip
-
-if ! command -v aws >/dev/null; then
-	print_step "Installing aws cli"
-	cd /tmp/
-	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-	unzip -q awscliv2.zip && sudo ./aws/install
-fi
+install_awscli() {
+	if ! command -v aws >/dev/null; then
+		print_step "Installing aws cli"
+		cd /tmp/
+		curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+		unzip -q awscliv2.zip && sudo ./aws/install
+	else
+		print_warning "Skipping awscli, already installed"
+		return
+	fi
+}
 
 setup_shell() {
 	# If this user's login shell is already "zsh", do not attempt to switch.
@@ -158,7 +188,7 @@ config_lazyvim() {
 }
 
 config_dotfiles() {
-	if [[ $OPTIONAL = no ]]; then
+	if [[ $DOTF=no ]]; then
 		return
 	fi
 	export DOTFILES=$HOME/.dotfiles
@@ -197,15 +227,37 @@ config_dotfiles() {
 
 }
 
-setup_shell
+main() {
+	setup_color
 
-install_ripgrep
-install_zoxide
-install_jq
-install_aliastips
-install_nvim
-config_lazyvim
+	# Parse arguments
+	while [ $# -gt 0 ]; do
+		case $1 in
+		--optional) OPTIONAL=yes ;;
+		--dotfiles) DOTF=yes ;;
+		esac
+		shift
+	done
 
-config_dotfiles
+	echo "Setting up your Ubuntu machine"
 
-echo "Setup completed"
+	print_step "Installing the packages"
+	sudo apt-get update -q
+	sudo apt-get install -y python3-dev unzip
+
+	setup_shell
+
+	install_awscli
+	install_ripgrep
+	install_zoxide
+	install_jq
+	install_aliastips
+	install_nvim
+	config_lazyvim
+
+	config_dotfiles
+}
+
+main
+
+print_step "Setup successfully completed!"
