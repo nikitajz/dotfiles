@@ -75,6 +75,47 @@ setup_shell() {
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
+install_fzf() {
+	print_step "Installing fzf"
+	if ! command -v fzf >/dev/null; then
+		rm -rf /tmp/.fzf
+		cd /tmp
+
+		git clone -q --depth 1 https://github.com/junegunn/fzf.git /tmp/.fzf
+		/tmp/.fzf/install --all --xdg --no-fish
+	else
+		print_warning "Skipping, fzf already installed"
+	fi
+}
+
+install_fd() {
+	if [ "$OPTIONAL" = no ]; then
+		return
+	fi
+	print_step "Installing fd-find"
+
+	if command -v fd >/dev/null; then
+		print_warning "fd-find has already been installed, skipping"
+		return
+	fi
+
+	FDFIND_VERSION=$(curl -s "https://api.github.com/repos/sharkdp/fd/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
+	echo "FD version: ${FDFIND_VERSION}"
+
+	cd /tmp
+	curl -Lo fdfind.deb "https://github.com/sharkdp/fd/releases/download/v${FDFIND_VERSION}/fd-musl_${FDFIND_VERSION}_amd64.deb"
+
+	if [ ! -f fdfind.deb ]; then
+		print_warning "Failed to download fd-find .deb file"
+		return
+	fi
+
+	sudo apt install -y ./fdfind.deb
+	ln -s $(command -v fdfind) ~/.local/bin/fd
+
+	fd --version
+}
+
 install_ripgrep() {
 	if [ "$OPTIONAL" = no ]; then
 		return
@@ -248,9 +289,11 @@ main() {
 	setup_shell
 
 	install_awscli
+	install_jq
+	install_fzf
+	install_fd
 	install_ripgrep
 	install_zoxide
-	install_jq
 	install_aliastips
 	install_nvim
 	config_lazyvim
