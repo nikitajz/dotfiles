@@ -111,6 +111,10 @@ install_aliastips() {
 }
 
 install_nvim() {
+	if [ "$OPTIONAL" = no ]; then
+		return
+	fi
+
 	print_step "Installing nvim"
 	if command -v nvim >/dev/null; then
 		print_warning "nvim already installed, skipping"
@@ -134,11 +138,13 @@ install_nvim() {
 }
 
 config_lazyvim() {
+	if [[ "$OPTIONAL" = no ]]; then
+		return
+	fi
+
 	print_step "Configuring neovim with LazyVim config"
-	if
-		command -v nvim >/dev/null 2>&1 &&
-			! [ -d $HOME/.config/nvim ]
-	then
+	if command -v nvim >/dev/null 2>&1 &&
+		! [[ -d $HOME/.config/nvim ]]; then
 		print_warning "Skipping nvim configuration with LazyVim"
 		return
 	fi
@@ -151,6 +157,46 @@ config_lazyvim() {
 	rm -rf ~/.config/nvim/.git
 }
 
+config_dotfiles() {
+	if [[ $OPTIONAL = no ]]; then
+		return
+	fi
+	export DOTFILES=$HOME/.dotfiles
+	echo "Copying dotfiles"
+	git clone git@github.com:nikitajz/dotfiles.git $DOTFILES
+
+	print_step "Configuring dotfiles"
+	if [[ ! -d $DOTFILES ]]; then
+		print_warning "Dotfiles do not exist"
+		return
+	fi
+
+	echo "Linking dotfiles"
+	# Backup previous .zshrc config and use one from the repo
+	if [[ -f $HOME/.zshrc ]] && [[ ! -L $HOME/.zshrc ]]; then
+		echo "Backing up existing .zshrc file to .zshrc_old"
+		mv $HOME/.zshrc $HOME/.zshrc_old
+	elif [[ -L $HOME/.zshrc ]]; then
+		print_warning ".zshrc already symllinked, skipping"
+	else
+		ln -s $DOTFILES/.zshrc $HOME/.zshrc
+		echo "Symlinked .zshrc"
+	fi
+
+	if [[ ! -f $HOME/.p10k.zsh ]]; then
+		ln -s $DOTFILES/.p10k.zsh $HOME/.p10k.zsh
+	else
+		print_warning ".p10k.zsh already linked"
+	fi
+
+	if [[ ! -f $HOME/.gitignore_global ]]; then
+		ln -s $DOTFILES/gitignore_global $HOME/.gitignore_global
+	else
+		print_warning ".gitignore_global already linked"
+	fi
+
+}
+
 setup_shell
 
 install_ripgrep
@@ -159,5 +205,7 @@ install_jq
 install_aliastips
 install_nvim
 config_lazyvim
+
+config_dotfiles
 
 echo "Setup completed"
