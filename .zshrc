@@ -3,12 +3,19 @@ export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 export LANG=en_US.UTF-8
 export RIPGREP_CONFIG_PATH=$DOTFILES/.ripgreprc
 
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
 # Use pyenv to manage python version
 [[ ! -f ~/.profile ]] || source ~/.profile
 [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
 export ZSH="$HOME/.oh-my-zsh"
-export ZSH_CUSTOM="$HOME/.dotfiles/oh-my-zsh/custom/"
+export ZSH_CUSTOM="$HOME/.dotfiles/oh-my-zsh/custom"
 # Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -59,13 +66,6 @@ source $ZSH/oh-my-zsh.sh
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 bindkey '^ ' autosuggest-accept
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -112,6 +112,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+
 # Enable command completion (e.g. for awscli)
 complete -C aws_completer aws
 
@@ -120,12 +122,9 @@ if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
 
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
