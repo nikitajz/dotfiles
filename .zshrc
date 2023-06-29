@@ -53,7 +53,7 @@ fi
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
   alias-tips
-  git
+  # git # use custom instead
   jq # https://github.com/reegnz/jq-zsh-plugin
   zsh-autosuggestions # should be before zsh-syntax-highlighting
   zsh-syntax-highlighting

@@ -1,4 +1,4 @@
-alias ea="source .venv/bin/activate"
+alias ea="source venv/bin/activate"
 alias ed="deactivate"
 
 vea() {
