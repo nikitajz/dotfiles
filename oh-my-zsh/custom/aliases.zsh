@@ -40,6 +40,11 @@ vij() {
 	vim -c ':%!jq' -c 'set filetype=json' $1
 }
 
+# Open Pycharm app for the specified folder (similar to vscode: `code <dir>`)
+pycharm() {
+  open -a /Applications/PyCharm.app/Contents/MacOS/pycharm $1
+}
+
 alias nv=nvim
 
 
