@@ -129,8 +129,8 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 5
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain KeyRepeat -int 3        # normal minimum is 2 (30 ms)
+defaults write NSGlobalDomain InitialKeyRepeat -int 8 # normal minimum is 15 (225 ms)
 
 # Disable automatic capitalization as it’s annoying when typing code
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
