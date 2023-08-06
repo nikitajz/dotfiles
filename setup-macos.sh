@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Adapted from https://mths.be/macos
+# Useful docs: https://macos-defaults.com/
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -340,6 +341,13 @@ defaults write com.apple.dock showhidden -bool true
 # Bottom right screen corner → Display sleep
 # defaults write com.apple.dock wvous-br-corner -int 10
 # defaults write com.apple.dock wvous-br-modifier -int 0
+
+###############################################################################
+# Control Center                                                              #
+###############################################################################
+
+# Show volume in menu bar -> Always
+defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
 
 ###############################################################################
 # Safari & WebKit                                                             #
