@@ -22,11 +22,11 @@ fi
 
 ## bat
 # Sometimes bat is installed as batcat.
-if command -v batcat >/dev/null; then
-	alias cat="batcat"
-elif command -v bat >/dev/null; then
-	alias cat="bat"
-fi
+# if command -v batcat >/dev/null; then
+# 	alias cat="batcat"
+# elif command -v bat >/dev/null; then
+# 	alias cat="bat"
+# fi
 
 ## zoxide
 alias z="j"
