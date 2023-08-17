@@ -230,11 +230,17 @@ config_lazyvim() {
 
 config_dotfiles() {
 	if [[ $DOTF=no ]]; then
+		echo "Skipping dotfiles setup as disabled step"
 		return
 	fi
+
 	export DOTFILES=$HOME/.dotfiles
-	echo "Copying dotfiles"
-	git clone git@github.com:nikitajz/dotfiles.git $DOTFILES
+	if [[ -d $DOTFILES ]]; then
+		print_warning "Dotfiles already exist"
+	else
+		print_step "Clonning dotfiles github repo"
+		git clone git@github.com:nikitajz/dotfiles.git $DOTFILES
+	fi
 
 	print_step "Configuring dotfiles"
 	if [[ ! -d $DOTFILES ]]; then
