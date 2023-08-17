@@ -229,6 +229,7 @@ config_lazyvim() {
 }
 
 config_dotfiles() {
+	print_step "Configuring dotfiles"
 	if [[ $"DOTF" = no ]]; then
 		echo "Skipping dotfiles setup as disabled step"
 		return
@@ -238,26 +239,13 @@ config_dotfiles() {
 	if [[ -d $DOTFILES ]]; then
 		print_warning "Dotfiles already exist"
 	else
-		print_step "Clonning dotfiles github repo"
+		echo "Clonning dotfiles github repo"
 		git clone git@github.com:nikitajz/dotfiles.git $DOTFILES
 	fi
 
-	print_step "Configuring dotfiles"
 	if [[ ! -d $DOTFILES ]]; then
 		print_warning "Dotfiles do not exist"
 		return
-	fi
-
-	echo "Linking dotfiles"
-	# Backup previous .zshrc config and use one from the repo
-	if [[ -f $HOME/.zshrc ]] && [[ ! -L $HOME/.zshrc ]]; then
-		echo "Backing up existing .zshrc file to .zshrc_old"
-		mv $HOME/.zshrc $HOME/.zshrc_old
-	elif [[ -L $HOME/.zshrc ]]; then
-		print_warning ".zshrc already symllinked, skipping"
-	else
-		ln -s $DOTFILES/.zshrc $HOME/.zshrc
-		echo "Symlinked .zshrc"
 	fi
 
 	if [[ ! -f $HOME/.p10k.zsh ]]; then
@@ -272,6 +260,18 @@ config_dotfiles() {
 		print_warning ".gitignore_global already linked"
 	fi
 
+	echo "Linking dotfiles"
+	# Backup previous .zshrc config and use one from the repo
+	if [[ -f $HOME/.zshrc ]] && [[ ! -L $HOME/.zshrc ]]; then
+		echo "Backing up existing .zshrc file to .zshrc_old"
+		mv $HOME/.zshrc $HOME/.zshrc_old
+	elif [[ -L $HOME/.zshrc ]]; then
+		print_warning ".zshrc already symlinked, skipping"
+		return
+	fi
+
+	ln -s $DOTFILES/.zshrc $HOME/.zshrc
+	echo "Symlinked .zshrc"
 }
 
 main() {
