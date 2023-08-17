@@ -229,7 +229,7 @@ config_lazyvim() {
 }
 
 config_dotfiles() {
-	if [[ $DOTF=no ]]; then
+	if [[ $"DOTF" = no ]]; then
 		echo "Skipping dotfiles setup as disabled step"
 		return
 	fi
