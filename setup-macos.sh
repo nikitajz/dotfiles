@@ -118,7 +118,7 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
-# defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
 # defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
@@ -348,6 +348,15 @@ defaults write com.apple.dock showhidden -bool true
 
 # Show volume in menu bar -> Always
 defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
+
+# Menu Bar Only > Spotlight > Don't Show in Menu Bar
+defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
+
+# Control Centre Modules > Bluetooth > Show in Menu Bar
+defaults write "com.apple.controlcenter" "NSStatusItem Visible Bluetooth" -bool true
+
+# Control Centre Modules > Now Playing > Don't Show in Menu Bar
+defaults write "com.apple.airplay" "NSStatusItem Visible NowPlaying" -bool false
 
 ###############################################################################
 # Safari & WebKit                                                             #
