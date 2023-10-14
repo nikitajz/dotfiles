@@ -130,8 +130,8 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain InitialKeyRepeat -int 20 # normal minimum is 15 (225 ms)
-defaults write NSGlobalDomain KeyRepeat -int 5         # normal minimum is 2 (30 ms)
+defaults write NSGlobalDomain InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
+defaults write NSGlobalDomain KeyRepeat -int 3         # normal minimum is 2 (30 ms)
 
 # Disable automatic capitalization as it’s annoying when typing code
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
@@ -168,7 +168,7 @@ systemsetup -settimezone "Europe/Lisbon" >/dev/null
 
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 10
+defaults write com.apple.screensaver askForPasswordDelay -int 60
 
 # Enable subpixel font rendering on non-Apple LCDs
 # defaults write NSGlobalDomain AppleFontSmoothing -int 2
