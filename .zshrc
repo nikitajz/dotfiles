@@ -82,7 +82,7 @@ fi
 eval "$(zoxide init zsh --cmd j)"
 
 # "sharkdp/fd" file finder, modern replacement for GNU find
-FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules --exclude .zshrc"
+FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules --exclude .zshrc --exclude venv"
 
 # 'junegunn/fzf', command line fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
