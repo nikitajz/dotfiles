@@ -17,6 +17,33 @@
           "mouse_motion_to_scroll.speed": 100
         },
         "rules": [
+            {
+                "description": "Toggle CAPSLOCK by pressing Left Shift then Right Shift",
+                "manipulators": [
+                  {
+                    "from": {
+                      "key_code": "left_shift",
+                      "modifiers": {
+                        "mandatory": [
+                          "right_shift"
+                        ],
+                        "optional": ["caps_lock"]
+                      }
+                    },
+                    "to": [
+                      {
+                        "key_code": "caps_lock"
+                      }
+                    ],
+                    "to_if_alone": [
+                      {
+                        "key_code": "left_shift"
+                      }
+                    ],
+                    "type": "basic"
+                  }
+                ]
+            },  
           {
             "description": "Function keys work as Fn keys on selected apps: (Atom, iTerm2, Sublime Text, PyCharm, VSCode)",
             "manipulators": [
