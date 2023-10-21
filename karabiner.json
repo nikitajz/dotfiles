@@ -24,22 +24,55 @@
                     "from": {
                       "key_code": "left_shift",
                       "modifiers": {
-                        "mandatory": [
-                          "right_shift"
-                        ],
-                        "optional": ["caps_lock"]
+                        "optional": ["any"]
                       }
                     },
+                    "to": [
+                      {
+                        "set_variable": {
+                          "name": "left_shift_pressed",
+                          "value": 1
+                        }
+                      }
+                    ],
+                    "to_after_key_up": [
+                      {
+                        "set_variable": {
+                          "name": "left_shift_pressed",
+                          "value": 0
+                        }
+                      }
+                    ],
+                    "parameters": {
+                      "basic.to_if_alone_timeout_milliseconds": 100,
+                      "basic.to_if_held_down_threshold_milliseconds": 50
+                    },
+                    "type": "basic"
+                  },
+                  {
+                    "from": {
+                      "key_code": "right_shift",
+                      "modifiers": {
+                        "optional": ["any"]
+                      }
+                    },
+                    "conditions": [
+                      {
+                        "type": "variable_if",
+                        "name": "left_shift_pressed",
+                        "value": 1
+                      }
+                    ],
                     "to": [
                       {
                         "key_code": "caps_lock"
                       }
                     ],
-                    "to_if_alone": [
-                      {
-                        "key_code": "left_shift"
-                      }
-                    ],
+                    "parameters": {
+                      "basic.to_delayed_action_delay_milliseconds": 500,
+                      "basic.to_if_alone_timeout_milliseconds": 1000,
+                      "basic.to_if_held_down_threshold_milliseconds": 50
+                    },
                     "type": "basic"
                   }
                 ]
