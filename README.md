@@ -125,16 +125,16 @@ This is a mix of standard hotkeys and custom set in the .zshrc
 
 **Editing**
 
-| Hotkey | Command                               |
-|--------|---------------------------------------|
-| ctrl-w | delete prev word (backward-kill-word) |
-| alt-bs | delete prev word (backward-kill-word) |
-| alt-d  | delete word (kill-word)               |
-| ctrl-l | clear screen                          |
-| ctrl-y | yank (copy)                           |
-| ctrl-x | delete selected file                  |
+| Hotkey  | Command                               |
+|---------|---------------------------------------|
+| ctrl-w: | delete prev word (backward-kill-word) |
+| alt-bs  | delete prev word (backward-kill-word) |
+| alt-d   | delete word (kill-word)               |
+| ctrl-l  | clear screen                          |
+| ctrl-y  | yank (copy)                           |
+| ctrl-x  | delete selected file                  |
 
-**Navigation in Preview**
+**Navigation Preview**
 
 | Hotkey     | Command                |
 |------------|------------------------|
@@ -146,8 +146,59 @@ This is a mix of standard hotkeys and custom set in the .zshrc
 | alt-l      | preview-bottom         |
 | alt-w      | toggle-preview-wrap    |
 
+### Karabiner Elements
+
+[Karabiner Elements](https://karabiner-elements.pqrs.org/) (KE) allows to supercharge keyboard shortcuts to maximum.  
+See example: https://wiki.nikiv.dev/macOS/apps/karabiner/
+
+#### Meh
+Run/activate applications  
+`Meh = CapsLock+Cmd`
+
+| Hotkey | Command                         |
+|--------|---------------------------------|
+| Meh+f  | [f]inder                        |
+| Meh+t  | iT[e]rm2 ([e]xecute)            |
+| Meh+i  | [i]Term2 (experimental)         |
+| Meh+w  | Chrome ([w]eb surfing)          |
+| Meh+r  | P[r]eview                       |
+| Meh+t  | [t]ypora*                       |
+| Meh+i  | [m]ail                          |
+| Meh+k  | [k]arabiner                     |
+| Meh+y  | Amphetamine* (who knows wh[y]?) |
+| Meh+s  | Da[s]h*                         |
+| Meh+d  | [D]ictionary                    |
+
+#### CapsLock
+
+Tap: `Esc`  
+Hold: `RShift+RCtrl+ROpt+RCmd` (all right keys)- serve as Hyperkey modifier
+
+Activate CapsLock:  
+`Left Shift + Right Shift`   
+`CapsLock + Esc` (alternative)
+
+| Hotkey          | Command  |
+|-----------------|----------|
+| Hyper+Cmd+Space | Emoji 😜 |
+
+#### Hyper Navigation
+
+Activates vim-style navigation when Hyperkey is hold  
+`Hyper+<key>`
+
+| Hotkey        | Command                                     |
+|---------------|---------------------------------------------|
+| Hyper+h       | left                                        |
+| Hyper+j       | down                                        |
+| Hyper+k       | up                                          |
+| Hyper+l       | right                                       |
+| Hyper+Shift+h | shift+left (select character to the left)   |
+| Hyper+Shift+j | shift+down (select line down)               |
+| Hyper+Shift+k | shift+up (select line up)                   |
+| Hyper+Shift+l | shift+right (select character to the right) |
+
 ### Zoxide
-`jj`(default `zz`) - jump to previous directory   
-`j` (default `z`) - j to directory  
-`+tab` - disambiguate (choose) if z has few options where to jump  
-**Tip:** Using the same command twice jump to the next directory that matches
+`jj`/`zz` jump to previous directory 
+`j`/`z` `+tab` - disambiguate (choose) if z has few options where to jump
+Tip: Using the same command twice jump to the next directory that matches
