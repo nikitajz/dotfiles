@@ -158,16 +158,18 @@ Run/activate applications
 | Hotkey | Command                         |
 |--------|---------------------------------|
 | Meh+f  | [f]inder                        |
-| Meh+t  | iT[e]rm2 ([e]xecute)            |
 | Meh+i  | [i]Term2 (experimental)         |
+| Meh+t  | i[T]erm2                        |
 | Meh+w  | Chrome ([w]eb surfing)          |
 | Meh+r  | P[r]eview                       |
-| Meh+t  | [t]ypora*                       |
-| Meh+i  | [m]ail                          |
-| Meh+k  | [k]arabiner                     |
+| Meh+n  | [N]otion                        |
+| Meh+m  | Spotify ([m]usic)               |
+| Meh+k  | [K]arabiner                     |
 | Meh+y  | Amphetamine* (who knows wh[y]?) |
 | Meh+s  | Da[s]h*                         |
 | Meh+d  | [D]ictionary                    |
+| Meh+c  | Py[C]harm                       |
+| Meh+v  | [V]SCode                        |
 
 #### CapsLock
 
