@@ -1,7 +1,7 @@
 tap "homebrew/bundle"
-tap "homebrew/cask"
+# tap "homebrew/cask"
 tap "homebrew/cask-fonts"
-tap "homebrew/core"
+# tap "homebrew/core"
 tap "buo/cask-upgrade"
 
 brew "awscli"
@@ -9,7 +9,7 @@ brew "bat"
 brew "cheat"
 # brew "coreutils" # Those that come with macOS are outdated
 brew "curl"
-brew "exa"
+brew "eza"  # exa is not maintained
 brew "entr"
 brew "fd"
 brew "ffmpeg"
