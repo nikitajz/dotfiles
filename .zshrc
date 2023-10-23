@@ -101,10 +101,10 @@ export FZF_DEFAULT_OPTS="--no-mouse \
                          --bind='ctrl-x:execute(rm -i {+})+abort' \
                          --bind='f2:toggle-preview,ctrl-v:toggle-preview' \
                          --bind='f3:execute(bat --style=numbers {} || less -f {})' \
-                         --bind='f4:execute($EDITOR {}),ctrl-o:execute($EDITOR {})' \
+                         --bind='f4:become($EDITOR {}),ctrl-o:become($EDITOR {})' \
                          --bind='ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-l:clear-query' \
-                         --bind='alt-w:toggle-preview-wrap,alt-j:preview-half-page-down,alt-k:preview-half-page-up,alt-h:preview-top,alt-l:preview-bottom'"
-#                         --bind='ctrl-x:+reload(eval $FZF_DEFAULT_COMMAND)' \
+                         --bind='alt-w:toggle-preview-wrap,alt-j:preview-half-page-down,alt-k:preview-half-page-up,alt-h:preview-top,alt-l:preview-bottom' \
+                         --bind='ctrl-x:+reload(eval $FZF_DEFAULT_COMMAND)'"
 
 # fzf will use this default command if and only if you don’t give any input.
 export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard 2>/dev/null || fd --type f --type l $FD_OPTIONS"

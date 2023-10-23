@@ -110,6 +110,23 @@ https://apple.stackexchange.com/a/377092
 ### fzf keymaps
 This is a mix of standard hotkeys and custom set in the .zshrc
 
+Activate **fzf**:
+`CTRL-T` - Paste the selected files and directories onto the command-line
+`CTRL-R` - Paste the selected command from history onto the command-line
+`OPT-C` - cd into the selected directory
+`OPT+J` - interactive `jq` (type for example `cat example.json` and then `OPT+J`). Requires `jq` to be installed
+
+Shortcuts in `fzf`:
+
+**General**
+
+| Hotkey    | Command          |
+|-----------|------------------|
+| ctrl-x    | remove           |
+| f2/ctrl-v | toggle preview   |
+| f3        | bat/less preview |
+| f4/ctrl-o | run $EDITOR      |
+
 **Navigation**
 
 | Hotkey | Command           |
@@ -134,7 +151,7 @@ This is a mix of standard hotkeys and custom set in the .zshrc
 | ctrl-y  | yank (copy)                           |
 | ctrl-x  | delete selected file                  |
 
-**Navigation Preview**
+**Navigation in Preview**
 
 | Hotkey     | Command                |
 |------------|------------------------|
