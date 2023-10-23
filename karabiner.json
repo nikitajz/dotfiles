@@ -657,9 +657,9 @@
                 "type": "basic"
               },
               {
-                "description": "m -> Spotify ([m]usic)",
+                "description": "s -> Spotify ([m]usic)",
                 "from": {
-                  "key_code": "m",
+                  "key_code": "s",
                   "modifiers": {
                     "mandatory": [
                       "left_command",
