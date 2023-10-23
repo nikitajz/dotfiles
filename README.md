@@ -178,9 +178,7 @@ Run/activate applications
 | Meh+i  | [i]Term2 (experimental)         |
 | Meh+t  | i[T]erm2                        |
 | Meh+w  | Chrome ([w]eb surfing)          |
-| Meh+r  | P[r]eview                       |
-| Meh+n  | [N]otion                        |
-| Meh+m  | Spotify ([m]usic)               |
+| Meh+m  | Chrome [m]eet.google.com      |
 | Meh+k  | [K]arabiner                     |
 | Meh+y  | Amphetamine* (who knows wh[y]?) |
 | Meh+s  | Da[s]h*                         |

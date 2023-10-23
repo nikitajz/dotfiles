@@ -699,6 +699,27 @@
                 "type": "basic"
               },
               {
+                "description": "m -> Chrome [m]eet.google.com",
+                "from": {
+                  "key_code": "m",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Google Chrome\" http://meet.google.com"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
                 "description": "r -> p[r]eview",
                 "from": {
                   "key_code": "r",
