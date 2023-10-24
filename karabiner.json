@@ -741,7 +741,7 @@
                 "type": "basic"
               },
               {
-                "description": "e -> iT[e]rm2 ([e]xecute)",
+                "description": "e -> iT[e]rm2 ([e]xecute) - focus existing",
                 "from": {
                   "key_code": "e",
                   "modifiers": {
@@ -756,13 +756,13 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a iTerm"
+                    "shell_command": "osascript -e 'tell application \"iTerm\" to activate'"
                   }
                 ],
                 "type": "basic"
               },
               {
-                "description": "i -> [i]Term2",
+                "description": "i -> [i]Term2 - open new",
                 "from": {
                   "key_code": "i",
                   "modifiers": {
@@ -783,7 +783,7 @@
                 "type": "basic"
               },
               {
-                "description": "t -> i[T]erm2",
+                "description": "t -> i[T]erm2 - open new",
                 "from": {
                   "key_code": "t",
                   "modifiers": {
@@ -798,7 +798,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a 'Visual Studio Code'"
+                    "shell_command": "open -a 'iTerm'"
                   }
                 ],
                 "type": "basic"
