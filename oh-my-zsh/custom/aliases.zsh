@@ -12,12 +12,12 @@ alias diff="code --diff" # use vscode for diff file
 alias t2="tree -L 2"
 alias t3="tree -L 3"
 
-## exa
-if command -v exa &>/dev/null; then
-  alias ls="exa"
-  alias ll="exa -lh"
-  alias la="exa -alh"
-  alias tree="exa --tree"
+## eza
+if command -v eza &>/dev/null; then
+  alias ls="eza"
+  alias ll="eza -lh"
+  alias la="eza -alh"
+  alias tree="eza --tree"
 fi
 
 ## bat
