@@ -216,20 +216,21 @@ Activate CapsLock:
 Run/activate applications  
 `Meh = CapsLock+Cmd`
 
-| Hotkey | Command                                  |
-|--------|------------------------------------------|
-| Meh+f  | [f]inder                                 |
-| Meh+e  | [i]Term2 ([e]xecute) - focus on existing |
-| Meh+i  | [i]Term2 - open new                      |
-| Meh+t  | i[T]erm2 - open new                      |
-| Meh+w  | Chrome ([w]eb surfing)                   |
-| Meh+m  | Chrome [m]eet.google.com                 |
-| Meh+k  | [K]arabiner                              |
-| Meh+y  | Amphetamine* (who knows wh[y]?)          |
-| Meh+s  | Da[s]h*                                  |
-| Meh+d  | [D]ictionary                             |
-| Meh+c  | Py[C]harm                                |
-| Meh+v  | [V]SCode                                 |
+| Hotkey | Command                         |
+|--------|---------------------------------|
+| Meh+w  | Chrome ([w]eb surfing)          |
+| Meh+e  | Chrome m[e]et.google.com        |
+| Meh+s  | [S]lack                         |
+| Meh+d  | [D]ictionary                    |
+| Meh+f  | [F]inder                        |
+| Meh+c  | Py[C]harm                       |
+| Meh+v  | [V]SCode                        |
+| Meh+t  | i[T]erm2 - open new             |
+| Meh+i  | [i]Term2 - focus on existing    |
+| Meh+y  | Amphetamine* (who knows wh[y]?) |
+| Meh+k  | [K]arabiner                     |
+| Meh+m  | Spotify ([m]usic)               |
+| Meh+h  | Das[h]*                         |
 
 #### Hyper Navigation
 

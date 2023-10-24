@@ -636,7 +636,7 @@
             "description": "Meh + <key>: Run/activate application (RShift+RCtrl+ROpt+RCmd+LCmd+<key>)",
             "manipulators": [
               {
-                "description": "f -> [f]inder",
+                "description": "f -> [F]inder",
                 "from": {
                   "key_code": "f",
                   "modifiers": {
@@ -657,9 +657,30 @@
                 "type": "basic"
               },
               {
-                "description": "s -> Spotify ([m]usic)",
+                "description": "s -> [S]lack",
                 "from": {
                   "key_code": "s",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a Slack"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "m -> Spotif[y]",
+                "from": {
+                  "key_code": "m",
                   "modifiers": {
                     "mandatory": [
                       "left_command",
@@ -699,9 +720,9 @@
                 "type": "basic"
               },
               {
-                "description": "m -> Chrome [m]eet.google.com",
+                "description": "e -> Chrome m[e]et.google.com",
                 "from": {
-                  "key_code": "m",
+                  "key_code": "e",
                   "modifiers": {
                     "mandatory": [
                       "left_command",
@@ -741,28 +762,7 @@
                 "type": "basic"
               },
               {
-                "description": "e -> iT[e]rm2 ([e]xecute) - focus existing",
-                "from": {
-                  "key_code": "e",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command",
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"iTerm\" to activate'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "description": "i -> [i]Term2 - open new",
+                "description": "i -> [i]Term2 - focus existing",
                 "from": {
                   "key_code": "i",
                   "modifiers": {
@@ -777,7 +777,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a iTerm"
+                    "shell_command": "osascript -e 'tell application \"iTerm\" to activate'"
                   }
                 ],
                 "type": "basic"
@@ -911,7 +911,7 @@
               {
                 "description": "l = A[l]fred 5",
                 "from": {
-                  "key_code": "f",
+                  "key_code": "l",
                   "modifiers": {
                     "mandatory": [
                       "left_command",
