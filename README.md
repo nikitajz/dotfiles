@@ -250,3 +250,4 @@ Activates navigation with inverted T-shape key cluster (jikl) when Hyperkey is h
 | Hyper+;       | backspace (works with Opt/Cmd as well)      |
 | Hyper+u       | PgUp                                        |
 | Hyper+o       | PgDown                                      |
+| Hyper+'       | Escape                                      |

@@ -790,8 +790,27 @@
                   }
                 ],
                 "type": "basic"
+              },
+              {
+                "description": " ' (quote) = Esc",
+                "from": {
+                  "key_code": "quote",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "escape"
+                  }
+                ],
+                "type": "basic"
               }
-
             ]
           },
           {
