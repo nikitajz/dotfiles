@@ -633,6 +633,103 @@
             ]
           },
           {
+            "description": "Hyper+<key> (ijkl): Navigation (RShift+RCtrl+ROpt+RCmd+<key>) + Selection (Hyper+Shift+<key>)",
+            "manipulators": [
+              {
+                "description": " j = left",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ],
+                    "optional": [
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": " l = right",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ],
+                    "optional": [
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": " i = up",
+                "from": {
+                  "key_code": "i",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ],
+                    "optional": [
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": " k = down",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ],
+                    "optional": [
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "down_arrow"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
             "description": "Meh + <key>: Run/activate application (RShift+RCtrl+ROpt+RCmd+LCmd+<key>)",
             "manipulators": [
               {
@@ -993,105 +1090,7 @@
                 "type": "basic"
               }
             ]
-          },
-          {
-            "description": "Hyper+<key>: Navigation (RShift+RCtrl+ROpt+RCmd+<key>) + Selection (Hyper+Shift+<key>)",
-            "manipulators": [
-              {
-                "description": " h = left",
-                "from": {
-                  "key_code": "h",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ],
-                    "optional": [
-                      "left_shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "left_arrow"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "description": " l = right",
-                "from": {
-                  "key_code": "l",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ],
-                    "optional": [
-                      "left_shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "right_arrow"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "description": " k = up",
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ],
-                    "optional": [
-                      "left_shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "up_arrow"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "description": " j = down",
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ],
-                    "optional": [
-                      "left_shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "down_arrow"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          }
-        ]
+          }       ]
       },
       "devices": [
         {

@@ -234,16 +234,16 @@ Run/activate applications
 
 #### Hyper Navigation
 
-Activates vim-style navigation when Hyperkey is hold  
+Activates navigation with inverted T-shape key cluster (jikl) when Hyperkey is hold  
 `Hyper+<key>`
 
 | Hotkey        | Command                                     |
 |---------------|---------------------------------------------|
-| Hyper+h       | left                                        |
-| Hyper+j       | down                                        |
-| Hyper+k       | up                                          |
+| Hyper+j       | left                                        |
+| Hyper+k       | down                                        |
+| Hyper+i       | up                                          |
 | Hyper+l       | right                                       |
-| Hyper+Shift+h | shift+left (select character to the left)   |
-| Hyper+Shift+j | shift+down (select line down)               |
-| Hyper+Shift+k | shift+up (select line up)                   |
+| Hyper+Shift+j | shift+left (select character to the left)   |
+| Hyper+Shift+k | shift+down (select line down)               |
+| Hyper+Shift+i | shift+up (select line up)                   |
 | Hyper+Shift+l | shift+right (select character to the right) |
