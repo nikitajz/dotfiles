@@ -247,3 +247,5 @@ Activates navigation with inverted T-shape key cluster (jikl) when Hyperkey is h
 | Hyper+Shift+k | shift+down (select line down)               |
 | Hyper+Shift+i | shift+up (select line up)                   |
 | Hyper+Shift+l | shift+right (select character to the right) |
+| Hyper+;       | backspace (works with Opt/Cmd as well)      |
+
