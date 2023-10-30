@@ -728,7 +728,7 @@
                 "type": "basic"
               },
               {
-                "description": " ; = backspace",
+                "description": " ; = backspace (incl. modifiers Opt/Cmd)",
                 "from": {
                   "key_code": "semicolon",
                   "modifiers": {
@@ -750,7 +750,48 @@
                   }
                 ],
                 "type": "basic"
+              },
+              {
+                "description": " u = PgUp",
+                "from": {
+                  "key_code": "u",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "page_up"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": " o = PgDown",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "page_down"
+                  }
+                ],
+                "type": "basic"
               }
+
             ]
           },
           {
