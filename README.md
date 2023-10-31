@@ -198,6 +198,15 @@ https://apple.stackexchange.com/a/377092
 [Karabiner Elements](https://karabiner-elements.pqrs.org/) (KE) allows to supercharge keyboard shortcuts to maximum.  
 See example: <https://wiki.nikiv.dev/macOS/apps/karabiner/>
 
+#### j+k -> Escape
+
+Press `j+k` simualteniously to activate `Escape`
+
+| Hotkey | Command |
+|--------|---------|
+| j+k    | Escape  |
+
+
 #### CapsLock
 
 Tap: `Esc`  
@@ -215,19 +224,19 @@ Activate CapsLock:
 
 Run/activate applications  
 
-| Hotkey | Command                         |
-|--------|---------------------------------|
-| *+w  | Chrome ([w]eb surfing)          |
-| *+e  | Chrome m[e]et.google.com        |
-| *+s  | [S]lack                         |
-| *+d  | [D]ictionary                    |
-| *+f  | [F]inder                        |
-| *+c  | Py[C]harm                       |
-| *+v  | [V]SCode                        |
-| *+t  | i[T]erm2 - open new             |
-| *+g  | iTerm2 - focus on existing    |
-| *+z  | Spotify                |
-| *+x  | Notion                |
+| Hotkey | Command                    |
+|--------|----------------------------|
+| *+w    | Chrome ([w]eb surfing)     |
+| *+e    | Chrome m[e]et.google.com   |
+| *+s    | [S]lack                    |
+| *+d    | [D]ictionary               |
+| *+f    | [F]inder                   |
+| *+c    | Py[C]harm                  |
+| *+v    | [V]SCode                   |
+| *+t    | i[T]erm2 - open new        |
+| *+g    | iTerm2 - focus on existing |
+| *+z    | Spotify                    |
+| *+x    | Notion                     |
 
 #### Hyper Navigation
 
