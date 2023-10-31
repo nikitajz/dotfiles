@@ -211,26 +211,23 @@ Activate CapsLock:
 |-----------------|----------|
 | Hyper+Cmd+Space | Emoji 😜 |
 
-#### Meh
+#### Hyper Applications
 
 Run/activate applications  
-`Meh = CapsLock+Cmd`
 
 | Hotkey | Command                         |
 |--------|---------------------------------|
-| Meh+w  | Chrome ([w]eb surfing)          |
-| Meh+e  | Chrome m[e]et.google.com        |
-| Meh+s  | [S]lack                         |
-| Meh+d  | [D]ictionary                    |
-| Meh+f  | [F]inder                        |
-| Meh+c  | Py[C]harm                       |
-| Meh+v  | [V]SCode                        |
-| Meh+t  | i[T]erm2 - open new             |
-| Meh+i  | [i]Term2 - focus on existing    |
-| Meh+y  | Amphetamine* (who knows wh[y]?) |
-| Meh+k  | [K]arabiner                     |
-| Meh+m  | Spotify ([m]usic)               |
-| Meh+h  | Das[h]*                         |
+| *+w  | Chrome ([w]eb surfing)          |
+| *+e  | Chrome m[e]et.google.com        |
+| *+s  | [S]lack                         |
+| *+d  | [D]ictionary                    |
+| *+f  | [F]inder                        |
+| *+c  | Py[C]harm                       |
+| *+v  | [V]SCode                        |
+| *+t  | i[T]erm2 - open new             |
+| *+g  | iTerm2 - focus on existing    |
+| *+z  | Spotify                |
+| *+x  | Notion                |
 
 #### Hyper Navigation
 

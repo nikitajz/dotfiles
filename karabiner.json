@@ -814,7 +814,7 @@
             ]
           },
           {
-            "description": "Meh + <key>: Run/activate application (RShift+RCtrl+ROpt+RCmd+LCmd+<key>)",
+            "description": "Hyper + <key>: Run/activate application (RShift+RCtrl+ROpt+RCmd+LCmd+<key>)",
             "manipulators": [
               {
                 "description": "f -> [F]inder",
@@ -822,7 +822,6 @@
                   "key_code": "f",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -843,7 +842,6 @@
                   "key_code": "s",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -859,12 +857,11 @@
                 "type": "basic"
               },
               {
-                "description": "m -> Spotif[y]",
+                "description": "z -> Spotif[y]",
                 "from": {
-                  "key_code": "m",
+                  "key_code": "z",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -885,7 +882,6 @@
                   "key_code": "w",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -906,7 +902,6 @@
                   "key_code": "e",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -927,7 +922,6 @@
                   "key_code": "r",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -943,12 +937,11 @@
                 "type": "basic"
               },
               {
-                "description": "i -> [i]Term2 - focus existing",
+                "description": "g -> iTerm2 - focus existing",
                 "from": {
-                  "key_code": "i",
+                  "key_code": "g",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -969,7 +962,6 @@
                   "key_code": "t",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -985,12 +977,11 @@
                 "type": "basic"
               },
               {
-                "description": "n -> [N]otion",
+                "description": "x -> Notion",
                 "from": {
-                  "key_code": "n",
+                  "key_code": "x",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -1006,75 +997,11 @@
                 "type": "basic"
               },
               {
-                "description": "k -> karabiner",
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command",
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a Karabiner-Elements"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "description": "y -> amphetamine",
-                "from": {
-                  "key_code": "y",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command",
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a amphetamine"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "description": "s -> Da[s]h",
-                "from": {
-                  "key_code": "s",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command",
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a Dash"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
                 "description": "d -> Dictionary",
                 "from": {
                   "key_code": "d",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -1090,54 +1017,11 @@
                 "type": "basic"
               },
               {
-                "description": "l = A[l]fred 5",
-                "from": {
-                  "key_code": "l",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command",
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a 'Alfred 5'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "description": "g -> Chrome ([g]oogle)",
-                "from": {
-                  "key_code": "g",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command",
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a 'Google Chrome'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
                 "description": "c -> Py[C]harm ([c]ode)",
                 "from": {
                   "key_code": "c",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
@@ -1158,7 +1042,6 @@
                   "key_code": "v",
                   "modifiers": {
                     "mandatory": [
-                      "left_command",
                       "right_command",
                       "right_control",
                       "right_shift",
