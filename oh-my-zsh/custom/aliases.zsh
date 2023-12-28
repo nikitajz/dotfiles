@@ -1,4 +1,12 @@
-alias ea="source venv/bin/activate"
+function ea() {
+    if [[ -d venv ]]; then
+        source venv/bin/activate
+    elif [[ -d .venv ]]; then
+        source .venv/bin/activate
+    else
+        echo "No virtual environment found."
+    fi
+}
 alias ed="deactivate"
 
 vea() {
