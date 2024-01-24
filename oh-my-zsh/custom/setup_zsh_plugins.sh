@@ -2,6 +2,12 @@
 
 set -e
 
+if ! command -v git &> /dev/null
+then
+    echo "git could not be found. Please install it and run the script again."
+    exit
+fi
+
 # source: https://github.com/romkatv/zsh-bench/blob/master/configs/diy%2B%2B/skel/.zshrc
 # https://github.com/romkatv/zsh-bench
 OMZ_PLUGINS=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins
@@ -25,9 +31,10 @@ function clone_plugin_repo() {
     
     if [[ ! -d "$OMZ_PLUGINS/$plugin_name" ]]; then
       echo "Cloning the repo for plugin ${plugin_name}"
-      git clone --depth=1 "$repo_url" "$OMZ_PLUGINS/$plugin_name"
+      git clone --depth=1 "$repo_url" "$OMZ_PLUGINS/$plugin_name" &
     fi
   done
+  wait
 }
 
 clone_plugin_repo
