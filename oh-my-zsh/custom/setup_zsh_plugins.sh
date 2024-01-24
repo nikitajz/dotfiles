@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-
 if ! command -v git &> /dev/null
 then
     echo "git could not be found. Please install it and run the script again."
