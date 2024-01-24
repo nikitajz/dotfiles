@@ -1,4 +1,7 @@
 #!/bin/sh
+
+set -e
+
 # source: https://github.com/romkatv/zsh-bench/blob/master/configs/diy%2B%2B/skel/.zshrc
 # https://github.com/romkatv/zsh-bench
 OMZ_PLUGINS=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins
