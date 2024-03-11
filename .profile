@@ -9,3 +9,5 @@ if command -v pyenv 1>/dev/null 2>&1; then
 else
 	echo "Warning: pyenv is not installed. Please install it to manage Python versions."
 fi
+
+. "$HOME/.cargo/env"
