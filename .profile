@@ -10,4 +10,4 @@ else
 	echo "Warning: pyenv is not installed. Please install it to manage Python versions."
 fi
 
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
