@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 export DOTFILES=$HOME/.dotfiles
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 export LANG=en_US.UTF-8
@@ -42,6 +44,12 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
+export NVM_DIR="$HOME/.nvm" # should be before loading nvm
+export NVM_COMPLETION=true
+export NVM_LAZY_LOAD=true
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # zsh-completions
 # if [[ ! -d "$ZSH/completions" || ! -f "$ZSH/completions/_gh" ]]; then
 #     mkdir -pv $ZSH/completions
@@ -56,6 +64,7 @@ plugins=(
   # git # use custom instead
   jq # https://github.com/reegnz/jq-zsh-plugin
   zsh-autosuggestions # should be before zsh-syntax-highlighting
+  zsh-nvm
   zsh-syntax-highlighting
   )
 
@@ -124,7 +133,5 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# zprof
 

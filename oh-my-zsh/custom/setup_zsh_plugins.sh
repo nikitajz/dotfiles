@@ -15,6 +15,7 @@ OMZ_THEMES=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes
 declare -a plugins=(
   "zsh-syntax-highlighting zsh-users/zsh-syntax-highlighting"
   "zsh-autosuggestions zsh-users/zsh-autosuggestions"
+  "zsh-nvm lukechilds/zsh-nvm"
   "jq reegnz/jq-zsh-plugin"
   "alias-tips djui/alias-tips"
 )
