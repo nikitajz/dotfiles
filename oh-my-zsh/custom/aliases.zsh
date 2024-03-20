@@ -1,3 +1,5 @@
+alias gsla="git --no-pager log --oneline --decorate --all --graph -35"
+
 function ea() {
     if [[ -d venv ]]; then
         source venv/bin/activate
