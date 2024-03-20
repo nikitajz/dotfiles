@@ -1,5 +1,6 @@
 # zmodload zsh/zprof
 
+export XDG_CONFIG_HOME=$HOME/.config
 export DOTFILES=$HOME/.dotfiles
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 export LANG=en_US.UTF-8
@@ -11,10 +12,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='nvim'
 fi
-
-# Use pyenv to manage python version
-[[ ! -f ~/.profile ]] || source ~/.profile
-[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/.dotfiles/oh-my-zsh/custom"
@@ -130,6 +127,10 @@ complete -C aws_completer aws
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
+
+# Use pyenv to manage python version
+[[ ! -f ~/.profile ]] || source ~/.profile
+[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
