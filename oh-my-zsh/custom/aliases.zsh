@@ -15,12 +15,10 @@ vea() {
   source ~/.virtualenvs/$(basename $PWD)/bin/activate
 }
 
-alias zshconf="$EDITOR ~/.zshrc"
+alias zc="$EDITOR ~/.zshrc"
+alias dot="cd ~/.dotfiles/"
 alias vscode="code"
 alias diff="code --diff" # use vscode for diff file
-
-alias t2="tree -L 2"
-alias t3="tree -L 3"
 
 ## eza
 if command -v eza &>/dev/null; then
@@ -29,6 +27,9 @@ if command -v eza &>/dev/null; then
   alias la="eza -alh"
   alias tree="eza --tree"
 fi
+
+alias t2="tree -L 2"
+alias t3="tree -L 3"
 
 ## bat
 # Sometimes bat is installed as batcat.
@@ -47,17 +48,16 @@ alias zz="z -"
 # serverless
 alias sls=serverless
 
-vij() {
-	vim -c ':%!jq' -c 'set filetype=json' $1
-}
-
 # Open Pycharm app for the specified folder (similar to vscode: `code <dir>`)
 pycharm() {
   open -a /Applications/PyCharm.app/Contents/MacOS/pycharm $1
 }
 
-alias nv=nvim
+vij() {
+	vim -c ':%!jq' -c 'set filetype=json' $1
+}
 
+alias v=nvim
 
 alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
 alias js2yaml="python -c 'import sys, yaml, json; yaml.dump(json.load(sys.stdin), sys.stdout, indent=4)'"
