@@ -35,26 +35,26 @@ set background=dark
 autocmd vimenter * ++nested colorscheme gruvbox
 
 " Basic editing settings
-set number " nu
-set relativenumber " rnu
-set linebreak " lbr
-set backspace=indent,eol,start " allow backspacing over everything
-set showcmd
-set nobackup
-set ruler
+set number                      " nu
+set relativenumber              " rnu
+set linebreak                   " lbr
+set backspace=indent,eol,start  " allow backspacing over everything
+set showcmd                     " display incomplete commands
+set nobackup                    " do not keep a backup file
+set ruler                       " show the current row and column
 set scrolloff=5
 set autoindent
 set expandtab
 
-set tabstop=4 " use 4 spaces instead of tabs during formatting
+set tabstop=4                   " use 4 spaces instead of tabs during formatting
 set shiftwidth=4
 set softtabstop=4
-set mouse+=a " enable mouse mode (scrolling, selection, etc)
-"set hlsearch            " highlight searches
-set incsearch           " do incremental searching
-set showmatch           " jump to matches when entering regexp
-set ignorecase          " ignore case when searching
-set smartcase           " no ignorecase if Uppercase char present
+set mouse+=a                    " enable mouse mode (scrolling, selection, etc)
+"set hlsearch                   " highlight searches
+set incsearch                   " do incremental searching
+set showmatch                   " jump to matches when entering regexp
+set ignorecase                  " ignore case when searching
+set smartcase                   " no ignorecase if Uppercase char present
 
 " folding, enabled by default
 set foldmethod=indent
