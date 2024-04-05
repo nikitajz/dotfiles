@@ -16,6 +16,7 @@ vea() {
 }
 
 alias zc="$EDITOR ~/.zshrc"
+alias zr="omz reload"
 alias dot="cd ~/.dotfiles/"
 alias vscode="code"
 alias diff="code --diff" # use vscode for diff file
@@ -58,6 +59,7 @@ vij() {
 }
 
 alias v=nvim
+alias nv=nvim
 
 alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
 alias js2yaml="python -c 'import sys, yaml, json; yaml.dump(json.load(sys.stdin), sys.stdout, indent=4)'"
