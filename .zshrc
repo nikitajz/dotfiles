@@ -1,5 +1,10 @@
 # zmodload zsh/zprof
 
+# always use emacs style for zsh
+# https://zsh.sourceforge.io/Guide/zshguide04.html#l75
+bindkey -e 
+
+
 export XDG_CONFIG_HOME=$HOME/.config
 export DOTFILES=$HOME/.dotfiles
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
