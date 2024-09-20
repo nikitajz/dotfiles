@@ -29,8 +29,9 @@ if command -v eza &>/dev/null; then
   alias tree="eza --tree"
 fi
 
-alias t2="tree -L 2"
+alias tt="tree -L 2"
 alias t3="tree -L 3"
+alias t4="tree -L 4"
 
 ## bat
 # Sometimes bat is installed as batcat.
