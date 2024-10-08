@@ -861,7 +861,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a finder"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "com.apple.finder" }
+                    }
                   }
                 ],
                 "type": "basic"
@@ -881,7 +883,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a Slack"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "com.tinyspeck.slackmacgap" }
+                    }
                   }
                 ],
                 "type": "basic"
@@ -901,7 +905,10 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a Arc"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "company.thebrowser.Browser" }
+                    }
+                  }
                   }
                 ],
                 "type": "basic"
@@ -921,7 +928,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a Spotify"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "com.spotify.client" }
+                    }
                   }
                 ],
                 "type": "basic"
@@ -941,7 +950,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a \"Google Chrome\""
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "com.google.Chrome" }
+                    }
                   }
                 ],
                 "type": "basic"
@@ -981,7 +992,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a Preview"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "com.apple.Preview" }
+                    }
                   }
                 ],
                 "type": "basic"
@@ -1001,7 +1014,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript -e 'tell application \"iTerm\" to activate'"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "com.googlecode.iterm2" }
+                    }
                   }
                 ],
                 "type": "basic"
@@ -1041,7 +1056,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a Notion"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "notion.id" }
+                    }
                   }
                 ],
                 "type": "basic"
@@ -1061,7 +1078,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a Dictionary"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "com.apple.Dictionary" }
+                    }
                   }
                 ],
                 "type": "basic"
@@ -1081,7 +1100,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a 'PyCharm'"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "com.jetbrains.pycharm" }
+                    }
                   }
                 ],
                 "type": "basic"
@@ -1101,7 +1122,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a 'Visual Studio Code'"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "com.microsoft.VSCode" }
+                    }
                   }
                 ],
                 "type": "basic"
@@ -1121,7 +1144,9 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a 'Telegram'"
+                    "software_function": {
+                      "open_application": { "bundle_identifier": "com.tdesktop.Telegram" }
+                    }
                   }
                 ],
                 "type": "basic"
