@@ -7,25 +7,25 @@ What's dotfiles:
 
 There are 2 main scripts to configure fresh setup:
 
-[install_macOS.sh](install_macos.sh)  
+[install_macOS.sh](install_macos.sh)
 Install Brew, Pyenv, fzf, oh-my-zsh and install other packages using [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle)
 
-[setup-macos.sh](setup-macos.sh)  
+[setup-macos.sh](setup-macos.sh)
 Configure macos using defaults (see <https://macos-defaults.com/>)
 
 ### Github
 
-[Add key to keychain](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)  
+[Add key to keychain](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
 `git config --global core.excludesfile ~/.gitignore`
 
 ### Fonts smoothing
 
 ```shell
-defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO  
-defaults -currentHost write -g AppleFontSmoothing -int 0  
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+defaults -currentHost write -g AppleFontSmoothing -int 0
 ```
 
-<https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antialiasing/>  
+<https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antialiasing/>
 <https://osxdaily.com/2022/04/06/change-remove-font-smoothing-macos/>
 
 <details>
@@ -33,7 +33,7 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 
 #### Homebrew
 
-Install all apps using [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) listed Brewfile  
+Install all apps using [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) listed Brewfile
 `brew bundle` (part of [setup_macos.sh](setup_macos.sh))
 
 [Brew Bundle Brewfile Tips](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
@@ -79,9 +79,9 @@ https://github.com/esc/conda-zsh-completion
 
 Most of the settings can be set using `defaults` command line. See [setup-macos.sh](setup-macos.sh) for details.
 
-References:  
-https://www.defaults-write.com/  
-https://macos-defaults.com/  
+References:
+https://www.defaults-write.com/
+https://macos-defaults.com/
 [macOS Commands Reference.md](https://gist.github.com/nikitajz/8ff97fb3e10a8949a2833c0ead7c8263)
 
 </details>
@@ -106,7 +106,7 @@ https://macos-defaults.com/
 
 ### Links
 
-<https://github.com/ibraheemdev/modern-unix>  
+<https://github.com/ibraheemdev/modern-unix>
 <https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/>
 
 ### fzf keymaps
@@ -114,10 +114,10 @@ https://macos-defaults.com/
 This is a mix of standard hotkeys and custom set in the .zshrc
 
 Activate **fzf**:
-`CTRL-T` - Paste the selected files and directories onto the command-line  
-`CTRL-R` - Paste the selected command from history onto the command-line  
-`OPT-C` - cd into the selected directory  
-`OPT+J` - interactive `jq` (type for example `cat example.json` and then `OPT+J`). Requires `jq` to be installed  
+`CTRL-T` - Paste the selected files and directories onto the command-line
+`CTRL-R` - Paste the selected command from history onto the command-line
+`OPT-C` - cd into the selected directory
+`OPT+J` - interactive `jq` (type for example `cat example.json` and then `OPT+J`). Requires `jq` to be installed
 
 Shortcuts in `fzf`:
 
@@ -189,13 +189,13 @@ Tip: Using the same command twice jump to the next directory that matches
 | Move to Built-in Retina Display     | Cmd + Ctrl + <-    |
 | Revert                              | Cmd + Shift + Down |
 
-https://apple.stackexchange.com/a/212607  
+https://apple.stackexchange.com/a/212607
 https://apple.stackexchange.com/a/377092
 </details>
 
 ### Karabiner Elements
 
-[Karabiner Elements](https://karabiner-elements.pqrs.org/) (KE) allows to supercharge keyboard shortcuts to maximum.  
+[Karabiner Elements](https://karabiner-elements.pqrs.org/) (KE) allows to supercharge keyboard shortcuts to maximum.
 See example: <https://wiki.nikiv.dev/macOS/apps/karabiner/>
 
 #### j+k -> Escape
@@ -207,14 +207,17 @@ Press `j+k` simualteniously to activate `Escape`
 | j+k    | Escape  |
 
 
-#### CapsLock
+#### Hyperkey
 
-Tap: `Esc`  
+Hyperkey (*) is a combination of all right keys (RShift+RCtrl+ROpt+RCmd)
+It's used as a modifier key to create custom shortcuts. This configuration uses physical CapsLock key to act as Hyperkey.
+
+Tap: `Esc`
 Hold: `RShift+RCtrl+ROpt+RCmd` (all right keys)- serve as Hyperkey modifier
 
-Activate CapsLock:  
-`Left Shift + Right Shift`
-`CapsLock + Esc` (alternative)
+Activate CapsLock:
+`CapsLock + Esc`
+`Left Shift + Right Shift` (alternative)
 
 | Hotkey          | Command  |
 |-----------------|----------|
@@ -222,25 +225,27 @@ Activate CapsLock:
 
 #### Hyper Applications
 
-Run/activate applications  
+Run/activate applications
 
 | Hotkey | Command                    |
 |--------|----------------------------|
 | *+w    | Chrome ([w]eb surfing)     |
 | *+e    | Chrome m[e]et.google.com   |
-| *+s    | [S]lack                    |
+| *+a    | [A]rc                      |
+| *+s    | [S]potify                  |
 | *+d    | [D]ictionary               |
 | *+f    | [F]inder                   |
 | *+c    | Py[C]harm                  |
 | *+v    | [V]SCode                   |
-| *+t    | i[T]erm2 - open new        |
+| *+t    | i[T]erm2                   |
 | *+g    | iTerm2 - focus on existing |
-| *+z    | Spotify                    |
+| *+z    | Zed                        |
 | *+x    | Notion                     |
+| *+m    | Slack ([m]essenger)        |
 
 #### Hyper Navigation
 
-Activates navigation with inverted T-shape key cluster (jikl) when Hyperkey is hold  
+Activates navigation with inverted T-shape key cluster (jikl) when Hyperkey is hold
 `Hyper+<key>`
 
 | Hotkey        | Command                                     |

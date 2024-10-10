@@ -788,30 +788,6 @@
                 "type": "basic"
               },
               {
-                "description": "s -> [S]lack",
-                "from": {
-                  "key_code": "s",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "software_function": {
-                      "open_application": {
-                        "bundle_identifier": "com.tinyspeck.slackmacgap"
-                      }
-                    }
-                  }
-                ],
-                "type": "basic"
-              },
-              {
                 "description": "a -> [A]rc",
                 "from": {
                   "key_code": "a",
@@ -836,9 +812,9 @@
                 "type": "basic"
               },
               {
-                "description": "z -> Spotify",
+                "description": "s -> [S]potify",
                 "from": {
-                  "key_code": "z",
+                  "key_code": "s",
                   "modifiers": {
                     "mandatory": [
                       "right_command",
@@ -952,7 +928,7 @@
                 "type": "basic"
               },
               {
-                "description": "t -> i[T]erm2 - open new",
+                "description": "t -> i[T]erm2",
                 "from": {
                   "key_code": "t",
                   "modifiers": {
@@ -969,6 +945,30 @@
                     "software_function": {
                       "open_application": {
                         "bundle_identifier": "com.googlecode.iterm2"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "z -> [Z]ed",
+                "from": {
+                  "key_code": "z",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "dev.zed.Zed"
                       }
                     }
                   }
@@ -1087,6 +1087,30 @@
                     "software_function": {
                       "open_application": {
                         "bundle_identifier": "com.tdesktop.Telegram"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "m -> Slack ([m]essenger)",
+                "from": {
+                  "key_code": "m",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "com.tinyspeck.slackmacgap"
                       }
                     }
                   }
