@@ -966,7 +966,11 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a 'iTerm'"
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "com.googlecode.iterm2"
+                      }
+                    }
                   }
                 ],
                 "type": "basic"
