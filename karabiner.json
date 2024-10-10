@@ -35,9 +35,7 @@
                 "from": {
                   "key_code": "left_shift",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -67,9 +65,7 @@
                 "from": {
                   "key_code": "right_shift",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "conditions": [
@@ -107,19 +103,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f1",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -140,19 +131,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f2",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -173,19 +159,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f3",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -206,19 +187,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f4",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -239,19 +215,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f5",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -272,19 +243,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f6",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -305,19 +271,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f7",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -338,19 +299,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f8",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -371,19 +327,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f9",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -404,19 +355,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f10",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -437,19 +383,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f11",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -470,19 +411,14 @@
                       "com.microsoft.VSCode",
                       "com.visualstudio.code.oss"
                     ],
-                    "file_paths": [
-                      "ck2\\.app",
-                      "eu4\\.app"
-                    ],
+                    "file_paths": ["ck2\\.app", "eu4\\.app"],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "f12",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -502,9 +438,7 @@
                 "from": {
                   "key_code": "caps_lock",
                   "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
+                    "optional": ["any"]
                   }
                 },
                 "to": [
@@ -567,17 +501,13 @@
                       "right_shift",
                       "right_option"
                     ],
-                    "optional": [
-                      "caps_lock"
-                    ]
+                    "optional": ["caps_lock"]
                   }
                 },
                 "to": [
                   {
                     "key_code": "caps_lock",
-                    "modifiers": [
-                      "left_control"
-                    ]
+                    "modifiers": ["left_control"]
                   }
                 ],
                 "type": "basic"
@@ -598,9 +528,7 @@
                 "to": [
                   {
                     "key_code": "spacebar",
-                    "modifiers": [
-                      "left_control"
-                    ]
+                    "modifiers": ["left_control"]
                   }
                 ],
                 "type": "basic"
@@ -622,10 +550,7 @@
                 "to": [
                   {
                     "key_code": "spacebar",
-                    "modifiers": [
-                      "left_control",
-                      "left_command"
-                    ]
+                    "modifiers": ["left_control", "left_command"]
                   }
                 ],
                 "type": "basic"
@@ -676,9 +601,7 @@
                       "right_shift",
                       "right_option"
                     ],
-                    "optional": [
-                      "left_shift"
-                    ]
+                    "optional": ["left_shift"]
                   }
                 },
                 "to": [
@@ -699,9 +622,7 @@
                       "right_shift",
                       "right_option"
                     ],
-                    "optional": [
-                      "left_shift"
-                    ]
+                    "optional": ["left_shift"]
                   }
                 },
                 "to": [
@@ -722,9 +643,7 @@
                       "right_shift",
                       "right_option"
                     ],
-                    "optional": [
-                      "left_shift"
-                    ]
+                    "optional": ["left_shift"]
                   }
                 },
                 "to": [
@@ -745,9 +664,7 @@
                       "right_shift",
                       "right_option"
                     ],
-                    "optional": [
-                      "left_shift"
-                    ]
+                    "optional": ["left_shift"]
                   }
                 },
                 "to": [
@@ -768,10 +685,7 @@
                       "right_shift",
                       "right_option"
                     ],
-                    "optional": [
-                      "left_command",
-                      "left_option"
-                    ]
+                    "optional": ["left_command", "left_option"]
                   }
                 },
                 "to": [
@@ -862,7 +776,9 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "com.apple.finder" }
+                      "open_application": {
+                        "bundle_identifier": "com.apple.finder"
+                      }
                     }
                   }
                 ],
@@ -884,7 +800,9 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "com.tinyspeck.slackmacgap" }
+                      "open_application": {
+                        "bundle_identifier": "com.tinyspeck.slackmacgap"
+                      }
                     }
                   }
                 ],
@@ -906,9 +824,10 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "company.thebrowser.Browser" }
+                      "open_application": {
+                        "bundle_identifier": "company.thebrowser.Browser"
+                      }
                     }
-                  }
                   }
                 ],
                 "type": "basic"
@@ -929,7 +848,9 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "com.spotify.client" }
+                      "open_application": {
+                        "bundle_identifier": "com.spotify.client"
+                      }
                     }
                   }
                 ],
@@ -951,7 +872,9 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "com.google.Chrome" }
+                      "open_application": {
+                        "bundle_identifier": "com.google.Chrome"
+                      }
                     }
                   }
                 ],
@@ -993,7 +916,9 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "com.apple.Preview" }
+                      "open_application": {
+                        "bundle_identifier": "com.apple.Preview"
+                      }
                     }
                   }
                 ],
@@ -1015,7 +940,9 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "com.googlecode.iterm2" }
+                      "open_application": {
+                        "bundle_identifier": "com.googlecode.iterm2"
+                      }
                     }
                   }
                 ],
@@ -1079,7 +1006,9 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "com.apple.Dictionary" }
+                      "open_application": {
+                        "bundle_identifier": "com.apple.Dictionary"
+                      }
                     }
                   }
                 ],
@@ -1101,7 +1030,9 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "com.jetbrains.pycharm" }
+                      "open_application": {
+                        "bundle_identifier": "com.jetbrains.pycharm"
+                      }
                     }
                   }
                 ],
@@ -1123,7 +1054,9 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "com.microsoft.VSCode" }
+                      "open_application": {
+                        "bundle_identifier": "com.microsoft.VSCode"
+                      }
                     }
                   }
                 ],
@@ -1145,7 +1078,9 @@
                 "to": [
                   {
                     "software_function": {
-                      "open_application": { "bundle_identifier": "com.tdesktop.Telegram" }
+                      "open_application": {
+                        "bundle_identifier": "com.tdesktop.Telegram"
+                      }
                     }
                   }
                 ],
