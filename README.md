@@ -239,26 +239,26 @@ Run/activate applications
 | *+v    | [V]SCode                   |
 | *+t    | i[T]erm2                   |
 | *+g    | iTerm2 - focus on existing |
-| *+z    | Zed                        |
+| *+z    | [Z]ed                      |
 | *+x    | Notion                     |
 | *+m    | Slack ([m]essenger)        |
 
 #### Hyper Navigation
 
-Activates navigation with inverted T-shape key cluster (jikl) when Hyperkey is hold
-`Hyper+<key>`
+Activates navigation with inverted T-shape key cluster (jikl) when Hyperkey+LCmd are hold
+`Hyper+LCmd+<key>`
 
-| Hotkey        | Command                                     |
-|---------------|---------------------------------------------|
-| Hyper+j       | left                                        |
-| Hyper+k       | down                                        |
-| Hyper+i       | up                                          |
-| Hyper+l       | right                                       |
-| Hyper+Shift+j | shift+left (select character to the left)   |
-| Hyper+Shift+k | shift+down (select line down)               |
-| Hyper+Shift+i | shift+up (select line up)                   |
-| Hyper+Shift+l | shift+right (select character to the right) |
-| Hyper+;       | backspace (works with Opt/Cmd as well)      |
-| Hyper+u       | PgUp                                        |
-| Hyper+o       | PgDown                                      |
-| Hyper+'       | Escape                                      |
+| Hotkey             | Command                                     |
+|--------------------|---------------------------------------------|
+| Hyper+LCmd+j       | left                                        |
+| Hyper+LCmd+k       | down                                        |
+| Hyper+LCmd+i       | up                                          |
+| Hyper+LCmd+l       | right                                       |
+| Hyper+LCmd+Shift+j | shift+left (select character to the left)   |
+| Hyper+LCmd+Shift+k | shift+down (select line down)               |
+| Hyper+LCmd+Shift+i | shift+up (select line up)                   |
+| Hyper+LCmd+Shift+l | shift+right (select character to the right) |
+| Hyper+LCmd+u       | PgUp                                        |
+| Hyper+LCmd+o       | PgDown                                      |
+| Hyper+;            | backspace (works with Opt/Cmd as well)      |
+| Hyper+'            | Escape (works with Opt/Cmd as well)         |
