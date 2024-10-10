@@ -243,6 +243,16 @@ Run/activate applications
 | *+x    | Notion                     |
 | *+m    | Slack ([m]essenger)        |
 
+Raycast:
+These shortcuts are configured in Raycast app (but require Hyperkey to be set in Karabiner Elements)
+
+| Hotkey | Command                                      |
+|--------|----------------------------------------------|
+| *+j    | Raycast hotkey (main)                        |
+| *+l    | Locate Files with File Search (Raycast)      |
+| *+d    | Define word (Raycast)                        |
+
+
 #### Hyper Navigation
 
 Activates navigation with inverted T-shape key cluster (jikl) when Hyperkey+LCmd are hold

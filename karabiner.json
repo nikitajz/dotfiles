@@ -16,6 +16,7 @@
       "simple_modifications": [],
       "virtual_hid_keyboard": {
         "country_code": 0,
+        "keyboard_type_v2": "ansi",
         "indicate_sticky_modifier_keys_state": true,
         "mouse_key_xy_scale": 100
       },
@@ -762,7 +763,7 @@
             ]
           },
           {
-            "description": "Hyper + <key>: Run/activate application (RShift+RCtrl+ROpt+RCmd+LCmd+<key>)",
+            "description": "Hyper + <key>: Run/activate application (RShift+RCtrl+ROpt+RCmd+<key>)",
             "manipulators": [
               {
                 "description": "f -> [F]inder",
@@ -993,30 +994,6 @@
                   {
                     "software_function": {
                       "open_application": { "bundle_identifier": "notion.id" }
-                    }
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "description": "d -> Dictionary",
-                "from": {
-                  "key_code": "d",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "software_function": {
-                      "open_application": {
-                        "bundle_identifier": "com.apple.Dictionary"
-                      }
                     }
                   }
                 ],
