@@ -600,7 +600,7 @@
                       "right_control",
                       "right_shift",
                       "right_option",
-                      "left_shift"
+                      "left_command"
                     ]
                   }
                 },
@@ -621,7 +621,7 @@
                       "right_control",
                       "right_shift",
                       "right_option",
-                      "left_shift"
+                      "left_command"
                     ]
                   }
                 },
@@ -642,7 +642,7 @@
                       "right_control",
                       "right_shift",
                       "right_option",
-                      "left_shift"
+                      "left_command"
                     ]
                   }
                 },
@@ -663,13 +663,55 @@
                       "right_control",
                       "right_shift",
                       "right_option",
-                      "left_shift"
+                      "left_command"
                     ]
                   }
                 },
                 "to": [
                   {
                     "key_code": "down_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": " u = PgUp",
+                "from": {
+                  "key_code": "u",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option",
+                      "left_command"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "page_up"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": " o = PgDown",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option",
+                      "left_command"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "page_down"
                   }
                 ],
                 "type": "basic"
@@ -697,48 +739,6 @@
                 "type": "basic"
               },
               {
-                "description": " u = PgUp",
-                "from": {
-                  "key_code": "u",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option",
-                      "left_shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "page_up"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "description": " o = PgDown",
-                "from": {
-                  "key_code": "o",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option",
-                      "left_shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "page_down"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
                 "description": " ' (quote) = Esc",
                 "from": {
                   "key_code": "quote",
@@ -748,7 +748,8 @@
                       "right_control",
                       "right_shift",
                       "right_option"
-                    ]
+                    ],
+                    "optional": ["left_command"]
                   }
                 },
                 "to": [
