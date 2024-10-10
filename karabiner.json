@@ -599,9 +599,9 @@
                       "right_command",
                       "right_control",
                       "right_shift",
-                      "right_option"
-                    ],
-                    "optional": ["left_shift"]
+                      "right_option",
+                      "left_shift"
+                    ]
                   }
                 },
                 "to": [
@@ -620,9 +620,9 @@
                       "right_command",
                       "right_control",
                       "right_shift",
-                      "right_option"
-                    ],
-                    "optional": ["left_shift"]
+                      "right_option",
+                      "left_shift"
+                    ]
                   }
                 },
                 "to": [
@@ -641,9 +641,9 @@
                       "right_command",
                       "right_control",
                       "right_shift",
-                      "right_option"
-                    ],
-                    "optional": ["left_shift"]
+                      "right_option",
+                      "left_shift"
+                    ]
                   }
                 },
                 "to": [
@@ -662,9 +662,9 @@
                       "right_command",
                       "right_control",
                       "right_shift",
-                      "right_option"
-                    ],
-                    "optional": ["left_shift"]
+                      "right_option",
+                      "left_shift"
+                    ]
                   }
                 },
                 "to": [
@@ -683,9 +683,10 @@
                       "right_command",
                       "right_control",
                       "right_shift",
-                      "right_option"
+                      "right_option",
+                      "left_shift"
                     ],
-                    "optional": ["left_command", "left_option"]
+                    "optional": ["option", "command"]
                   }
                 },
                 "to": [
@@ -704,7 +705,8 @@
                       "right_command",
                       "right_control",
                       "right_shift",
-                      "right_option"
+                      "right_option",
+                      "left_shift"
                     ]
                   }
                 },
@@ -724,7 +726,8 @@
                       "right_command",
                       "right_control",
                       "right_shift",
-                      "right_option"
+                      "right_option",
+                      "left_shift"
                     ]
                   }
                 },
