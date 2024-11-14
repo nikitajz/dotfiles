@@ -96,7 +96,7 @@ eval "$(zoxide init zsh --cmd j)"
 FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules --exclude .zshrc --exclude venv"
 
 # 'junegunn/fzf', command line fuzzy finder
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Requires fzf.vim
 export FZF_DEFAULT_OPTS="--no-mouse \
@@ -125,21 +125,16 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 
-# Enable command completion (e.g. for awscli)
-complete -C aws_completer aws
-
-# Include local config
-if [ -f ~/.zshrc.local ]; then
-  source ~/.zshrc.local
-fi
-
-# Use pyenv to manage python version
+# Source configs into this one
 [[ ! -f ~/.profile ]] || source ~/.profile
 [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 eval "$(uv generate-shell-completion zsh)"
+
+# Enable command completion (e.g. for awscli)
+complete -C aws_completer aws
 
 # zprof
 
