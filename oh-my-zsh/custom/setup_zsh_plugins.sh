@@ -42,3 +42,14 @@ if [[ ! -d $OMZ_THEMES/powerlevel10k ]]; then
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $OMZ_THEMES/powerlevel10k
   make -C $OMZ_THEMES/powerlevel10k pkg
 fi
+
+# Check and clone fzf.vim
+FZF_VIM_DIR="$HOME/.local/bin/fzf.vim"
+if [[ ! -d "$FZF_VIM_DIR" ]]; then
+  echo "Cloning fzf.vim to $FZF_VIM_DIR"
+  mkdir -p "$(dirname "$FZF_VIM_DIR")"
+  git clone --depth=1 "git@github.com:junegunn/fzf.vim.git" "$FZF_VIM_DIR" || {
+    echo "Failed to clone fzf.vim repository"
+    exit 1
+  }
+fi

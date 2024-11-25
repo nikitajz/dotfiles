@@ -62,6 +62,7 @@ fi
 plugins=(
   alias-tips
   # git # use custom instead
+  fzf
   jq # https://github.com/reegnz/jq-zsh-plugin
   zsh-autosuggestions # should be before zsh-syntax-highlighting
   zsh-syntax-highlighting
@@ -73,13 +74,12 @@ source $ZSH/oh-my-zsh.sh
 
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 bindkey '^ ' autosuggest-accept
+bindkey \^U backward-kill-line  # fix Ctrl-U in terminal
+
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# CUSTOM
-
-bindkey \^U backward-kill-line  # fix Ctrl-U in terminal
 
 # Activate Powerlevel10k Instant Prompt.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -93,9 +93,9 @@ eval "$(zoxide init zsh --cmd j)"
 FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules --exclude .zshrc --exclude venv"
 
 # 'junegunn/fzf', command line fuzzy finder
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Requires fzf.vim
+export FZF_VIM_DIR="$HOME/.local/bin/fzf.vim"
+
 export FZF_DEFAULT_OPTS="--no-mouse \
                          --height 80% \
                          --reverse \
@@ -104,7 +104,7 @@ export FZF_DEFAULT_OPTS="--no-mouse \
                          --marker='' \
                          --pointer='→' \
                          --color='pointer:white' \
-                         --preview='$HOME/.local/share/nvim/site/fzf.vim/bin/preview.sh {}' \
+                         --preview='$FZF_VIM_DIR/bin/preview.sh {}' \
                          --preview-window='right:60%:wrap' \
                          --bind='ctrl-x:execute(rm -i {+})+abort' \
                          --bind='f2:toggle-preview,ctrl-v:toggle-preview' \
@@ -120,7 +120,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+source <(fzf --zsh)
 
 # Source configs into this one
 [[ ! -f ~/.profile ]] || source ~/.profile
