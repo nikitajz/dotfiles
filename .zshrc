@@ -11,6 +11,9 @@ export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 export LANG=en_US.UTF-8
 export RIPGREP_CONFIG_PATH=$DOTFILES/.ripgreprc
 
+# Use local `n` instead of global `/opt/homebrew/bin/n`
+export N_PREFIX="$HOME/.local/bin"
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
