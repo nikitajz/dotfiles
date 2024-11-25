@@ -28,6 +28,7 @@ brew "tmux"
 brew "tree"
 brew "wget"
 brew "zoxide"
+brew "uv"
 # should be handled by oh-my-zsh
 # brew "zsh-autosuggestions"
 # brew "zsh-completions"
