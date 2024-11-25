@@ -65,3 +65,14 @@ alias nv=nvim
 alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
 alias js2yaml="python -c 'import sys, yaml, json; yaml.dump(json.load(sys.stdin), sys.stdout, indent=4)'"
 
+# alias `llm` to enable `-h` flag to work as `--help`
+function llmh() {
+  local args=("$@")
+  for ((i = 0; i < ${#args[@]}; i++)); do
+    if [[ "${args[i]}" == "-h" ]]; then
+      args[i]="--help"
+    fi
+  done
+  # Call the original `llm` command with the modified arguments
+  command llm "${args[@]}"
+}
