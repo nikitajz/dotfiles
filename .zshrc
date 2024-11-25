@@ -66,6 +66,7 @@ plugins=(
   jq # https://github.com/reegnz/jq-zsh-plugin
   zsh-autosuggestions # should be before zsh-syntax-highlighting
   zsh-syntax-highlighting
+  uv
   )
 
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$USER
@@ -127,8 +128,6 @@ source <(fzf --zsh)
 [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-eval "$(uv generate-shell-completion zsh)"
 
 # Enable command completion (e.g. for awscli)
 complete -C aws_completer aws
