@@ -36,7 +36,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd.mm.yyyy"
 
 # Install plugins & compile
-source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/setup_zsh_plugins.sh
+# Do not source this file directly, zsh plugins should be installed automatically except for custom plugins
+# source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/setup_zsh_plugins.sh
 
 # Don't use zsh-completions as oh-my-zsh plugin (including `compinit`)
 # https://github.com/zsh-users/zsh-completions/issues/603
@@ -45,12 +46,6 @@ fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
-
-export NVM_DIR="$HOME/.nvm" # should be before loading nvm
-export NVM_COMPLETION=true
-export NVM_LAZY_LOAD=true
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # zsh-completions
 # if [[ ! -d "$ZSH/completions" || ! -f "$ZSH/completions/_gh" ]]; then
@@ -66,7 +61,6 @@ plugins=(
   # git # use custom instead
   jq # https://github.com/reegnz/jq-zsh-plugin
   zsh-autosuggestions # should be before zsh-syntax-highlighting
-  zsh-nvm
   zsh-syntax-highlighting
   )
 
@@ -137,4 +131,3 @@ eval "$(uv generate-shell-completion zsh)"
 complete -C aws_completer aws
 
 # zprof
-

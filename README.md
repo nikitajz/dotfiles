@@ -18,6 +18,12 @@ Configure macos using defaults (see <https://macos-defaults.com/>)
 [Add key to keychain](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
 `git config --global core.excludesfile ~/.gitignore`
 
+### Use `n` instead of `nvm`
+
+`nvm` is notorious for it's slowdown of shell startup:
+https://github.com/nvm-sh/nvm/issues/2724
+Despite it's possible to [make it faster by using lazy load](https://dev.to/thraizz/fix-slow-zsh-startup-due-to-nvm-408k), it's better to use https://github.com/tj/n instead
+
 ### Fonts smoothing
 
 ```shell
