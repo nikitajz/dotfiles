@@ -28,9 +28,10 @@ brew "tmux"
 brew "tree"
 brew "wget"
 brew "zoxide"
-brew "zsh-autosuggestions"
-brew "zsh-completions"
-brew "zsh-syntax-highlighting"
+# should be handled by oh-my-zsh
+# brew "zsh-autosuggestions"
+# brew "zsh-completions"
+# brew "zsh-syntax-highlighting"
 
 # Fonts
 cask "font-fira-code-nerd-font"
