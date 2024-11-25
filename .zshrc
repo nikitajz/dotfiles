@@ -57,6 +57,9 @@ fi
 # #    echo "gh added completions: gh completion --shell zsh > $ZSH/completions/_gh"
 # fi
 
+# Use (j, ji) as default commands instead of (z, zi)
+eval "$(zoxide init zsh --cmd j)"
+
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
@@ -77,18 +80,13 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 bindkey '^ ' autosuggest-accept
 bindkey \^U backward-kill-line  # fix Ctrl-U in terminal
 
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
 
 # Activate Powerlevel10k Instant Prompt.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-# Use (j, ji) as default commands instead of (z, zi)
-eval "$(zoxide init zsh --cmd j)"
 
 # "sharkdp/fd" file finder, modern replacement for GNU find
 FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules --exclude .zshrc --exclude venv"
