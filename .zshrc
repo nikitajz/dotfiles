@@ -64,7 +64,7 @@ eval "$(zoxide init zsh --cmd j)"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
   alias-tips
-  # git # use custom instead
+  aws
   fzf
   jq # https://github.com/reegnz/jq-zsh-plugin
   zsh-autosuggestions # should be before zsh-syntax-highlighting
@@ -126,8 +126,5 @@ source <(fzf --zsh)
 [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# Enable command completion (e.g. for awscli)
-complete -C aws_completer aws
 
 # zprof
