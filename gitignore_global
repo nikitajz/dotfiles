@@ -1,6 +1,8 @@
+# local gitconfig
+.gitconfig.local
+
 # Created by https://www.toptal.com/developers/gitignore/api/zsh,node,venv,python,pycharm,dotfilessh,virtualenv,visualstudiocode,linux,macos,vim
 # Edit at https://www.toptal.com/developers/gitignore?templates=zsh,node,venv,python,pycharm,dotfilessh,virtualenv,visualstudiocode,linux,macos,vim
-rity file
 .yarn-integrity
 
 # dotenv environment variable files
