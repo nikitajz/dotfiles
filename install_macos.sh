@@ -71,20 +71,24 @@ install_homebrew() {
 }
 
 create_symlink() {
-	local src=$1
-	local dest=$2
-	local dest_backup="${dest}_old"
+	local src="${1}"
+	local dest="${2}"
+	local dest_backup="${dest}.bk"
 
-	if [[ -f $dest ]] && [[ ! -L $dest ]]; then
-		echo "Backing up existing $dest file to $dest_backup"
-		mv $dest $dest_backup
-	elif [[ -L $dest ]]; then
-		print_warning "$dest already symlinked, skipping"
+	mkdir -p "$(dirname "${dest}")"
+
+	if [[ -L "${dest}" ]]; then
+		print_warning "${dest} already symlinked, skipping"
 		return
-	else
-		ln -s $src $dest
-		echo "Symlinked $dest"
 	fi
+
+	if [[ -f "${dest}" ]]; then
+		echo "Backing up existing ${dest} file to ${dest_backup}"
+		mv "${dest}" "${dest_backup}"
+	fi
+
+	ln -s "${src}" "${dest}"
+	echo "Symlinked ${dest}"
 }
 
 config_dotfiles() {
