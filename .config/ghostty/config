@@ -2,7 +2,7 @@
 # font-size = 14
 mouse-hide-while-typing = true
 # Hyper+o - quick terminal
-keybind = global:cmd+ctrl+alt+shift+o=toggle_quick_terminal
+keybind = global:cmd+ctrl+alt+shift+i=toggle_quick_terminal
 quick-terminal-position=center
 # Delete to the beginning-of-line, requires to add in `.zshrc` to enable Ctlr-U in zsh:
 # `bindkey \^U backward-kill-line`
@@ -10,5 +10,4 @@ keybind = cmd+backspace=text:\x15
 # only left option behaves as alt, the right still can be used for Unicode input
 macos-option-as-alt = left
 background-opacity = 0.95
-
 
