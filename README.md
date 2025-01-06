@@ -233,21 +233,23 @@ Activate CapsLock:
 
 Run/activate applications
 
-| Hotkey | Command                    |
-|--------|----------------------------|
-| *+w    | Chrome ([w]eb surfing)     |
-| *+e    | Chrome m[e]et.google.com   |
-| *+a    | [A]rc                      |
-| *+s    | [S]potify                  |
-| *+d    | [D]ictionary               |
-| *+f    | [F]inder                   |
-| *+c    | Py[C]harm                  |
-| *+v    | [V]SCode                   |
-| *+t    | i[T]erm2                   |
-| *+g    | iTerm2 - focus on existing |
-| *+z    | [Z]ed                      |
-| *+x    | Notion                     |
-| *+m    | Slack ([m]essenger)        |
+| Hotkey | Command                  |
+|--------|--------------------------|
+| *+w    | Chrome ([w]eb surfing)   |
+| *+e    | Chrome m[e]et.google.com |
+| *+a    | [A]rc                    |
+| *+s    | [S]potify                |
+| *+d    | [D]ictionary             |
+| *+f    | [F]inder                 |
+| *+c    | Py[C]harm                |
+| *+v    | [V]SCode                 |
+| *+t    | i[T]erm2                 |
+| *+g    | [G]hostty                |
+| *+h    | G[h]ostty                |
+| *+u    | C[u]rsor                 |
+| *+z    | [Z]ed                    |
+| *+x    | Notion                   |
+| *+m    | Slack ([m]essenger)      |
 
 Raycast:
 These shortcuts are configured in Raycast app (but require Hyperkey to be set in Karabiner Elements)

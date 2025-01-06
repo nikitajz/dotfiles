@@ -589,7 +589,7 @@
             ]
           },
           {
-            "description": "Hyper+<key> (ijkl): Navigation (RShift+RCtrl+ROpt+RCmd+<key>) + Selection (Hyper+Shift+<key>)",
+            "description": "Hyper+Cmd+<key> (ijkl): Navigation (RShift+RCtrl+ROpt+RCmd+<key>) + Selection (Hyper+Shift+<key>)",
             "manipulators": [
               {
                 "description": " j = left",
@@ -930,6 +930,30 @@
                 "type": "basic"
               },
               {
+                "description": "h -> G[h]ostty",
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "com.mitchellh.ghostty"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
                 "description": "t -> i[T]erm2",
                 "from": {
                   "key_code": "t",
@@ -949,6 +973,26 @@
                         "bundle_identifier": "com.googlecode.iterm2"
                       }
                     }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "u -> C[u]rsor",
+                "from": {
+                  "key_code": "u",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                  "shell_command": "open -a 'Cursor'"
                   }
                 ],
                 "type": "basic"
