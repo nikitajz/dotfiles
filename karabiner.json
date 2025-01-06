@@ -906,7 +906,7 @@
                 "type": "basic"
               },
               {
-                "description": "g -> iTerm2 - focus existing",
+                "description": "g -> [G]hostty",
                 "from": {
                   "key_code": "g",
                   "modifiers": {
@@ -922,7 +922,7 @@
                   {
                     "software_function": {
                       "open_application": {
-                        "bundle_identifier": "com.googlecode.iterm2"
+                        "bundle_identifier": "com.mitchellh.ghostty"
                       }
                     }
                   }
