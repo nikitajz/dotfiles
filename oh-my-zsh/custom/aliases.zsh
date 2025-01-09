@@ -20,6 +20,7 @@ alias zr="omz reload"
 alias dot="cd ~/.dotfiles/"
 alias vscode="code"
 alias diff="code --diff" # use vscode for diff file
+alias lg="lazygit"
 
 ## eza
 if command -v eza &>/dev/null; then
