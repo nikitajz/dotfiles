@@ -1030,7 +1030,7 @@
 									<real>0.15225237607955933</real>
 								</dict>
 								<key>font</key>
-								<string>.SFNS-Regular 12</string>
+								<string>.AppleSystemUIFont 12</string>
 								<key>remove empty components</key>
 								<false/>
 							</dict>
@@ -1087,7 +1087,7 @@
 									<real>0.15225237607955933</real>
 								</dict>
 								<key>font</key>
-								<string>.SFNS-Regular 12</string>
+								<string>.AppleSystemUIFont 12</string>
 								<key>remove empty components</key>
 								<false/>
 							</dict>
@@ -1136,7 +1136,7 @@
 									<real>0.15225237607955933</real>
 								</dict>
 								<key>font</key>
-								<string>.SFNS-Regular 12</string>
+								<string>.AppleSystemUIFont 12</string>
 								<key>remove empty components</key>
 								<false/>
 							</dict>
@@ -1185,7 +1185,7 @@
 									<real>0.15225237607955933</real>
 								</dict>
 								<key>font</key>
-								<string>.SFNS-Regular 12</string>
+								<string>.AppleSystemUIFont 12</string>
 								<key>remove empty components</key>
 								<false/>
 							</dict>
@@ -1234,7 +1234,7 @@
 									<real>0.15225237607955933</real>
 								</dict>
 								<key>font</key>
-								<string>.SFNS-Regular 12</string>
+								<string>.AppleSystemUIFont 12</string>
 								<key>remove empty components</key>
 								<false/>
 							</dict>
@@ -1283,7 +1283,7 @@
 									<real>0.15225237607955933</real>
 								</dict>
 								<key>font</key>
-								<string>.SFNS-Regular 12</string>
+								<string>.AppleSystemUIFont 12</string>
 								<key>remove empty components</key>
 								<false/>
 							</dict>
@@ -1336,7 +1336,7 @@
 									<real>0.15225237607955933</real>
 								</dict>
 								<key>font</key>
-								<string>.SFNS-Regular 12</string>
+								<string>.AppleSystemUIFont 12</string>
 								<key>remove empty components</key>
 								<false/>
 							</dict>
@@ -1354,13 +1354,15 @@
 								<key>base: priority</key>
 								<integer>5</integer>
 								<key>format</key>
-								<string>M/dd HH:mm</string>
+								<string>dd/MM HH:mm</string>
 								<key>localize</key>
-								<integer>0</integer>
+								<integer>1</integer>
 								<key>maxwidth</key>
-								<integer>90</integer>
+								<real>100</real>
 								<key>minwidth</key>
 								<integer>50</integer>
+								<key>shared font</key>
+								<string></string>
 								<key>shared text color</key>
 								<dict>
 									<key>Alpha Component</key>
@@ -1395,7 +1397,7 @@
 									<real>0.15225237607955933</real>
 								</dict>
 								<key>font</key>
-								<string>.SFNS-Regular 12</string>
+								<string>.AppleSystemUIFont 12</string>
 								<key>remove empty components</key>
 								<false/>
 							</dict>
