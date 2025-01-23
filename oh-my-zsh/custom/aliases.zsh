@@ -67,6 +67,9 @@ alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin)
 alias js2yaml="python -c 'import sys, yaml, json; yaml.dump(json.load(sys.stdin), sys.stdout, indent=4)'"
 
 # alias `llm` to enable `-h` flag to work as `--help`
+alias llm='function _llm(){ command llm $(echo "$@" | sed "s/-h/--help/g"); }; _llm'
+
+# alternative solution
 function llmh() {
   local args=("$@")
   for ((i = 0; i < ${#args[@]}; i++)); do
