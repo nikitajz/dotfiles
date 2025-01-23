@@ -22,21 +22,22 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd.mm.yyyy"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$USER
 
-# Load custom oh-my-zsh preferences
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-source $ZSH/oh-my-zsh.sh
-
-# Plugins
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
   alias-tips
   aws
   fzf
-  jq
-  zsh-autosuggestions
+  jq # https://github.com/reegnz/jq-zsh-plugin
+  zsh-autosuggestions # should be before zsh-syntax-highlighting
   zsh-syntax-highlighting
   uv
-)
+  )
 
+# Load custom oh-my-zsh preferences
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+source $ZSH/oh-my-zsh.sh
+  
 # zsh-completions
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 if type brew &>/dev/null; then
