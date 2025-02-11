@@ -167,6 +167,34 @@ install_jq() {
   git clone --depth 1 https://github.com/reegnz/jq-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/jq
 }
 
+install_nvtop() {
+  if [ "$OPTIONAL" = no ]; then
+    return
+  fi
+  print_step "Installing nvtop"
+
+  if command -v nvtop >/dev/null; then
+    print_warning "nvtop has already been installed, skipping"
+    return
+  fi
+
+  sudo apt install -y nvtop
+}
+
+install_uv() {
+  if [ "$OPTIONAL" = no ]; then
+    return
+  fi
+  print_step "Installing uv"
+
+  if command -v uv >/dev/null; then
+    print_warning "uv has already been installed, skipping"
+    return
+  fi
+
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+}
+
 install_aliastips() {
   if [ "$OPTIONAL" = no ]; then
     return
@@ -248,31 +276,31 @@ config_dotfiles() {
     return
   fi
 
-  if [[ ! -f $HOME/.p10k.zsh ]]; then
-    ln -s $DOTFILES/.p10k.zsh $HOME/.p10k.zsh
-  else
-    print_warning ".p10k.zsh already linked"
-  fi
+  # Helper function to create symlink with checks
+  link_file() {
+    local src=$1
+    local dest=$2
+    
+    if [[ -L "$dest" ]]; then
+      print_warning "$(basename $dest) already linked, skipping"
+      return
+    fi
+    
+    if [[ -f "$dest" ]]; then
+      echo "Backing up existing $(basename $dest) to $(basename $dest)_old"
+      mv "$dest" "${dest}_old"
+    fi
+    
+    ln -s "$src" "$dest"
+    echo "Symlinked $(basename $dest)"
+  }
 
-  if [[ ! -f $HOME/.gitignore_global ]]; then
-    ln -s $DOTFILES/gitignore_global $HOME/.gitignore_global
-  else
-    print_warning ".gitignore_global already linked"
-  fi
-
-  echo "Linking dotfiles"
-  # Backup previous .zshrc config and use one from the repo
-  if [[ -f $HOME/.zshrc ]] && [[ ! -L $HOME/.zshrc ]]; then
-    echo "Backing up existing .zshrc file to .zshrc_old"
-    mv $HOME/.zshrc $HOME/.zshrc_old
-  elif [[ -L $HOME/.zshrc ]]; then
-    print_warning ".zshrc already symlinked, skipping"
-    return
-  fi
-
-  ln -s $DOTFILES/.zshrc $HOME/.zshrc
-  echo "Symlinked .zshrc"
+  # Link each dotfile using the helper function
+  link_file "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
+  link_file "$DOTFILES/gitignore_global" "$HOME/.gitignore_global"
+  link_file "$DOTFILES/.zshrc" "$HOME/.zshrc"
 }
+
 
 main() {
   setup_color
@@ -301,6 +329,8 @@ main() {
   install_ripgrep
   install_zoxide
   install_aliastips
+  install_nvtop
+  install_uv
   install_nvim
   config_lazyvim
 
