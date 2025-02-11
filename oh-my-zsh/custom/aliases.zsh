@@ -66,17 +66,21 @@ alias nv=nvim
 alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
 alias js2yaml="python -c 'import sys, yaml, json; yaml.dump(json.load(sys.stdin), sys.stdout, indent=4)'"
 
-# alias `llm` to enable `-h` flag to work as `--help`
-alias llm='function _llm(){ command llm $(echo "$@" | sed "s/-h/--help/g"); }; _llm'
-
-# alternative solution
 function llmh() {
-  local args=("$@")
-  for ((i = 0; i < ${#args[@]}; i++)); do
-    if [[ "${args[i]}" == "-h" ]]; then
-      args[i]="--help"
+  # Accumulate transformed arguments.
+  local newargs=()
+  for arg in "$@"; do
+    # If an argument is literally "-h", convert it to "--help".
+    if [[ "$arg" == "-h" ]]; then
+      newargs+=("--help")
+    else
+      newargs+=("$arg")
     fi
   done
-  # Call the original `llm` command with the modified arguments
-  command llm "${args[@]}"
+
+  # Now call the real (underlying) llm command with the modified args.
+  command llm "${newargs[@]}"
 }
+
+# alias `llm` to enable `-h` flag to work as `--help`
+alias llm=llmh
