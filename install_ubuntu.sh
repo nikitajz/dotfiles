@@ -4,6 +4,8 @@ set -euo pipefail
 # install optional, e.g. ripgrep, zoxide
 OPTIONAL=${OPTIONAL:-yes}
 DOTF=${DOTF:-yes}
+NVIDIA=${NVIDIA:-no}
+NVIDIA_VERSION=${NVIDIA_VERSION:-550}
 
 # source: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 
@@ -301,6 +303,20 @@ config_dotfiles() {
   link_file "$DOTFILES/.zshrc" "$HOME/.zshrc"
 }
 
+install_nvidia() {
+  if [ "$NVIDIA" = no ]; then
+    return
+  fi
+  print_step "Installing NVIDIA drivers"
+
+  if dpkg -l | grep -q nvidia-driver; then
+    print_warning "NVIDIA drivers already installed, skipping"
+    return
+  fi
+
+  print_step "Installing NVIDIA driver version ${NVIDIA_VERSION}"
+  sudo apt install -y nvidia-driver-${NVIDIA_VERSION}
+}
 
 main() {
   setup_color
@@ -310,6 +326,8 @@ main() {
     case $1 in
     --optional) OPTIONAL=yes ;;
     --dotfiles) DOTF=yes ;;
+    --nvidia) NVIDIA=yes ;;
+    --nvidia-version=*) NVIDIA_VERSION="${1#*=}" ;;
     esac
     shift
   done
@@ -333,6 +351,7 @@ main() {
   install_uv
   install_nvim
   config_lazyvim
+  install_nvidia
 
   config_dotfiles
 }
