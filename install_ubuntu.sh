@@ -164,7 +164,7 @@ install_jq() {
 
   sudo apt install -y jq
 
-  git clone https://github.com/reegnz/jq-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/jq
+  git clone --depth 1 https://github.com/reegnz/jq-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/jq
 }
 
 install_aliastips() {
@@ -178,7 +178,7 @@ install_aliastips() {
   fi
 
   print_step "Installing alias-tips"
-  git clone https://github.com/djui/alias-tips.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/alias-tips
+  git clone --depth 1 https://github.com/djui/alias-tips.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/alias-tips
 }
 
 install_nvim() {
@@ -196,7 +196,7 @@ install_nvim() {
 
   cd /tmp
 
-  git clone https://github.com/neovim/neovim
+  git clone --depth 1 https://github.com/neovim/neovim
 
   cd neovim
 
@@ -205,7 +205,7 @@ install_nvim() {
   make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local/bin
 
   # build DEB
-  cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb
+  cd build && cpack -G DEB && sudo dpkg -i nvim-linux-x86_64.deb
 }
 
 config_lazyvim() {
@@ -223,7 +223,7 @@ config_lazyvim() {
   mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null || true
   mv ~/.local/share/nvim ~/.local/share/nvim.bak 2>/dev/null || true
 
-  git clone https://github.com/LazyVim/starter ~/.config/nvim
+  git clone --depth 1 https://github.com/LazyVim/starter ~/.config/nvim
 
   rm -rf ~/.config/nvim/.git
 }
@@ -240,7 +240,7 @@ config_dotfiles() {
     print_warning "Dotfiles already exist"
   else
     echo "Clonning dotfiles github repo"
-    git clone git@github.com:nikitajz/dotfiles.git $DOTFILES
+    git clone --depth 1 git@github.com:nikitajz/dotfiles.git $DOTFILES
   fi
 
   if [[ ! -d $DOTFILES ]]; then
