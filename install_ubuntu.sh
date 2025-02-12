@@ -130,11 +130,12 @@ install_ripgrep() {
   fi
 
   RIPGREP_VERSION=$(curl -s "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | grep -Po '"tag_name": "\K[0-9.]+')
+  echo "ripgrep version: $RIPGREP_VERSION"
 
   cd /tmp
-  curl -Lo ripgrep_amd64.deb "https://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep_${RIPGREP_VERSION}_amd64.deb"
 
-  sudo dpkg -i ./ripgrep_amd64.deb
+  curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/ripgrep_${RIPGREP_VERSION}-1_amd64.deb
+  sudo dpkg -i ripgrep_${RIPGREP_VERSION}-1_amd64.deb
 
   rg --version
 }
@@ -282,17 +283,17 @@ config_dotfiles() {
   link_file() {
     local src=$1
     local dest=$2
-    
+
     if [[ -L "$dest" ]]; then
       print_warning "$(basename $dest) already linked, skipping"
       return
     fi
-    
+
     if [[ -f "$dest" ]]; then
       echo "Backing up existing $(basename $dest) to $(basename $dest)_old"
       mv "$dest" "${dest}_old"
     fi
-    
+
     ln -s "$src" "$dest"
     echo "Symlinked $(basename $dest)"
   }
