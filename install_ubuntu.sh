@@ -55,7 +55,7 @@ print_warning() {
 
 install_cargo() {
   print_step "Installing Rust/Cargo"
-  
+
   if command -v cargo >/dev/null; then
     print_warning "Cargo already installed, skipping"
     return
@@ -92,11 +92,12 @@ setup_shell() {
 install_fzf() {
   print_step "Installing fzf"
   if ! command -v fzf >/dev/null; then
-    rm -rf /tmp/.fzf
-    cd /tmp
+    rm -rf ~/.fzf
 
-    git clone -q --depth 1 https://github.com/junegunn/fzf.git /tmp/.fzf
-    /tmp/.fzf/install --all --xdg --no-fish
+    git clone -q --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+
+    ~/.fzf/install --all --xdg --no-fish
+    print_step "fzf installed, version $(fzf --version)"
   else
     print_warning "Skipping, fzf already installed"
   fi
