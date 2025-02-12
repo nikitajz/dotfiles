@@ -22,7 +22,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd.mm.yyyy"
 
 # Install plugins & compile
-source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/setup_zsh_plugins.sh
+source ${DOTFILES}/setup_zsh_plugins.sh
 
 # gh completions
 # if [[ ! -d "$ZSH/completions" || ! -f "$ZSH/completions/_gh" ]]; then
