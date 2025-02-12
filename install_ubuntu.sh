@@ -53,6 +53,18 @@ print_warning() {
   echo "${FMT_GREEN}[!] $1${FMT_RESET} "
 }
 
+install_cargo() {
+  print_step "Installing Rust/Cargo"
+  
+  if command -v cargo >/dev/null; then
+    print_warning "Cargo already installed, skipping"
+    return
+  fi
+
+  curl https://sh.rustup.rs -sSf | sh -s -- -y
+  source "$HOME/.cargo/env"
+}
+
 install_awscli() {
   if ! command -v aws >/dev/null; then
     print_step "Installing aws cli"
@@ -340,6 +352,7 @@ main() {
   sudo apt-get install -y python3-dev unzip
 
   setup_shell
+  install_cargo
 
   install_awscli
   install_jq
