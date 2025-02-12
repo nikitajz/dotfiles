@@ -20,7 +20,24 @@ export ZSH_CUSTOM="$HOME/.dotfiles/oh-my-zsh/custom"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd.mm.yyyy"
-export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$USER
+
+# Install plugins & compile
+source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/setup_zsh_plugins.sh
+
+# Don't use zsh-completions as oh-my-zsh plugin (including `compinit`)
+# https://github.com/zsh-users/zsh-completions/issues/603
+fpath+="${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src"
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+# zsh-completions
+# if [[ ! -d "$ZSH/completions" || ! -f "$ZSH/completions/_gh" ]]; then
+#     mkdir -pv $ZSH/completions
+#     gh completion --shell zsh > $ZSH/completions/_gh
+# #    echo "gh added completions: gh completion --shell zsh > $ZSH/completions/_gh"
+# fi
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -29,6 +46,7 @@ plugins=(
   aws
   fzf
   jq # https://github.com/reegnz/jq-zsh-plugin
+  # don't use zsh-completions as oh-my-zsh plugin, it's added above as `fpath`
   zsh-autosuggestions # should be before zsh-syntax-highlighting
   zsh-syntax-highlighting
   uv
