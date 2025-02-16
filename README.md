@@ -206,7 +206,7 @@ See example: <https://wiki.nikiv.dev/macOS/apps/karabiner/>
 
 #### j+k -> Escape
 
-Press `j+k` simualteniously to activate `Escape`
+Press `j+k` simultaneously to activate `Escape`
 
 | Hotkey | Command |
 |--------|---------|
@@ -233,23 +233,25 @@ Activate CapsLock:
 
 Run/activate applications
 
-| Hotkey | Command                  |
-|--------|--------------------------|
-| *+w    | Chrome ([w]eb surfing)   |
-| *+e    | Chrome m[e]et.google.com |
-| *+a    | [A]rc                    |
-| *+s    | [S]potify                |
-| *+d    | [D]ictionary             |
-| *+f    | [F]inder                 |
-| *+c    | Py[C]harm                |
-| *+v    | [V]SCode                 |
-| *+t    | i[T]erm2                 |
-| *+g    | [G]hostty                |
-| *+h    | G[h]ostty                |
-| *+u    | C[u]rsor                 |
-| *+z    | [Z]ed                    |
-| *+x    | Notion                   |
-| *+m    | Slack ([m]essenger)      |
+| Hotkey | Command                        |
+|--------|--------------------------------|
+| *+w    | Chrome ([w]eb surfing)         |
+| *+e    | Chrome m[e]et.google.com       |
+| *+a    | [A]rc                          |
+| *+s    | [S]potify                      |
+| *+d    | [D]ictionary                   |
+| *+f    | [F]inder                       |
+| *+c    | Py[C]harm                      |
+| *+v    | [V]SCode                       |
+| *+t    | i[T]erm2                       |
+| *+g    | [G]hostty (quick, via .config) |
+| *+h    | G[h]ostty                      |
+| *+i    | Msty (a[i] chat)               |
+| *+u    | C[u]rsor                       |
+| *+z    | [Z]ed                          |
+| *+x    | Notion                         |
+| *+n    | Telegram ([n]ear m)            |
+| *+m    | Slack ([m]essenger)            |
 
 Raycast:
 These shortcuts are configured in Raycast app (but require Hyperkey to be set in Karabiner Elements)
