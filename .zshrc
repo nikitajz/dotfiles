@@ -20,7 +20,25 @@ export ZSH_CUSTOM="$HOME/.dotfiles/oh-my-zsh/custom"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd.mm.yyyy"
-export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$USER
+
+# Install plugins & compile
+source ${DOTFILES}/setup_zsh_plugins.sh
+
+# gh completions
+# if [[ ! -d "$ZSH/completions" || ! -f "$ZSH/completions/_gh" ]]; then
+#     mkdir -pv $ZSH/completions
+#     gh completion --shell zsh > $ZSH/completions/_gh
+# #    echo "gh added completions: gh completion --shell zsh > $ZSH/completions/_gh"
+# fi
+
+# zsh-completions
+# Don't use zsh-completions as oh-my-zsh plugin (including `compinit`)
+# https://github.com/zsh-users/zsh-completions/issues/603
+fpath+="${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src"
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -29,6 +47,7 @@ plugins=(
   aws
   fzf
   jq # https://github.com/reegnz/jq-zsh-plugin
+  # don't use zsh-completions as oh-my-zsh plugin, it's added above as `fpath`
   zsh-autosuggestions # should be before zsh-syntax-highlighting
   zsh-syntax-highlighting
   uv
@@ -37,15 +56,29 @@ plugins=(
 # Load custom oh-my-zsh preferences
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 source $ZSH/oh-my-zsh.sh
-  
-# zsh-completions
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-fi
 
 # Use (j, ji) as default commands instead of (z, zi)
 eval "$(zoxide init zsh --cmd j)"
+
+# uv run autocomplete
+# https://github.com/astral-sh/uv/issues/8432#issuecomment-2605216865
+eval "$(uv generate-shell-completion zsh)"
+
+_uv_run_mod() {
+    if [[ "$words[2]" == "run" && "$words[CURRENT]" != -* ]]; then
+        local venv_binaries
+        if [[ -d .venv/bin ]]; then
+            venv_binaries=( ${(@f)"$(_call_program files ls -1 .venv/bin 2>/dev/null)"} )
+        fi
+        
+        _alternative \
+            'files:filename:_files' \
+            "binaries:venv binary:(($venv_binaries))"
+    else
+        _uv "$@"
+    fi
+}
+compdef _uv_run_mod uv
 
 # Key bindings
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
