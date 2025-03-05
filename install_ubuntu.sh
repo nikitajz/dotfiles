@@ -197,6 +197,20 @@ install_nvtop() {
   sudo apt install -y nvtop
 }
 
+install_keychain() {
+  if [ "$OPTIONAL" = no ]; then
+    return
+  fi
+  print_step "Installing keychain"
+
+  if command -v keychain >/dev/null; then
+    print_warning "keychain has already been installed, skipping"
+    return
+  fi
+
+  sudo apt install -y keychain
+}
+
 install_uv() {
   if [ "$OPTIONAL" = no ]; then
     return
@@ -363,6 +377,7 @@ main() {
   install_zoxide
   install_aliastips
   install_nvtop
+  install_keychain
   install_uv
   install_nvim
   config_lazyvim
