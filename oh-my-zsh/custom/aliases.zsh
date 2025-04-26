@@ -22,6 +22,7 @@ alias vscode="code"
 alias diff="code --diff" # use vscode for diff file
 alias lg="lazygit"
 alias pn=pnpm
+alias zj=zellij
 
 ## eza
 if command -v eza &>/dev/null; then
