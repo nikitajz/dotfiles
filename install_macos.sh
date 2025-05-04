@@ -4,6 +4,10 @@ set -euo pipefail
 
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
+# Define DOTFILES path, defaulting to $HOME/.dotfiles
+# This makes the script work locally by default
+export DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
+
 # The [ -t 1 ] check only works when the function is not called from
 # a subshell (like in `$(...)` or `(...)`, so this hack redefines the
 # function at the top level to always return false when stdout is not
@@ -37,7 +41,6 @@ setup_color() {
   FMT_BLUE=$(printf '\033[34m')
   FMT_BOLD=$(printf '\033[1m')
   FMT_RESET=$(printf '\033[0m')
-
 }
 
 setup_color
@@ -49,10 +52,6 @@ print_step() {
 print_warning() {
   echo "${FMT_GREEN}[!] $1${FMT_RESET} "
 }
-
-# These variables should be the same as in .zshrc
-# Load custom oh-my-zsh preferences, including all *.zsh files (automatically)
-#ZSH_CUSTOM=$DOTFILES/oh-my-zsh
 
 # Ukrainian spellchecking
 if [ ! -f $HOME/Library/Spelling/Ukrainian_uk_UA.dic ]; then
@@ -94,58 +93,50 @@ create_symlink() {
 }
 
 config_dotfiles() {
-  export DOTFILES=$HOME/.dotfiles
-
   print_step "Configuring dotfiles"
+  # Check if the target DOTFILES directory exists
   if [[ ! -d $DOTFILES ]]; then
-    print_warning "Dotfiles do not exist"
+    print_warning "Dotfiles directory not found: $DOTFILES"
     return
   fi
 
-  echo "Linking dotfiles"
-  create_symlink $DOTFILES/.zshrc $HOME/.zshrc
-  create_symlink $DOTFILES/.profile $HOME/.profile
-  create_symlink $DOTFILES/.p10k.zsh $HOME/.p10k.zsh
-  create_symlink $DOTFILES/.config/ghostty/config $XDG_CONFIG_HOME/ghostty/config
-  create_symlink $DOTFILES/gitignore_global $HOME/.gitignore_global
+  echo "Linking dotfiles from $DOTFILES"
+  create_symlink "$DOTFILES/.zshrc" "$HOME/.zshrc"
+  create_symlink "$DOTFILES/.profile" "$HOME/.profile"
+  create_symlink "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
+  create_symlink "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
+  create_symlink "$DOTFILES/gitignore_global" "$HOME/.gitignore_global"
 }
 
 install_brew_dependencies() {
   print_step "Installing brew dependencies from Brewfile"
 
   brew update
-  brew bundle --file $DOTFILES/Brewfile
+  
+  # Use minimal Brewfile in CI environment
+  if [ -n "${CI}" ]; then
+    print_step "CI environment detected, using minimal Brewfile.test"
+    brew bundle --file "$DOTFILES/Brewfile.test"
+  else
+    brew bundle --file "$DOTFILES/Brewfile"
+  fi
 }
 
 install_fzf() {
   if ! command -v fzf >/dev/null; then
     print_step "fzf install"
-
     $(brew --prefix)/opt/fzf/install --all --xdg --no-fish
   else
     print_warning "Skipping fzf, already installed"
   fi
 }
 
-install_oh_my_zsh() {
-  if ! command -v omz >/dev/null; then
-    print_step "Installing Oh My Zsh"
-    /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" "" --keep-zshrc
-  else
-    print_warning "Skipping Oh My Zsh, already installed"
-  fi
-}
-
 main() {
   print_step "Setting up your Mac..."
-  # Path to dotfiles
-  export DOTFILES=$HOME/.dotfiles
-
-  config_dotfiles
   install_homebrew
   install_brew_dependencies
+  config_dotfiles
   install_fzf
-  install_oh_my_zsh
 }
 
 main

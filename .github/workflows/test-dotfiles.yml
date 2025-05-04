@@ -1,0 +1,117 @@
+name: Test macOS Dotfiles
+
+on:
+  push:
+    branches-ignore: [ master ]  # Run on all branches except master
+  pull_request:
+    branches: [ master ]  # Run PRs targeting master
+
+jobs:
+  test:
+    runs-on: macos-latest
+    timeout-minutes: 15  # Set a timeout to prevent hanging
+    env: # Define environment variables for the job
+      XDG_CONFIG_HOME: "${HOME}/.config"
+      XDG_DATA_HOME: "${HOME}/.local/share"
+      XDG_CACHE_HOME: "${HOME}/.cache"
+      # CI is automatically set to "true" by GitHub Actions
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Log Initial Environment
+      run: |
+        echo "--- Initial Environment ---" 
+        uname -a
+        whoami
+        pwd
+        echo PATH=$PATH
+        echo "---------------------------"
+
+    - name: Create .dotfiles symlink for CI
+      run: |
+        echo "Linking ${{ github.workspace }} to $HOME/.dotfiles"
+        ln -s "${{ github.workspace }}" "$HOME/.dotfiles"
+
+    - name: Set up environment
+      run: |
+        # Create necessary directories
+        mkdir -p ~/Library/Spelling
+        mkdir -p ~/.config
+        mkdir -p ~/.local/share
+        mkdir -p ~/.cache
+
+    - name: Run installation script with tracing
+      run: |
+        echo "--- Running install_macos.sh with bash -x --- "
+        chmod +x install_macos.sh
+        bash -x ./install_macos.sh
+        echo "--- Finished install_macos.sh --- "
+
+    - name: Test XDG compliance
+      run: |
+        # Check if the symlink file exists
+        if [ ! -L "${XDG_CONFIG_HOME}/ghostty/config" ]; then
+          echo "❌ Ghostty config symlink not found in ${XDG_CONFIG_HOME}/ghostty/config"
+          echo "--- Listing parent directory ${XDG_CONFIG_HOME}/ghostty: ---"
+          ls -la "${XDG_CONFIG_HOME}/ghostty"
+          echo "------------------------------------------------------"
+          exit 1
+        fi
+        echo "✅ XDG compliance test passed"
+
+    - name: Test Homebrew installation
+      run: |
+        # Check if brew command exists
+        if ! command -v brew >/dev/null; then
+          echo "❌ Homebrew command (brew) not found"
+          echo "--- Current PATH: ---"
+          echo "$PATH"
+          echo "---------------------"
+          exit 1
+        fi
+        echo "✅ Homebrew installation test passed"
+
+    - name: Test fzf installation
+      run: |
+        # Check if fzf command exists (installed via brew bundle)
+        if ! command -v fzf >/dev/null; then
+          echo "❌ fzf command not found (expected from Brewfile)"
+          echo "--- Current PATH: ---"
+          echo "$PATH"
+          echo "---------------------"
+          exit 1
+        fi
+        echo "✅ fzf installation test passed"
+
+    - name: Test symlinks
+      run: |
+        missing_links=""
+        [ ! -L "${HOME}/.zshrc" ] && missing_links="$missing_links ${HOME}/.zshrc"
+        [ ! -L "${HOME}/.profile" ] && missing_links="$missing_links ${HOME}/.profile"
+        [ ! -L "${HOME}/.p10k.zsh" ] && missing_links="$missing_links ${HOME}/.p10k.zsh"
+        
+        if [ -n "$missing_links" ]; then
+          echo "❌ Some dotfile symlinks are missing: $missing_links"
+          echo "--- Listing home directory ${HOME}: ---"
+          ls -la "${HOME}"
+          echo "--------------------------------------"
+          exit 1
+        fi
+        echo "✅ Symlinks test passed"
+
+    - name: Test Ukrainian spellchecking
+      run: |
+        # Check if the dictionary file exists
+        spell_dir="${HOME}/Library/Spelling"
+        spell_file="${spell_dir}/Ukrainian_uk_UA.dic"
+        if [ ! -f "${spell_file}" ]; then
+          echo "❌ Ukrainian spellchecking file not found: ${spell_file}"
+          echo "--- Listing directory ${spell_dir}: ---"
+          ls -la "${spell_dir}" || echo "Directory ${spell_dir} may not exist."
+          echo "---------------------------------------"
+          exit 1
+        fi
+        echo "✅ Ukrainian spellchecking test passed"

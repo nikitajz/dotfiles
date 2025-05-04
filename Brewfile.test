@@ -16,4 +16,4 @@ brew "wget"
 brew "zoxide"
 brew "uv"
 
-# No casks (applications) or fonts to save time 
+# No casks (applications) or fonts to save time
