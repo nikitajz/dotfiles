@@ -1,0 +1,19 @@
+# Minimal Brewfile for CI testing
+brew "bat"
+brew "curl"
+brew "eza"
+brew "fd"
+brew "fzf"  # Required for fzf installation test
+brew "gh"
+brew "git"
+brew "git-lfs"
+brew "htop"
+brew "jq"
+brew "ripgrep"
+brew "rsync"
+brew "tree"
+brew "wget"
+brew "zoxide"
+brew "uv"
+
+# No casks (applications) or fonts to save time 
