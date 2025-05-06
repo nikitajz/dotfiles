@@ -69,7 +69,22 @@ install_awscli() {
   if ! command -v aws >/dev/null; then
     print_step "Installing aws cli"
     cd /tmp/
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    
+    # Get architecture
+    ARCH=$(uname -m)
+    case $ARCH in
+      x86_64)
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        ;;
+      aarch64)
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
+        ;;
+      *)
+        echo "Unsupported architecture: $ARCH"
+        return 1
+        ;;
+    esac
+    
     unzip -q awscliv2.zip && sudo ./aws/install
   else
     print_warning "Skipping awscli, already installed"
@@ -92,12 +107,19 @@ setup_shell() {
 install_fzf() {
   print_step "Installing fzf"
   if ! command -v fzf >/dev/null; then
-    rm -rf ~/.fzf
-
+    # Install fzf using the official installation script
     git clone -q --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --no-fish --no-bash --no-update-rc
 
-    ~/.fzf/install --all --xdg --no-fish
-    print_step "fzf installed, version $(fzf --version)"
+    # Add fzf to PATH for the current session
+    export PATH="$HOME/.fzf/bin:$PATH"
+    
+    # Verify installation
+    if command -v fzf >/dev/null; then
+      print_step "fzf installed, version $(fzf --version)"
+    else
+      print_warning "fzf installation may have failed"
+    fi
   else
     print_warning "Skipping, fzf already installed"
   fi
@@ -114,21 +136,19 @@ install_fd() {
     return
   fi
 
-  FDFIND_VERSION=$(curl -s "https://api.github.com/repos/sharkdp/fd/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
-  echo "FD version: ${FDFIND_VERSION}"
+  # Install fd-find using apt
+  sudo apt-get install -y fd-find
 
-  cd /tmp
-  curl -Lo fdfind.deb "https://github.com/sharkdp/fd/releases/download/v${FDFIND_VERSION}/fd-musl_${FDFIND_VERSION}_amd64.deb"
-
-  if [ ! -f fdfind.deb ]; then
-    print_warning "Failed to download fd-find .deb file"
-    return
+  # Create symlink as per official documentation
+  if ! command -v fd >/dev/null; then
+    sudo ln -s $(which fdfind) /usr/local/bin/fd
   fi
 
-  sudo apt install -y ./fdfind.deb
-  ln -s $(command -v fdfind) ~/.local/bin/fd
-
-  fd --version
+  # Verify installation
+  if ! command -v fd >/dev/null; then
+    print_warning "fd installation verification failed"
+    return 1
+  fi
 }
 
 install_ripgrep() {
@@ -142,15 +162,14 @@ install_ripgrep() {
     return
   fi
 
-  RIPGREP_VERSION=$(curl -s "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | grep -Po '"tag_name": "\K[0-9.]+')
-  echo "ripgrep version: $RIPGREP_VERSION"
+  # Install ripgrep using apt as per official instructions
+  sudo apt-get install -y ripgrep
 
-  cd /tmp
-
-  curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/ripgrep_${RIPGREP_VERSION}-1_amd64.deb
-  sudo dpkg -i ripgrep_${RIPGREP_VERSION}-1_amd64.deb
-
-  rg --version
+  # Verify installation
+  if ! command -v rg >/dev/null; then
+    print_warning "ripgrep installation verification failed"
+    return 1
+  fi
 }
 
 install_zoxide() {
@@ -164,7 +183,54 @@ install_zoxide() {
   fi
 
   print_step "Installing Zoxide"
-  curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+  
+  # Ensure .local/bin is in PATH
+  export PATH="$HOME/.local/bin:$PATH"
+  
+  # Create necessary directories
+  mkdir -p "$HOME/.local/bin"
+  
+  # Install zoxide using cargo
+  if ! command -v cargo >/dev/null; then
+    print_warning "Cargo not found, installing Rust first"
+    install_cargo
+  fi
+  
+  if command -v cargo >/dev/null; then
+    cargo install zoxide --locked
+    
+    # Add initialization to shell
+    echo 'eval "$(zoxide init zsh)"' >> "$HOME/.zshrc"
+    
+    # Verify installation
+    if command -v zoxide >/dev/null; then
+      echo "✅ zoxide installed successfully"
+      return 0
+    fi
+  fi
+  
+  print_warning "Failed to install zoxide using cargo, trying alternative method"
+  
+  # Fallback to curl installation
+  if ! curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh; then
+    print_warning "Failed to install zoxide"
+    return 1
+  fi
+
+  # Add .local/bin to PATH permanently
+  if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.zshrc"
+  fi
+
+  # Add initialization to shell
+  echo 'eval "$(zoxide init zsh)"' >> "$HOME/.zshrc"
+
+  # Verify installation with full PATH
+  export PATH="$HOME/.local/bin:$PATH"
+  if ! command -v zoxide >/dev/null; then
+    print_warning "zoxide installation verification failed"
+    return 1
+  fi
 }
 
 install_jq() {
@@ -240,30 +306,26 @@ install_aliastips() {
 }
 
 install_nvim() {
-  if [ "$OPTIONAL" = no ]; then
-    return
-  fi
-
   print_step "Installing nvim"
+
   if command -v nvim >/dev/null; then
-    print_warning "nvim already installed, skipping"
+    print_warning "nvim has already been installed, skipping"
     return
   fi
 
-  sudo apt-get install -qy ninja-build gettext cmake unzip curl
+  # Add Neovim repository
+  sudo apt-get install -y software-properties-common
+  sudo add-apt-repository -y ppa:neovim-ppa/stable
+  sudo apt-get update
+  sudo apt-get install -y neovim
 
-  cd /tmp
-
-  git clone --depth 1 https://github.com/neovim/neovim
-
-  cd neovim
-
-  git checkout stable
-
-  make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local/bin
-
-  # build DEB
-  cd build && cpack -G DEB && sudo dpkg -i nvim-linux-x86_64.deb
+  # Verify installation
+  if ! command -v nvim >/dev/null; then
+    print_warning "nvim installation verification failed"
+    return 1
+  fi
+  
+  nvim --version
 }
 
 config_lazyvim() {
@@ -346,8 +408,36 @@ install_nvidia() {
   sudo apt install -y nvidia-driver-${NVIDIA_VERSION}
 }
 
+# Set up environment
+setup_environment() {
+  print_step "Setting up environment"
+  
+  # Set timezone to avoid interactive prompts
+  export TZ=UTC
+  ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+  
+  # Set locale
+  export LANG=en_US.UTF-8
+  export LANGUAGE=en_US:en
+  export LC_ALL=en_US.UTF-8
+  
+  # Set up XDG directories
+  export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+  export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+  export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+  
+  # Create necessary directories
+  mkdir -p "$XDG_CONFIG_HOME" "$XDG_DATA_HOME" "$XDG_CACHE_HOME" "$HOME/.local/bin"
+  
+  # Add local bin to PATH if not already there
+  if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+  fi
+}
+
 main() {
   setup_color
+  setup_environment
 
   # Parse arguments
   while [ $# -gt 0 ]; do
@@ -364,11 +454,10 @@ main() {
 
   print_step "Installing the packages"
   sudo apt-get update -q
-  sudo apt-get install -y python3-dev unzip
+  sudo apt-get install -y python3-dev unzip jq nvtop keychain
 
   setup_shell
   install_cargo
-
   install_awscli
   install_jq
   install_fzf
@@ -382,7 +471,6 @@ main() {
   install_nvim
   config_lazyvim
   install_nvidia
-
   config_dotfiles
 }
 
