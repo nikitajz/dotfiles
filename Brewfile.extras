@@ -1,0 +1,24 @@
+# GUI apps and fonts
+# Need to include the same tap to ensure it's available
+tap "buo/cask-upgrade"
+
+# Fonts
+cask "font-fira-code-nerd-font"
+cask "font-hack-nerd-font"
+
+# Apps
+cask "1password"
+cask "alfred"
+cask "cleanshot"
+# cask "firefox"
+cask "ghostty"
+cask "google-chrome"
+cask "iina"
+cask "notion"
+# cask "postman"
+cask "rectangle"
+# cask "slack"
+cask "spotify"
+cask "telegram"
+cask "visual-studio-code"
+# cask "vlc" 

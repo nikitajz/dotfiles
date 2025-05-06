@@ -1,7 +1,9 @@
+# Essential command-line tools
 # tap "homebrew/core"
 tap "buo/cask-upgrade"
 
 brew "awscli"
+brew "antidote"  # zsh plugin manager
 brew "bat"
 brew "cheat"
 # brew "coreutils" # Those that come with macOS are outdated
@@ -25,28 +27,3 @@ brew "tree"
 brew "wget"
 brew "zoxide"
 brew "uv"
-# should be handled by oh-my-zsh
-# brew "zsh-autosuggestions"
-# brew "zsh-completions"
-# brew "zsh-syntax-highlighting"
-
-# Fonts
-cask "font-fira-code-nerd-font"
-cask "font-hack-nerd-font"
-
-# Apps
-cask "1password"
-cask "alfred"
-cask "cleanshot"
-# cask "firefox"
-cask "ghostty"
-cask "google-chrome"
-cask "iina"
-cask "notion"
-# cask "postman"
-cask "rectangle"
-# cask "slack"
-cask "spotify"
-cask "telegram"
-cask "visual-studio-code"
-# cask "vlc"

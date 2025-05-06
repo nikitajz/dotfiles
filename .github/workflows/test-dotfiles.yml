@@ -46,7 +46,6 @@ jobs:
     - name: Run installation script with tracing
       run: |
         echo "--- Running install_macos.sh with bash -x --- "
-        chmod +x install_macos.sh
         bash -x ./install_macos.sh
         echo "--- Finished install_macos.sh --- "
 
@@ -115,3 +114,39 @@ jobs:
           exit 1
         fi
         echo "✅ Ukrainian spellchecking test passed"
+        
+    - name: Test Antidote installation
+      run: |
+        # Check if Antidote is installed (either via Homebrew or git clone)
+        BREW_ANTIDOTE="$(brew --prefix)/opt/antidote"
+        MANUAL_ANTIDOTE="${XDG_DATA_HOME}/antidote"
+        
+        if [ -d "$BREW_ANTIDOTE" ]; then
+          echo "✅ Antidote found via Homebrew at: $BREW_ANTIDOTE"
+        elif [ -d "$MANUAL_ANTIDOTE" ]; then
+          echo "✅ Antidote found via git clone at: $MANUAL_ANTIDOTE"
+        else
+          echo "❌ Antidote installation not found in any expected location"
+          exit 1
+        fi
+        
+        # Check if plugins directory and file exist
+        ZSH_DIR="${XDG_CONFIG_HOME}/zsh"
+        PLUGINS_FILE="${ZSH_DIR}/.zsh_plugins.txt"
+        
+        if [ ! -d "$ZSH_DIR" ]; then
+          echo "❌ Directory not found: $ZSH_DIR"
+          exit 1
+        fi
+        
+        if [ ! -f "$PLUGINS_FILE" ]; then
+          echo "❌ Plugins file not found: $PLUGINS_FILE"
+          exit 1
+        fi
+        
+        echo "✅ Antidote installation test passed"
+        
+    - name: Run dotfiles tests
+      run: |
+        ./tests/run_tests.sh
+        echo "✅ All tests passed"

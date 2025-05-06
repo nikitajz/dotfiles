@@ -1,0 +1,20 @@
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting   kind:defer
+lukechilds/zsh-nvm                  kind:defer
+reegnz/jq-zsh-plugin
+djui/alias-tips
+romkatv/powerlevel10k
+junegunn/fzf                        path:shell
+junegunn/fzf.vim                    kind:clone
+
+# completions
+zsh-users/zsh-completions           kind:fpath path:src
+
+# OMZ
+# how to use OMZ plugins with antidote
+# https://github.com/mattmc3/antidote/discussions/70#discussioncomment-6775215
+getantidote/use-omz        # handle OMZ dependencies
+ohmyzsh/ohmyzsh path:lib   # load OMZ's library, including git.zsh
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/aws
+ohmyzsh/ohmyzsh path:plugins/uv

@@ -106,19 +106,36 @@ config_dotfiles() {
   create_symlink "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
   create_symlink "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
   create_symlink "$DOTFILES/gitignore_global" "$HOME/.gitignore_global"
+  
+  # Symlink the entire zsh directory rather than individual files
+  create_symlink "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"
 }
 
 install_brew_dependencies() {
-  print_step "Installing brew dependencies from Brewfile"
+  print_step "Installing brew dependencies"
 
   brew update
   
-  # Use minimal Brewfile in CI environment
-  if [ -n "${CI}" ]; then
-    print_step "CI environment detected, using minimal Brewfile.test"
-    brew bundle --file "$DOTFILES/Brewfile.test"
+  # Always install essential command-line tools
+  print_step "Installing essential tools from Brewfile"
+  brew bundle --file "$DOTFILES/Brewfile" --no-upgrade
+  
+  # In CI environment, skip GUI apps
+  if [ -z "${CI:-}" ]; then
+    print_step "Installing GUI apps and fonts from Brewfile.extras"
+    brew bundle --file "$DOTFILES/Brewfile.extras" --no-upgrade
   else
-    brew bundle --file "$DOTFILES/Brewfile"
+    print_step "CI environment detected, skipping GUI apps and fonts"
+  fi
+}
+
+install_antidote() {
+  export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+  if [ ! -d "${XDG_DATA_HOME}/antidote" ]; then
+    print_step "Installing Antidote (Zsh plugin manager)"
+    git clone --depth=1 https://github.com/mattmc3/antidote.git "${XDG_DATA_HOME}/antidote"
+  else
+    print_warning "Antidote already installed, skipping"
   fi
 }
 
@@ -135,6 +152,7 @@ main() {
   print_step "Setting up your Mac..."
   install_homebrew
   install_brew_dependencies
+  install_antidote
   config_dotfiles
   install_fzf
 }

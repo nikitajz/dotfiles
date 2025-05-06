@@ -5,6 +5,11 @@ set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DOTFILES_ROOT="$(dirname "$SCRIPT_DIR")"
 
+# Define XDG directories
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+
 # Source common test functions
 source "$SCRIPT_DIR/test_common.sh"
 
@@ -37,12 +42,12 @@ end_test_group "Optional Tools"
 
 # Test shell configuration
 start_test_group "Shell Configuration"
-assert_directory "$HOME/.oh-my-zsh"
+assert_directory "$XDG_DATA_HOME/antidote"
 
-# Test oh-my-zsh plugins
-for plugin in alias-tips jq; do
-    assert_directory "$HOME/.oh-my-zsh/custom/plugins/$plugin"
-done
+# Test shell plugins directory
+assert_directory "$XDG_CONFIG_HOME/zsh"
+assert_file "$XDG_CONFIG_HOME/zsh/.zsh_plugins.txt"
+assert_file "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 end_test_group "Shell Configuration"
 
 # Test dotfiles configuration
@@ -66,6 +71,7 @@ end_test_group "Neovim Configuration"
 start_test_group "Shell Environment"
 assert_contains "$HOME/.zshrc" "export PATH=.*\.local/bin.*PATH"
 assert_contains "$HOME/.zshrc" "eval.*zoxide init zsh"
+assert_contains "$HOME/.zshrc" "antidote load"
 end_test_group "Shell Environment"
 
 # Test PATH configuration

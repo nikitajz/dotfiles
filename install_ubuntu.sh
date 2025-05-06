@@ -100,8 +100,9 @@ setup_shell() {
   print_step "Installing zsh"
   sudo apt-get install -y zsh
 
-  print_step "Installing oh-my-zsh"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --keep-zshrc
+  # Set zsh as default shell
+  print_step "Setting zsh as default shell"
+  chsh -s $(which zsh)
 }
 
 install_fzf() {
@@ -244,9 +245,11 @@ install_jq() {
     return
   fi
 
+  # Install jq using apt
   sudo apt install -y jq
-
-  git clone --depth 1 https://github.com/reegnz/jq-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/jq
+  
+  # The jq plugin will be installed via antidote
+  print_warning "jq zsh plugin will be installed via antidote"
 }
 
 install_nvtop() {
@@ -296,13 +299,19 @@ install_aliastips() {
     return
   fi
 
-  if [ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/alias-tips ]; then
-    print_warning "Alias-tips installed, skipping"
-    return
-  fi
-
   print_step "Installing alias-tips"
-  git clone --depth 1 https://github.com/djui/alias-tips.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/alias-tips
+  # The alias-tips plugin will be installed via antidote
+  print_warning "alias-tips will be installed via antidote, skipping manual installation"
+}
+
+install_antidote() {
+  export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+  if [ ! -d "${XDG_DATA_HOME}/antidote" ]; then
+    print_step "Installing Antidote (Zsh plugin manager)"
+    git clone --depth=1 https://github.com/mattmc3/antidote.git "${XDG_DATA_HOME}/antidote"
+  else
+    print_warning "Antidote already installed, skipping"
+  fi
 }
 
 install_nvim() {
@@ -454,10 +463,11 @@ main() {
 
   print_step "Installing the packages"
   sudo apt-get update -q
-  sudo apt-get install -y python3-dev unzip jq nvtop keychain
+  sudo apt-get install -y python3-dev unzip jq nvtop keychain zsh
 
   setup_shell
   install_cargo
+  install_antidote
   install_awscli
   install_jq
   install_fzf
