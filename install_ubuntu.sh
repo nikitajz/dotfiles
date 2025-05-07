@@ -382,6 +382,9 @@ config_dotfiles() {
     local src=$1
     local dest=$2
 
+    # Only create parent directory if source is not a directory (for file symlinks)
+    [ -d "$src" ] || mkdir -p "$(dirname "$dest")"
+
     if [[ -L "$dest" ]]; then
       print_warning "$(basename $dest) already linked, skipping"
       return
@@ -396,10 +399,17 @@ config_dotfiles() {
     echo "Symlinked $(basename $dest)"
   }
 
-  # Link each dotfile using the helper function
-  link_file "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
+  # Link dotfiles to the config locations
+  link_file "$DOTFILES/.zshenv" "$HOME/.zshenv"
+  link_file "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
+  link_file "$DOTFILES/.config/ripgrep/.ripgreprc" "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
   link_file "$DOTFILES/gitignore_global" "$HOME/.gitignore_global"
-  link_file "$DOTFILES/.zshrc" "$HOME/.zshrc"
+  
+  # Symlink the entire zsh directory rather than individual files
+  link_file "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"
+  # p10k.zsh is symlinked above
+  # link_file "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
+
 }
 
 install_nvidia() {

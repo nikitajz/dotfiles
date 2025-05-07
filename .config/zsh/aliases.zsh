@@ -32,6 +32,7 @@ alias t3="tree -L 3"
 alias t4="tree -L 4"
 
 ## zoxide
+alias z="j" # backward compatibility
 # jump to the previous directory
 alias jj="j -"
 alias zz="z -"

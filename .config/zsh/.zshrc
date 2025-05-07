@@ -1,41 +1,19 @@
-# Environment variables
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-export DOTFILES=$HOME/.dotfiles
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
-export LANG=en_US.UTF-8
-export RIPGREP_CONFIG_PATH=$DOTFILES/.ripgreprc
-export N_PREFIX="$HOME/.local/bin"
-
-# Preferred editor for local and remote sessions
-export EDITOR='nvim'
-[[ -n $SSH_CONNECTION ]] && export EDITOR='vim'
-
-# Powerlevel10k Instant Prompt
+# Powerlevel10k Instant Prompt (should be at the top)
 [[ -r "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && source "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
 
-#  Antidote (support both macOS/Homebrew or Linux/manual)
-if command -v brew >/dev/null 2>&1 \
-   && [[ -f "$(brew --prefix)/opt/antidote/share/antidote/antidote.zsh" ]]; then
-  ANTIDOTE_DIR="$(brew --prefix)/opt/antidote/share/antidote"
-else
-  ANTIDOTE_DIR="${XDG_DATA_HOME}/antidote"
-fi
-source "${ANTIDOTE_DIR}/antidote.zsh"
+# Antidote (Zsh plugin manager)
+[[ -f "${XDG_DATA_HOME}/antidote/antidote.zsh" ]] && source "${XDG_DATA_HOME}/antidote/antidote.zsh"
 
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 antidote load ${XDG_CONFIG_HOME}/zsh/.zsh_plugins.txt
 
-# completion system
+# Use (j, ji) as default commands instead of (z, zi)
+eval "$(zoxide init zsh --cmd j)"
+
+## Completion
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
-
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-
-# Use (j, ji) as default commands instead of (z, zi)
-eval "$(zoxide init zsh --cmd j)"
 
 # uv run autocomplete
 # https://github.com/astral-sh/uv/issues/8432#issuecomment-2605216865
@@ -57,11 +35,10 @@ _uv_run_mod() {
 }
 compdef _uv_run_mod uv
 
-# Key bindings
+## Key bindings
 # always use emacs style for zsh
 # https://zsh.sourceforge.io/Guide/zshguide04.html#l75
 bindkey -e
-
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 bindkey '^ ' autosuggest-accept
 bindkey \^U backward-kill-line
@@ -77,19 +54,14 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 source <(fzf --zsh)
 
-# Source additional configs
+## Additional configs
+# Powerlevel10k should be sourced near the end of the file
+# [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+[[ -f $XDG_CONFIG_HOME/zsh/.p10k.zsh ]] && source $XDG_CONFIG_HOME/zsh/.p10k.zsh
+
+# Aliases
 [[ -f "${XDG_CONFIG_HOME}/zsh/aliases.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/aliases.zsh"
-[[ -f ~/.profile ]] && source ~/.profile
+
+# Local config (do not commit, can contain secrets)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# pnpm
-export PNPM_HOME="${HOME}/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-# rust
-[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"

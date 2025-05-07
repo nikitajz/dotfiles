@@ -6,6 +6,7 @@ local/
 **/themes/
 .vimrc.local
 .zshrc.local
+.zsh_history
 
 # Antidote generated files
 **/.zsh_plugins.zsh

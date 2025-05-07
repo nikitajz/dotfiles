@@ -5,16 +5,17 @@ set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DOTFILES_ROOT="$(dirname "$SCRIPT_DIR")"
 
-# Define XDG directories
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+# Source user zsh environment (loads XDG dirs, PATH, etc.)
+if [ -f "$HOME/.zshenv" ]; then
+  # shellcheck disable=SC1090
+  source "$HOME/.zshenv"
+fi
+if [ -f "$HOME/.config/zsh/.zshenv" ]; then
+  source "$HOME/.config/zsh/.zshenv"
+fi
 
 # Source common test functions
 source "$SCRIPT_DIR/test_common.sh"
-
-# Ensure required paths are in PATH
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.fzf/bin:$PATH"
 
 log_info "Running installation verification tests..."
 
@@ -52,9 +53,12 @@ end_test_group "Shell Configuration"
 
 # Test dotfiles configuration
 start_test_group "Dotfiles Configuration"
-for file in .zshrc .p10k.zsh .gitignore_global; do
-    assert_symlink "$HOME/$file"
-done
+assert_symlink "$HOME/.zshenv"
+assert_symlink "$HOME/.gitignore_global"
+assert_symlink "$XDG_CONFIG_HOME/zsh"
+# Ensure that .zshrc and .p10k.zsh files exist in the linked config directory
+assert_file "$XDG_CONFIG_HOME/zsh/.zshrc"
+assert_file "$XDG_CONFIG_HOME/zsh/.p10k.zsh"
 end_test_group "Dotfiles Configuration"
 
 # Test Neovim installation
@@ -67,12 +71,12 @@ else
 fi
 end_test_group "Neovim Configuration"
 
-# Test shell configuration files
-start_test_group "Shell Environment"
-assert_contains "$HOME/.zshrc" "export PATH=.*\.local/bin.*PATH"
-assert_contains "$HOME/.zshrc" "eval.*zoxide init zsh"
-assert_contains "$HOME/.zshrc" "antidote load"
-end_test_group "Shell Environment"
+# Test interactive shell behavior
+start_test_group "Interactive Shell"
+assert_true "Interactive zsh includes ~/.local/bin in PATH" "zsh -i -c '[[ ":\$PATH:" == *":$HOME/.local/bin:"* ]]'"
+assert_true "zoxide works in interactive shell" "zsh -i -c 'command -v zoxide >/dev/null'"
+assert_true "uv works in interactive shell" "zsh -i -c 'command -v uv >/dev/null'"
+end_test_group "Interactive Shell"
 
 # Test PATH configuration
 start_test_group "PATH Configuration"

@@ -101,14 +101,15 @@ config_dotfiles() {
   fi
 
   echo "Linking dotfiles from $DOTFILES"
-  create_symlink "$DOTFILES/.zshrc" "$HOME/.zshrc"
-  create_symlink "$DOTFILES/.profile" "$HOME/.profile"
-  create_symlink "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
+  create_symlink "$DOTFILES/.zshenv" "$HOME/.zshenv"
   create_symlink "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
+  create_symlink "$DOTFILES/.config/ripgrep/.ripgreprc" "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
   create_symlink "$DOTFILES/gitignore_global" "$HOME/.gitignore_global"
   
   # Symlink the entire zsh directory rather than individual files
   create_symlink "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"
+  # p10k.zsh is symlinked above
+  # create_symlink "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
 }
 
 install_brew_dependencies() {
