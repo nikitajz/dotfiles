@@ -5,50 +5,58 @@ What's dotfiles:
 
 ## Initial setup and configuration
 
+Configuration is automated with shell scripts (see below `Manual configuration` for details)
+
+### MacOS
+
 There are 2 main scripts to configure fresh setup:
 
-[install_macOS.sh](install_macos.sh)
-Install Brew, Pyenv, fzf, oh-my-zsh and install other packages using [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle)
+[install_macos.sh](install_macos.sh)
+Install Brew, Antidote, fzf, uv and other packages using [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle)
 
 [setup-macos.sh](setup-macos.sh)
-Configure macos using defaults (see <https://macos-defaults.com/>)
+Configure macos using [defaults](https://macos-defaults.com/)
 
-### Github
+### Ubuntu
 
-[Add key to keychain](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
-`git config --global core.excludesfile ~/.gitignore`
+[install_ubuntu.sh](install_ubuntu.sh)
+Similar to macos setup, but uses apt or manual installation (depending on the package)
 
-### Use `n` instead of `nvm`
+## Configuration Structure
 
-`nvm` is notorious for it's slowdown of shell startup:
-https://github.com/nvm-sh/nvm/issues/2724
-Despite it's possible to [make it faster by using lazy load](https://dev.to/thraizz/fix-slow-zsh-startup-due-to-nvm-408k), it's better to use https://github.com/tj/n instead
+The dotfiles follow the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) for configuration files:
 
-### Fonts smoothing
+- Main configuration files are stored in `$XDG_CONFIG_HOME` (defaults to `~/.config`)
+- Shell-specific files are in `$XDG_CONFIG_HOME/zsh`
+- Additional configuration files are symlinked from the dotfiles repository
 
-```shell
-defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
-defaults -currentHost write -g AppleFontSmoothing -int 0
-```
+### Zsh Configuration
 
-<https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antialiasing/>
-<https://osxdaily.com/2022/04/06/change-remove-font-smoothing-macos/>
+The shell configuration uses [Antidote](https://github.com/mattmc3/antidote) for plugin management, which is a faster and more maintainable alternative to Oh My Zsh. The configuration is organized following the XDG Base Directory Specification:
+
+- Main zsh configuration: `$XDG_CONFIG_HOME/zsh/.zshrc`
+- Plugin management (via antidote): `$XDG_CONFIG_HOME/zsh/plugins.txt`
+- Theme and additional configs: `$XDG_CONFIG_HOME/zsh/`
+
+Antidote supports Oh My Zsh plugins seamlessly.
+
+## Manual configuration
 
 <details>
 <summary>Previous manual instructions</summary>
 
-#### Homebrew
+### Homebrew
 
-Install all apps using [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) listed Brewfile
+Install all apps using [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) listed in Brewfile and Brewfile.extras
 `brew bundle` (part of [setup_macos.sh](setup_macos.sh))
 
 [Brew Bundle Brewfile Tips](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
 
-#### Fonts
+### Fonts
 
 [Fira Code](https://github.com/tonsky/FiraCode) is a good choice
 
-Use a patched version to include various glyphs and icons (already included in Brewfile)
+Use a patched version (`*--nerd-font`) to include various glyphs and icons (already included in Brewfile)
 
 Patched variant
 
@@ -64,10 +72,20 @@ brew cask install font-fira-code
 
 Might require additional [setup in other apps, e.g. JetBrains products, VSCode, etc](https://github.com/romkatv/powerlevel10k/blob/master/README.md#manual-font-installation)
 
-## Spellchecking
+### Fonts smoothing
+
+```shell
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+defaults -currentHost write -g AppleFontSmoothing -int 0
+```
+
+<https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antialiasing/>
+<https://osxdaily.com/2022/04/06/change-remove-font-smoothing-macos/>
+
+### Spellchecking
 
 Install Ukrainian spellchecking (included in installation script)
-https://github.com/titoBouzout/Dictionaries
+<https://github.com/titoBouzout/Dictionaries>
 copy to $HOME/Library/Spelling
 
 ### Useful links
@@ -75,19 +93,17 @@ copy to $HOME/Library/Spelling
 [Selected fonts by Joshukraine](https://github.com/joshukraine/dotfiles#my-favorite-programming-fonts)
 [Programming fonts - Test Drive](https://app.programmingfonts.org/)
 
-## Conda autocomplete for zsh
+### Conda autocomplete for zsh
 
-https://github.com/esc/conda-zsh-completion
+<https://github.com/esc/conda-zsh-completion>
 
-## Mac
-
-### System Preferences
+### MacOS System Preferences
 
 Most of the settings can be set using `defaults` command line. See [setup-macos.sh](setup-macos.sh) for details.
 
 References:
-https://www.defaults-write.com/
-https://macos-defaults.com/
+<https://www.defaults-write.com/>
+<https://macos-defaults.com/>
 [macOS Commands Reference.md](https://gist.github.com/nikitajz/8ff97fb3e10a8949a2833c0ead7c8263)
 
 </details>
@@ -180,7 +196,7 @@ Tip: Using the same command twice jump to the next directory that matches
 
 ## Windows manager
 
-[Rectangle](https://rectangleapp.com/)
+[Rectangle](https://rectangleapp.com/) or Rectangle Pro
 
 <details>
 <summary> Alternative option using built-in macOS functions, but limited to basic </summary>
@@ -195,8 +211,8 @@ Tip: Using the same command twice jump to the next directory that matches
 | Move to Built-in Retina Display     | Cmd + Ctrl + <-    |
 | Revert                              | Cmd + Shift + Down |
 
-https://apple.stackexchange.com/a/212607
-https://apple.stackexchange.com/a/377092
+<https://apple.stackexchange.com/a/212607>
+<https://apple.stackexchange.com/a/377092>
 </details>
 
 ### Karabiner Elements
@@ -211,7 +227,6 @@ Press `j+k` simultaneously to activate `Escape`
 | Hotkey | Command |
 |--------|---------|
 | j+k    | Escape  |
-
 
 #### Hyperkey
 
@@ -262,7 +277,6 @@ These shortcuts are configured in Raycast app (but require Hyperkey to be set in
 | *+l    | Locate Files with File Search (Raycast)      |
 | *+d    | Define word (Raycast)                        |
 
-
 #### Hyper Navigation
 
 Activates navigation with inverted T-shape key cluster (jikl) when Hyperkey+LCmd are hold
@@ -282,3 +296,44 @@ Activates navigation with inverted T-shape key cluster (jikl) when Hyperkey+LCmd
 | Hyper+LCmd+o       | PgDown                                      |
 | Hyper+;            | backspace (works with Opt/Cmd as well)      |
 | Hyper+'            | Escape (works with Opt/Cmd as well)         |
+
+## Other
+
+### Python uses `uv` by default
+
+[uv](https://github.com/astral-sh/uv) is a modern Python packaging and environment management tool that replaces multiple traditional tools (but still compatible with `pip` and `venv`):
+
+- `pip` for package installation
+- `virtualenv`/`venv` for virtual environments
+- `pip-tools` for dependency management
+- `poetry`/`pipenv` for project management
+
+Key benefits:
+
+- Superior performance (written in Rust and clever optimizations)
+- Compatible with existing Python tooling
+- Unified interface for all Python packaging needs
+- Significantly faster than traditional tools
+- Built-in virtual environment management
+
+### Use `n` instead of `nvm`
+
+`nvm` is notorious for it's slowdown of shell startup:
+<https://github.com/nvm-sh/nvm/issues/2724>
+Despite it's possible to [make it faster by using lazy load](https://dev.to/thraizz/fix-slow-zsh-startup-due-to-nvm-408k), it's better to use <https://github.com/tj/n> instead
+
+### Use `pnpm` instead of `npm`
+
+[pnpm](https://pnpm.io/) is a fast, disk space efficient package manager for Node.js that:
+
+- Uses hard links and a content-addressable store to save disk space
+- Enforces strict dependency management
+- Maintains compatibility with npm ecosystem
+- Significantly faster than npm and yarn
+
+## Misc
+
+### Github
+
+[Add key to keychain](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
+`git config --global core.excludesfile ~/.gitignore`
