@@ -11,7 +11,8 @@ function ea() {
 }
 alias ed="deactivate"
 
-alias zconf="$EDITOR ~/.zshrc"
+alias zconf="$EDITOR {ZDOTDIR:~}/.zshrc"
+alias zsource="source $XDG_HOME_DIR/zsh/.zshrc"
 alias dot="cd ~/.dotfiles/"
 alias vscode="code"
 alias diff="code --diff" # use vscode for diff file
