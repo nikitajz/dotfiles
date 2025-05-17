@@ -1,0 +1,57 @@
+###############################################################################
+# macOS noise
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+# Remote-share artefacts
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.icloud
+
+###############################################################################
+# Linux noise
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+###############################################################################
+# Editor / IDE temp files
+*.sw[a-p]            # Vim swap/backup
+.idea/
+.vscode/
+*.code-workspace
+
+###############################################################################
+# Generic build artefacts
+*.o
+*.obj
+*.class
+*.so
+*.dll
+*.exe
+*.out
+
+###############################################################################
+# Archives & logs
+*.zip
+*.tar
+*.gz
+*.log
+
+###############################################################################
+# History
+.zsh_history
