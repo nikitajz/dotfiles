@@ -7,6 +7,9 @@
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 antidote load ${XDG_CONFIG_HOME}/zsh/.zsh_plugins.txt
 
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
+
 # Use (j, ji) as default commands instead of (z, zi)
 eval "$(zoxide init zsh --cmd j)"
 

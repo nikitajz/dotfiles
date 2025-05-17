@@ -24,21 +24,24 @@ Similar to macos setup, but uses apt or manual installation (depending on the pa
 
 ## Configuration Structure
 
-The dotfiles follow the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) for configuration files:
+The dotfiles try to follow the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) for configuration files:
 
 - Main configuration files are stored in `$XDG_CONFIG_HOME` (defaults to `~/.config`)
 - Shell-specific files are in `$XDG_CONFIG_HOME/zsh`
-- Additional configuration files are symlinked from the dotfiles repository
+
+There is awesome tool [xdg-ninja](https://github.com/b3nj5m1n/xdg-ninja) to help setup the configuration
 
 ### Zsh Configuration
 
-The shell configuration uses [Antidote](https://github.com/mattmc3/antidote) for plugin management, which is a faster and more maintainable alternative to Oh My Zsh. The configuration is organized following the XDG Base Directory Specification:
+The shell configuration uses [Antidote](https://github.com/mattmc3/antidote) for plugin management.
 
-- Main zsh configuration: `$XDG_CONFIG_HOME/zsh/.zshrc`
-- Plugin management (via antidote): `$XDG_CONFIG_HOME/zsh/plugins.txt`
-- Theme and additional configs: `$XDG_CONFIG_HOME/zsh/`
+- `.zshenv`: Sourced by all zsh sessions (login, interactive, scripts). Use this for environment variables and universal settings that should always be set, regardless of how zsh is started.
+- `.zprofile`: Sourced for login shells only (like `.profile` in bash). Use this for commands that should run only at login (e.g., starting agents, setting up the environment for login shells).
+- `.zshrc` : Main zsh configuration (sourced for interactive shells; put aliases, functions, prompt, etc. here)
+- `zsh_plugins.txt`: Plugins list, managed by antidote
+- `$XDG_CONFIG_HOME/zsh/`: Contains additional configs (aliases, etc)
 
-Antidote supports Oh My Zsh plugins seamlessly.
+Antidote supports Oh My Zsh plugins seamlessly (specified in `zsh_plugins.txt`).
 
 ## Manual configuration
 
