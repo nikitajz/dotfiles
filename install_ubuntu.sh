@@ -1,6 +1,47 @@
 #!/bin/bash
 set -euo pipefail
 
+# Ensure this script runs on Ubuntu/Debian systems only
+if [ -f /etc/os-release ]; then
+  . /etc/os-release
+  if ! { [ "$ID" = "ubuntu" ] || [ "$ID" = "debian" ] || [[ "$ID_LIKE" == *debian* ]]; }; then
+    echo "Error: This script only supports Debian/Ubuntu." >&2
+    exit 1
+  fi
+else
+  echo "Error: Cannot detect OS." >&2
+  exit 1
+fi
+
+# Set up environment
+setup_environment() {
+  # Environment variables are already sourced from dotfiles in config_dotfiles()
+  # Just create the necessary directories
+  
+  # Create XDG directories if they don't exist
+  mkdir -p "$XDG_CONFIG_HOME"
+  mkdir -p "$XDG_DATA_HOME"
+  mkdir -p "$XDG_CACHE_HOME"
+  mkdir -p "$XDG_STATE_HOME"
+  mkdir -p "$XDG_CONFIG_HOME/zsh"
+  mkdir -p "$XDG_CONFIG_HOME/git"
+  mkdir -p "$XDG_CACHE_HOME/zsh"
+  mkdir -p "$XDG_STATE_HOME/zsh"
+  
+  # Create Cargo and Rustup directories if they don't exist
+  mkdir -p "$CARGO_HOME"
+  mkdir -p "$RUSTUP_HOME"
+  
+  # Set timezone to avoid interactive prompts
+  export TZ=UTC
+  # Skip system-wide timezone setup if not root
+  if [ "$(id -u)" = "0" ]; then
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+  fi
+  
+  # Locale is already set in .zshenv (LANG=en_US.UTF-8)
+}
+
 # install optional, e.g. ripgrep, zoxide
 OPTIONAL=${OPTIONAL:-yes}
 DOTF=${DOTF:-yes}
@@ -61,8 +102,24 @@ install_cargo() {
     return
   fi
 
-  curl https://sh.rustup.rs -sSf | sh -s -- -y
-  source "$HOME/.cargo/env"
+  # Install Rust with proper XDG paths (already set by setup_environment)
+  print_step "Installing Rust to $CARGO_HOME"
+  # Ensure the CARGO_HOME and RUSTUP_HOME directories exist
+  mkdir -p "$CARGO_HOME"
+  mkdir -p "$RUSTUP_HOME"
+  
+  # Use --no-modify-path to prevent rustup from modifying profile files
+  curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
+  
+  # Source the cargo environment file
+  source "$CARGO_HOME/env"
+  
+  # Verify installation
+  if [ -f "$CARGO_HOME/bin/cargo" ]; then
+    echo "✅ Cargo installed successfully to $CARGO_HOME/bin/cargo"
+  else
+    print_warning "Cargo installation may have failed"
+  fi
 }
 
 install_awscli() {
@@ -102,7 +159,9 @@ setup_shell() {
 
   # Set zsh as default shell
   print_step "Setting zsh as default shell"
-  chsh -s $(which zsh)
+  # Check if USER is set, otherwise use the current username
+  local username="${USER:-$(whoami)}"
+  sudo chsh -s $(which zsh) $username
 }
 
 install_fzf() {
@@ -112,8 +171,8 @@ install_fzf() {
     git clone -q --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install --no-fish --no-bash --no-update-rc
 
-    # Add fzf to PATH for the current session
-    export PATH="$HOME/.fzf/bin:$PATH"
+    # Add fzf to PATH for the current session (PATH is managed by zsh config)
+    PATH="$HOME/.fzf/bin:$PATH"
     
     # Verify installation
     if command -v fzf >/dev/null; then
@@ -178,58 +237,51 @@ install_zoxide() {
     return
   fi
 
-  if command -v z || command -v j >/dev/null; then
+  print_step "Installing Zoxide"
+  
+  if command -v zoxide >/dev/null; then
     print_warning "zoxide has already been installed, skipping"
     return
   fi
 
-  print_step "Installing Zoxide"
-  
-  # Ensure .local/bin is in PATH
-  export PATH="$HOME/.local/bin:$PATH"
-  
-  # Create necessary directories
-  mkdir -p "$HOME/.local/bin"
-  
-  # Install zoxide using cargo
+  # Ensure cargo is installed and available
   if ! command -v cargo >/dev/null; then
     print_warning "Cargo not found, installing Rust first"
     install_cargo
   fi
   
+  # Source the cargo environment to ensure it's in PATH
+  if [ -f "$CARGO_HOME/env" ]; then
+    source "$CARGO_HOME/env"
+  fi
+  
   if command -v cargo >/dev/null; then
+    # Install zoxide with cargo using XDG paths
+    print_step "Installing zoxide via cargo (to $CARGO_HOME/bin)"
     cargo install zoxide --locked
     
-    # Add initialization to shell
-    echo 'eval "$(zoxide init zsh)"' >> "$HOME/.zshrc"
-    
-    # Verify installation
-    if command -v zoxide >/dev/null; then
-      echo "✅ zoxide installed successfully"
+    # Verify installation 
+    if [ -f "$CARGO_HOME/bin/zoxide" ]; then
+      echo "✅ zoxide installed successfully to $CARGO_HOME/bin/zoxide"
       return 0
     fi
   fi
   
   print_warning "Failed to install zoxide using cargo, trying alternative method"
   
-  # Fallback to curl installation
-  if ! curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh; then
+  # Fallback to curl installation to ~/.local/bin
+  mkdir -p "$HOME/.local/bin"
+  print_step "Attempting to install zoxide to $HOME/.local/bin via curl"
+  
+  curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | \
+    ZOXIDE_INSTALL_DIR="$HOME/.local/bin" sh
+  
+  # Verify installation
+  if [ -f "$HOME/.local/bin/zoxide" ]; then
+    echo "✅ zoxide installed successfully to $HOME/.local/bin/zoxide"
+    return 0
+  else
     print_warning "Failed to install zoxide"
-    return 1
-  fi
-
-  # Add .local/bin to PATH permanently
-  if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.zshrc"
-  fi
-
-  # Add initialization to shell
-  echo 'eval "$(zoxide init zsh)"' >> "$HOME/.zshrc"
-
-  # Verify installation with full PATH
-  export PATH="$HOME/.local/bin:$PATH"
-  if ! command -v zoxide >/dev/null; then
-    print_warning "zoxide installation verification failed"
     return 1
   fi
 }
@@ -246,7 +298,7 @@ install_jq() {
   fi
 
   # Install jq using apt
-  sudo apt install -y jq
+  sudo apt-get install -y jq
   
   # The jq plugin will be installed via antidote
   print_warning "jq zsh plugin will be installed via antidote"
@@ -263,7 +315,7 @@ install_nvtop() {
     return
   fi
 
-  sudo apt install -y nvtop
+  sudo apt-get install -y nvtop
 }
 
 install_keychain() {
@@ -277,7 +329,7 @@ install_keychain() {
     return
   fi
 
-  sudo apt install -y keychain
+  sudo apt-get install -y keychain
 }
 
 install_uv() {
@@ -305,7 +357,6 @@ install_aliastips() {
 }
 
 install_antidote() {
-  export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
   if [ ! -d "${XDG_DATA_HOME}/antidote" ]; then
     print_step "Installing Antidote (Zsh plugin manager)"
     git clone --depth=1 https://github.com/mattmc3/antidote.git "${XDG_DATA_HOME}/antidote"
@@ -315,22 +366,22 @@ install_antidote() {
 }
 
 install_nvim() {
-  print_step "Installing nvim"
+  print_step "Installing Neovim"
 
   if command -v nvim >/dev/null; then
-    print_warning "nvim has already been installed, skipping"
+    print_warning "Neovim has already been installed, skipping"
     return
   fi
 
   # Add Neovim repository
   sudo apt-get install -y software-properties-common
   sudo add-apt-repository -y ppa:neovim-ppa/stable
-  sudo apt-get update
+  sudo apt-get update -q > /dev/null 2>&1
   sudo apt-get install -y neovim
 
   # Verify installation
   if ! command -v nvim >/dev/null; then
-    print_warning "nvim installation verification failed"
+    print_warning "Neovim installation verification failed"
     return 1
   fi
   
@@ -364,26 +415,35 @@ config_dotfiles() {
     return
   fi
 
-  export DOTFILES=$HOME/.dotfiles
-  if [[ -d $DOTFILES ]]; then
+  # Set DOTFILES for initial setup (before .zshenv is available)
+  DOTFILES="$HOME/.dotfiles"
+  
+  if [[ -d "$DOTFILES" ]]; then
     print_warning "Dotfiles already exist"
   else
     echo "Clonning dotfiles github repo"
-    git clone --depth 1 git@github.com:nikitajz/dotfiles.git $DOTFILES
+    git clone --depth 1 git@github.com:nikitajz/dotfiles.git "$DOTFILES"
   fi
 
-  if [[ ! -d $DOTFILES ]]; then
+  if [[ ! -d "$DOTFILES" ]]; then
     print_warning "Dotfiles do not exist"
     return
+  fi
+
+  # Source environment variables directly from dotfiles repo (before symlinking)
+  if [ -f "$DOTFILES/.config/zsh/.zshenv" ]; then
+    # shellcheck disable=SC1090
+    source "$DOTFILES/.config/zsh/.zshenv"
+    print_step "Sourced environment variables from dotfiles"
+  else
+    print_warning "No .config/zsh/.zshenv found in dotfiles"
+    return 1
   fi
 
   # Helper function to create symlink with checks
   link_file() {
     local src=$1
     local dest=$2
-
-    # Only create parent directory if source is not a directory (for file symlinks)
-    [ -d "$src" ] || mkdir -p "$(dirname "$dest")"
 
     if [[ -L "$dest" ]]; then
       print_warning "$(basename $dest) already linked, skipping"
@@ -395,21 +455,22 @@ config_dotfiles() {
       mv "$dest" "${dest}_old"
     fi
 
+    # Create parent directory if it doesn't exist
+    mkdir -p "$(dirname "$dest")"
+
+    # Create the symlink
     ln -s "$src" "$dest"
     echo "Symlinked $(basename $dest)"
   }
 
-  # Link dotfiles to the config locations
+  # Link dotfiles to the config locations (XDG variables are now available)
   link_file "$DOTFILES/.zshenv" "$HOME/.zshenv"
   link_file "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
   link_file "$DOTFILES/.config/ripgrep/.ripgreprc" "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
-  link_file "$DOTFILES/gitignore_global" "$HOME/.gitignore_global"
+  link_file "$DOTFILES/.config/git/ignore" "$XDG_CONFIG_HOME/git/ignore"
   
   # Symlink the entire zsh directory rather than individual files
   link_file "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"
-  # p10k.zsh is symlinked above
-  # link_file "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
-
 }
 
 install_nvidia() {
@@ -427,37 +488,9 @@ install_nvidia() {
   sudo apt install -y nvidia-driver-${NVIDIA_VERSION}
 }
 
-# Set up environment
-setup_environment() {
-  print_step "Setting up environment"
-  
-  # Set timezone to avoid interactive prompts
-  export TZ=UTC
-  ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-  
-  # Set locale
-  export LANG=en_US.UTF-8
-  export LANGUAGE=en_US:en
-  export LC_ALL=en_US.UTF-8
-  
-  # Set up XDG directories
-  export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-  export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-  export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-  
-  # Create necessary directories
-  mkdir -p "$XDG_CONFIG_HOME" "$XDG_DATA_HOME" "$XDG_CACHE_HOME" "$HOME/.local/bin"
-  
-  # Add local bin to PATH if not already there
-  if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    export PATH="$HOME/.local/bin:$PATH"
-  fi
-}
-
 main() {
   setup_color
-  setup_environment
-
+  
   # Parse arguments
   while [ $# -gt 0 ]; do
     case $1 in
@@ -472,8 +505,15 @@ main() {
   echo "Setting up your Ubuntu machine"
 
   print_step "Installing the packages"
-  sudo apt-get update -q
+
+  sudo apt-get update -q > /dev/null 2>&1
   sudo apt-get install -y python3-dev unzip jq nvtop keychain zsh
+
+  # Configure dotfiles FIRST so we can source environment variables
+  config_dotfiles
+  
+  # Now set up environment with proper sourcing
+  setup_environment
 
   setup_shell
   install_cargo
@@ -491,7 +531,6 @@ main() {
   install_nvim
   config_lazyvim
   install_nvidia
-  config_dotfiles
 }
 
 main

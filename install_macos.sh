@@ -100,11 +100,21 @@ config_dotfiles() {
     return
   fi
 
+  # Source environment variables directly from dotfiles repo (before symlinking)
+  if [ -f "$DOTFILES/.config/zsh/.zshenv" ]; then
+    # shellcheck disable=SC1090
+    source "$DOTFILES/.config/zsh/.zshenv"
+    print_step "Sourced environment variables from dotfiles"
+  else
+    print_warning "No .config/zsh/.zshenv found in dotfiles"
+    return 1
+  fi
+
   echo "Linking dotfiles from $DOTFILES"
   create_symlink "$DOTFILES/.zshenv" "$HOME/.zshenv"
   create_symlink "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
   create_symlink "$DOTFILES/.config/ripgrep/.ripgreprc" "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
-  create_symlink "$DOTFILES/gitignore_global" "$HOME/.gitignore_global"
+  create_symlink "$DOTFILES/.config/git/ignore" "$XDG_CONFIG_HOME/git/ignore"
   
   # Symlink the entire zsh directory rather than individual files
   create_symlink "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"

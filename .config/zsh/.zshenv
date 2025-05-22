@@ -13,8 +13,6 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_RUNTIME_DIR=/run/user/$UID
 
-[[ -d "$XDG_CACHE_HOME/zsh" ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
-
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/.ripgreprc
 
 # Cargo & Rustup
@@ -40,8 +38,8 @@ export TLDR_CACHE_DIR="$XDG_CACHE_HOME"/tldr
 # export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
 # export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig:/usr/local/opt/sqlite/lib/pkgconfig"
 
-# Add sourcing of Cargo environment to include ~/.cargo/bin in PATH
-if [ -f "$HOME/.cargo/env" ]; then
+# Add sourcing of Cargo environment to include cargo bin in PATH
+if [ -f "$CARGO_HOME/env" ]; then
   # shellcheck disable=SC1091
-  source "$HOME/.cargo/env"
+  source "$CARGO_HOME/env"
 fi

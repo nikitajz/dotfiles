@@ -24,6 +24,10 @@ log_error() {
     ((TEST_FAILURES++))
 }
 
+log_warning() {
+    echo -e "${YELLOW}⚠️  $1${NC}"
+}
+
 log_section() {
     echo -e "\n${YELLOW}📋 $1${NC}"
     echo -e "${YELLOW}$(printf '=%.0s' {1..50})${NC}\n"

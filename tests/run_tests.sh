@@ -8,6 +8,20 @@ DOTFILES_ROOT="$(dirname "$SCRIPT_DIR")"
 # Source common test functions
 source "$SCRIPT_DIR/test_common.sh"
 
+# Detect environmental conditions upfront
+IN_DOCKER=false
+IS_MACOS=false
+
+if [ -f /.dockerenv ] || grep -q docker /proc/1/cgroup 2>/dev/null || \
+   grep -q docker /proc/self/cgroup 2>/dev/null || \
+   (command -v systemd-detect-virt >/dev/null && systemd-detect-virt -q --container); then
+  IN_DOCKER=true
+fi
+
+if [ "$(uname)" = "Darwin" ]; then
+  IS_MACOS=true
+fi
+
 # Function to run local tests
 run_local_tests() {
     log_section "Running Local Installation Tests"
@@ -27,13 +41,21 @@ run_docker_test() {
     
     # Run test with all features enabled
     log_info "Running test with all features enabled..."
-    if ! docker run --rm -e NVIDIA=yes -e OPTIONAL=yes -e DOTF=yes "dotfiles-test"; then
+    if ! docker run --rm \
+        -e HOME=/home/ubuntu \
+        -e USER=ubuntu \
+        -e NVIDIA=yes \
+        -e OPTIONAL=yes \
+        -e DOTF=yes \
+        -e SHELL=/bin/bash \
+        "dotfiles-test" 2>&1; then
         log_error "Comprehensive test failed"
         docker rmi "dotfiles-test" >/dev/null 2>&1 || true
         return 1
     fi
     
-    log_success "Comprehensive Docker test passed"
+    # Clean up
+    log_info "Cleaning up..."
     docker rmi "dotfiles-test" >/dev/null 2>&1 || true
     return 0
 }
@@ -44,6 +66,12 @@ run_docker_tests() {
     
     # Verify Docker is available
     if ! assert_docker_available; then
+        # If we're already inside Docker, just run the local tests
+        if $IN_DOCKER; then
+            log_info "Already inside Docker container, running local tests instead"
+            run_local_tests
+            return $?
+        fi
         return 1
     fi
     
@@ -57,11 +85,24 @@ run_docker_tests() {
 }
 
 # Parse command line arguments
-MODE="local"
+# Set default mode based on environment
+if $IN_DOCKER; then
+    MODE="local"
+elif $IS_MACOS; then
+    MODE="docker"
+else
+    MODE="local"
+fi
+
+# Process command line flags (override default mode if specified)
 while [[ $# -gt 0 ]]; do
     case $1 in
         --docker)
             MODE="docker"
+            shift
+            ;;
+        --local)
+            MODE="local"
             shift
             ;;
         --all)
@@ -70,11 +111,14 @@ while [[ $# -gt 0 ]]; do
             ;;
         *)
             log_error "Unknown option: $1"
-            echo "Usage: $0 [--docker|--all]"
+            echo "Usage: $0 [--docker|--local|--all]"
             exit 1
             ;;
     esac
 done
+
+# Log the mode being used
+log_info "Running in $MODE mode"
 
 # Run tests based on mode
 case $MODE in

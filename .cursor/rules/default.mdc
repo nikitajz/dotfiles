@@ -1,0 +1,41 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Dotfiles Management Rules
+
+## Environment Variable Management
+
+1. **Source environment variables from the dotfiles repository directly** before symlinking, using the actual file path (e.g., `$DOTFILES/.config/zsh/.zshenv`) rather than the symlinked location.
+
+2. **Environment variables should be managed through zsh configuration files** (primarily `.config/zsh/.zshenv`). Installation scripts should ONLY source these files, never export or duplicate variables already defined there.
+
+## Installation Script Workflow
+
+3. **Configure dotfiles FIRST** in the installation workflow, before any functions that depend on environment variables. This ensures proper sourcing order.
+
+4. **Create directories using sourced XDG variables** rather than hardcoded paths like `$HOME/.config`. Always maintain XDG Base Directory compliance.
+
+5. **Set timezone and locale variables only when needed** for avoiding interactive prompts during package installation, not as permanent environment configuration.
+
+## Testing and Validation
+
+6. **Test conditional features appropriately** - only verify directories/configurations that are actually enabled (e.g., LazyVim config only when LazyVim is installed).
+
+7. **Use proper PATH variables in tests** - reference `$CARGO_HOME/bin` instead of hardcoded `~/.cargo/bin` paths, but be flexible to check both XDG-compliant and default locations when tools may have been installed before dotfiles setup.
+
+8. **When testing in Docker, ensure environment variables** (USER, HOME, etc.) match what would be available in a real user environment.
+
+## Docker and Testing
+
+9. **Dockerfile should only set up a clean environment** for testing without creating directories that would normally be part of the installation.
+
+10. **Tests should only verify that the proper environment is set up**, not make changes to it.
+
+## GitHub CLI and Shell Interaction
+
+11. **Use `gh` CLI instead of web search** for GitHub-related queries when possible. Prefer `gh run view <run-id>`, `gh run list`, `gh api` commands over web searches.
+
+12. **Use `GH_PAGER=cat gh <command>` to avoid pager issues** when using gh CLI. Use `--log-failed` flag with `gh run view` to see only failed steps.
+
