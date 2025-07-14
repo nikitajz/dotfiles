@@ -1050,6 +1050,30 @@
                 "type": "basic"
               },
               {
+                "description": "[j] -> ChatGPT",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "com.openai.chat"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
                 "description": "t -> i[T]erm2",
                 "from": {
                   "key_code": "t",
