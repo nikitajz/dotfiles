@@ -1,3 +1,7 @@
+[includeIf "gitdir:~/projects/"]
+  path = ~/projects/.gitconfig
+[include]
+  path = config.local
 [push]
 	autoSetupRemote = true
 [pager]
