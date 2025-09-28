@@ -1,0 +1,77 @@
+[pager]
+  diff = delta
+[diff]
+  tool = vscode
+[difftool "vscode"]
+ 	cmd = code --wait --diff $LOCAL $REMOTE
+[pretty]
+	better-oneline = "format:%C(auto)%h%d %s %C(blue)<%cn>"
+  # use '%ad' instead of '%cd' to show accurate commit dates (e.g. squash, etc)
+  oneline-dates = "format:%C(bold green)%h%Creset %C(cyan)%ad%Creset%C(auto)%d%Creset %s%Cblue <%cn>"
+  oneline-dates-end = "format:%C(bold green)%h%Creset %C(auto)%d%Creset %s%Cblue <%cn> %C(cyan)(%ad)"
+[alias]
+  amend = commit --amend --verbose
+  # reverts the last commit, keeping the changes unstaged
+  undo = reset --mixed HEAD~1
+  # resets the working directory and index to the last commit, discarding all the changes
+  res = !git reset --hard
+  # reverts the last commit, keeping the changes staged in the index
+  uncommit = reset --soft HEAD~1
+  # restore staged file(s)
+  unstage = restore --staged # <file>...
+  # list all remotes and their URLs
+  remotes = remote -v
+  # list tags (all or matching pattern) 
+  tags = tag -l #[PATTERN]
+  # list all aliases
+  aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ / | grep -v ^'alias '"
+  # show logs as graph/tree
+	tree  = log --pretty=better-oneline --all --graph
+  graph = log --pretty=better-oneline -graph
+  structure = log --oneline --simplify-by-decoration --graph --all
+  # no pager
+  nlog = "!git --no-pager log --decorate=short --pretty=short"
+  # last commit details with changed files
+  last = log --stat -1 HEAD
+
+  # shortcuts
+  a = add
+  b = branch
+  # extended format with author name, commit date and ahead/behind
+  be = "branch --format=\"%(HEAD) %(color:bold green)%(refname:short)%(color:reset) %(color:blue)<%(authorname)> %(color:cyan)(%(committerdate:relative)) %(color:bold red)%(upstream:track)%(color:reset) \n%(contents:subject)\" --sort=-committerdate"
+  # rename (move) local branch
+  bm = branch -m # <old_branch> <new_branch>
+  co = checkout
+  cb = checkout -b
+  # modify last commit
+  m = commit --amend 
+  ci = commit
+  cm = commit -m # <message>
+  ca = commit --all
+  cam = commit --all -m # <message>
+  d = diff
+  # summarized view of changes
+  ds = diff --stat
+  # shows staged changes, useful before commiting
+  dc = diff --cached
+  # diff tool (vsdode atm)
+  dt = difftool
+  lg = graph
+  ls = log --pretty=better-oneline
+  ld = log --pretty=oneline-dates-end --date=relative
+  lds = log --pretty=oneline-dates --date=short
+  ldr = log --pretty=oneline-dates-end --date=relative
+  # show modified files with number of added and removed lines
+  ll = log --pretty=better-oneline --numstat
+  # no pager
+  l5 = nlog -5
+  # list aliases
+  la = alias
+  sw = switch # <branch>
+  # status summary/short
+  ss = status -s
+  st = status
+  u = pull
+  p = push
+  pf = push --force-with-lease
+
