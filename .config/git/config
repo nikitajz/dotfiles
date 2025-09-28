@@ -1,3 +1,5 @@
+[push]
+	autoSetupRemote = true
 [pager]
   diff = delta
 [diff]
