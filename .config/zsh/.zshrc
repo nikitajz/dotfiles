@@ -47,10 +47,11 @@ bindkey '^ ' autosuggest-accept
 bindkey \^U backward-kill-line
 
 ## fzf, fd and forgit configuration
-export FORGIT_FZF_DEFAULT_OPTS="--layout=reverse"
+# Ripgrep uses git ignore: ~/.config/git/ignore
+# fd uses ignore: ~/.config/fd/ignore
 FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules --exclude .venv"
+export FORGIT_FZF_DEFAULT_OPTS="--layout=reverse"
 export FZF_VIM_DIR="$(antidote path junegunn/fzf.vim 2>/dev/null || echo "$HOME/.local/bin/fzf.vim")"
-#   --preview='fzf-preview.sh {}'
 export FZF_DEFAULT_OPTS="
   --height 80% 
   --multi 
@@ -73,6 +74,7 @@ export FZF_DEFAULT_OPTS="
   "
 export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard 2>/dev/null || fd --type f --type l $FD_OPTIONS"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS --preview='fzf-preview.sh {}'"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200' --walker-skip .git,node_modules,.venv"
 
