@@ -1,0 +1,24 @@
+# Version control
+.git/
+
+# Dependencies and packages
+node_modules/
+.venv/
+venv/
+__pycache__/
+
+# Build artifacts
+dist/
+build/
+target/
+
+# Caches
+.cache/
+.npm/
+.yarn/
+
+# Session files
+.zsh_sessions/
+
+# OS files
+.DS_Store

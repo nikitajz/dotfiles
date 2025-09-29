@@ -468,6 +468,7 @@ config_dotfiles() {
   link_file "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
   link_file "$DOTFILES/.config/ripgrep/.ripgreprc" "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
   link_file "$DOTFILES/.config/git/ignore" "$XDG_CONFIG_HOME/git/ignore"
+  link_file "$DOTFILES/.config/fd/ignore" "$XDG_CONFIG_HOME/fd/ignore"
   
   # Symlink the entire zsh directory rather than individual files
   link_file "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"

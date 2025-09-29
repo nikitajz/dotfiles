@@ -115,6 +115,7 @@ config_dotfiles() {
   create_symlink "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
   create_symlink "$DOTFILES/.config/ripgrep/.ripgreprc" "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
   create_symlink "$DOTFILES/.config/git/ignore" "$XDG_CONFIG_HOME/git/ignore"
+  create_symlink "$DOTFILES/.config/fd/ignore" "$XDG_CONFIG_HOME/fd/ignore"
   
   # Symlink the entire zsh directory rather than individual files
   create_symlink "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"
