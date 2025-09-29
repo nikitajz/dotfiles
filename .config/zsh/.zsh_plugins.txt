@@ -6,6 +6,7 @@ djui/alias-tips
 romkatv/powerlevel10k
 junegunn/fzf                        path:shell
 junegunn/fzf.vim                    kind:clone
+wfxr/forgit                         kind:defer
 
 # completions
 zsh-users/zsh-completions           kind:fpath path:src
@@ -15,6 +16,6 @@ zsh-users/zsh-completions           kind:fpath path:src
 # https://github.com/mattmc3/antidote/discussions/70#discussioncomment-6775215
 getantidote/use-omz        # handle OMZ dependencies
 ohmyzsh/ohmyzsh path:lib   # load OMZ's library, including git.zsh
-ohmyzsh/ohmyzsh path:plugins/git
 ohmyzsh/ohmyzsh path:plugins/aws
 ohmyzsh/ohmyzsh path:plugins/uv
+
