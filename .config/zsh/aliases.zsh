@@ -1,18 +1,8 @@
+alias g=git
 alias gsla="git --no-pager log --oneline --decorate --all --graph -35"
 
-function ea() {
-    if [[ -d venv ]]; then
-        source venv/bin/activate
-    elif [[ -d .venv ]]; then
-        source .venv/bin/activate
-    else
-        echo "No virtual environment found."
-    fi
-}
-alias ed="deactivate"
-
-alias zconf="$EDITOR {ZDOTDIR:~}/.zshrc"
-alias zsource="source $XDG_HOME_DIR/zsh/.zshrc"
+alias zconf="$EDITOR ${ZDOTDIR:-~}/.zshrc"
+alias zsource="source $XDG_CONFIG_HOME/zsh/.zshrc"
 alias dot="cd ~/.dotfiles/"
 alias vscode="code"
 alias diff="code --diff" # use vscode for diff file
@@ -56,19 +46,13 @@ alias nv=nvim
 alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
 alias js2yaml="python -c 'import sys, yaml, json; yaml.dump(json.load(sys.stdin), sys.stdout, indent=4)'"
 
-# alias `llm` to enable `-h` flag to work as `--help`
-function llmh() {
-  # Accumulate transformed arguments.
-  local newargs=()
-  for arg in "$@"; do
-    # If an argument is literally "-h", convert it to "--help".
-    if [[ "$arg" == "-h" ]]; then
-      newargs+=("--help")
+function ea() {
+    if [[ -d venv ]]; then
+        source venv/bin/activate
+    elif [[ -d .venv ]]; then
+        source .venv/bin/activate
     else
-      newargs+=("$arg")
+        echo "No virtual environment found."
     fi
-  done
-
-  # Now call the real (underlying) llm command with the modified args.
-  command llm "${newargs[@]}"
 }
+alias ed="deactivate"
