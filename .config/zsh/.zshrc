@@ -46,14 +46,48 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 bindkey '^ ' autosuggest-accept
 bindkey \^U backward-kill-line
 
-# fd and fzf configuration
-FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules --exclude .zshrc --exclude venv"
+## fzf, fd and forgit configuration
+export FORGIT_FZF_DEFAULT_OPTS="--layout=reverse"
+FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules --exclude .venv"
 export FZF_VIM_DIR="$(antidote path junegunn/fzf.vim 2>/dev/null || echo "$HOME/.local/bin/fzf.vim")"
-export FZF_DEFAULT_OPTS="--no-mouse --height 80% --reverse --multi --info=inline --marker='' --pointer='→' --color='pointer:white' --preview='$FZF_VIM_DIR/bin/preview.sh {}' --preview-window='right:60%:wrap' --bind='ctrl-x:execute(rm -i {+})+abort' --bind='f2:toggle-preview,ctrl-v:toggle-preview' --bind='f3:execute(bat --style=numbers {} || less -f {})' --bind='f4:become($EDITOR {}),ctrl-o:become($EDITOR {})' --bind='ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-l:clear-query' --bind='alt-w:toggle-preview-wrap,alt-j:preview-half-page-down,alt-k:preview-half-page-up,alt-h:preview-top,alt-l:preview-bottom' --bind='ctrl-x:+reload(eval $FZF_DEFAULT_COMMAND)'"
+#   --preview='fzf-preview.sh {}'
+export FZF_DEFAULT_OPTS="
+  --height 80% 
+  --multi 
+  --pointer='›'
+  --marker='✓'
+  --info=inline 
+  --color='pointer:white' 
+  --preview-window='right:60%:wrap' 
+  --bind='f3:execute(bat --style=numbers {} || less -f {})' 
+  --bind='ctrl-x:execute(rm -i {+})+abort' 
+  --bind='ctrl-o:become($EDITOR {})'
+  --bind='ctrl-/:toggle-preview'
+  --bind='ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-l:clear-query' 
+  --bind='ctrl-a:select-all,ctrl-q:deselect-all'
+  --bind='ctrl-d:half-page-down,ctrl-u:half-page-up'
+  --bind='alt-n:preview-half-page-down,alt-p:preview-half-page-up'
+  --bind='alt-j:preview-down,alt-k:preview-up'
+  --bind='alt-h:preview-top,alt-l:preview-bottom' 
+  --bind='alt-w:toggle-preview-wrap'
+  "
 export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard 2>/dev/null || fd --type f --type l $FD_OPTIONS"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200' --walker-skip .git,node_modules,.venv"
+
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}" "$@" ;;
+    ssh)          fzf "$@" ;;  # no preview
+    vim|nvim|v|nv|code) fzf --preview 'fzf-preview.sh {}' "$@" ;;
+    *)            fzf --preview 'fzf-preview.sh {}' "$@" ;;
+  esac
+} 
 
 source <(fzf --zsh)
 
