@@ -1,6 +1,6 @@
 # Should be before other plugins
 mattmc3/zephyr path:plugins/color
-mattmc3/zephyr path:plugins/environment  
+mattmc3/zephyr path:plugins/environment
 mattmc3/zephyr path:plugins/editor
 mattmc3/zephyr path:plugins/history
 mattmc3/zephyr path:plugins/directory
@@ -8,24 +8,24 @@ mattmc3/zephyr path:plugins/utility
 mattmc3/zephyr path:plugins/completion
 mattmc3/zephyr path:plugins/compstyle
 
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-syntax-highlighting   kind:defer
+romkatv/powerlevel10k
+
 lukechilds/zsh-nvm                  kind:defer
 reegnz/jq-zsh-plugin
-djui/alias-tips
-romkatv/powerlevel10k
+djui/alias-tips                     kind:defer
 junegunn/fzf                        path:shell
 junegunn/fzf.vim                    kind:clone
 wfxr/forgit                         kind:defer
 
-# completions
 zsh-users/zsh-completions           kind:fpath path:src
 
-# OMZ
+# faster alternative to 'zsh-users/zsh-syntax-highlighting'
+zdharma-continuum/fast-syntax-highlighting kind:defer
+zsh-users/zsh-autosuggestions              kind:defer
+zsh-users/zsh-history-substring-search     kind:defer
+
 # how to use OMZ plugins with antidote
 # https://github.com/mattmc3/antidote/discussions/70#discussioncomment-6775215
-# getantidote/use-omz        # handle OMZ dependencies
-# ohmyzsh/ohmyzsh path:lib   # load OMZ's library, including git.zsh
 # ohmyzsh/ohmyzsh path:plugins/aws
 # ohmyzsh/ohmyzsh path:plugins/uv
 

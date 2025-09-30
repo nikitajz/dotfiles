@@ -1,10 +1,10 @@
 # TODO: remove benchmarking
-zmodload zsh/zprof
+# zmodload zsh/zprof
 
 # Powerlevel10k Instant Prompt (should be at the top)
 [[ -r "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && source "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
 
-# Add Homebrew completions to fpath before loading plugins
+# Adding fpath for completions MUST BE before loading plugins (incl. completion)
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
@@ -12,12 +12,14 @@ fi
 # Antidote (Zsh plugin manager)
 [[ -f "${XDG_DATA_HOME}/antidote/antidote.zsh" ]] && source "${XDG_DATA_HOME}/antidote/antidote.zsh"
 
+# Configure Zephyr plugins BEFORE loading them
+# Proper zsh defaults are enabled by 'zephyr' plugin.
+# See the documentation and source code for the details: https://github.com/mattmc3/zephyr/tree/main?tab=readme-ov-file#plugins
+# XDG-compliance is enabled by default
+zstyle ':zephyr:plugin:editor' 'magic-enter' no
+
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 antidote load ${XDG_CONFIG_HOME}/zsh/.zsh_plugins.txt
-
-# Zephyr's completion and history plugins handle these
-# compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
-# export HISTFILE="$XDG_STATE_HOME/zsh/history"
 
 # Use (j, ji) as default commands instead of (z, zi)
 eval "$(zoxide init zsh --cmd j)"
@@ -110,5 +112,5 @@ source <(fzf --zsh)
 [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # TODO: remove benchmarking
-zprof
+# zprof
 
