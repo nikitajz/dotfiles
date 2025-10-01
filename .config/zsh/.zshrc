@@ -113,7 +113,6 @@ source <(fzf --zsh)
 
 # Local config (do not commit, can contain secrets)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-[[ -e "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # TODO: remove benchmarking
 # zprof
