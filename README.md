@@ -159,12 +159,12 @@ Shortcuts in `fzf`:
 
 #### General
 
-| Hotkey    | Command          |
-|-----------|------------------|
-| ctrl-x    | remove           |
-| f2/ctrl-v | toggle preview   |
-| f3        | bat/less preview |
-| f4/ctrl-o | run $EDITOR      |
+| Hotkey  | Command                |
+|---------|------------------------|
+| ctrl-x  | remove (file)          |
+| ctrl-/  | toggle preview         |
+| f3      | toggle bat/les preview |
+| ctrl-o  | run $EDITOR            |
 
 #### Navigation
 
@@ -187,7 +187,7 @@ Shortcuts in `fzf`:
 | alt-bs  | delete prev word (backward-kill-word) |
 | alt-d   | delete word (kill-word)               |
 | ctrl-l  | clear screen                          |
-| ctrl-y  | yank (copy)                           |
+| ctrl-y  | copy  (yank)                          |
 | ctrl-x  | delete selected file                  |
 
 #### Navigation in Preview
@@ -196,8 +196,10 @@ Shortcuts in `fzf`:
 |------------|------------------------|
 | shift-up   | up                     |
 | shift-down | down                   |
-| alt-j      | preview-half-page-down |
-| alt-k      | preview-half-page-up   |
+| alt-j      | down                   |
+| alt-k      | up                     |
+| alt-p      | preview-half-page-down |
+| alt-n      | preview-half-page-up   |
 | alt-h      | preview-top            |
 | alt-l      | preview-bottom         |
 | alt-w      | toggle-preview-wrap    |

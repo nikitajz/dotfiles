@@ -63,6 +63,7 @@ export FORGIT_FZF_DEFAULT_OPTS="--layout=reverse"
 export FZF_VIM_DIR="$(antidote path junegunn/fzf.vim 2>/dev/null || echo "$HOME/.local/bin/fzf.vim")"
 export FZF_DEFAULT_OPTS="
   --height 80% 
+  --layout=reverse
   --multi 
   --pointer='›'
   --marker='✓'
