@@ -1,6 +1,8 @@
 # TODO: remove benchmarking
 # zmodload zsh/zprof
 
+# Environment variables (including XDG) are setup in ./.zshenv
+
 # Powerlevel10k Instant Prompt (should be at the top)
 [[ -r "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && source "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
 
@@ -9,25 +11,26 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
-# Antidote (Zsh plugin manager)
-[[ -f "${XDG_DATA_HOME}/antidote/antidote.zsh" ]] && source "${XDG_DATA_HOME}/antidote/antidote.zsh"
-
-# Configure Zephyr plugins BEFORE loading them
-# Proper zsh defaults are enabled by 'zephyr' plugin.
-# See the documentation and source code for the details: https://github.com/mattmc3/zephyr/tree/main?tab=readme-ov-file#plugins
-# XDG-compliance is enabled by default
+## Antidote (Zsh plugin manager)
+# Configure plugins with 'zstyle' BEFORE loading them
+# Proper zsh defaults are enabled by 'zephyr' plugins:
+# https://github.com/mattmc3/zephyr/tree/main?tab=readme-ov-file#plugins
+# Zephyr enable XDG-compliance by default
 zstyle ':zephyr:plugin:editor' 'magic-enter' no
 
 zstyle ':antidote:bundle' use-friendly-names 'yes'
+
+[[ -f "${XDG_DATA_HOME}/antidote/antidote.zsh" ]] && source "${XDG_DATA_HOME}/antidote/antidote.zsh"
 antidote load ${XDG_CONFIG_HOME}/zsh/.zsh_plugins.txt
 
 # Use (j, ji) as default commands instead of (z, zi)
 eval "$(zoxide init zsh --cmd j)"
 
-# uv run autocomplete
+## uv autocomplete
 # https://github.com/astral-sh/uv/issues/8432#issuecomment-2605216865
-eval "$(uv generate-shell-completion zsh)"
-
+# currently sourced from ohmyzsh/uv plugin
+# eval "$(uv generate-shell-completion zsh)"
+# `uv` completion fix to source .venv binaries
 _uv_run_mod() {
     if [[ "$words[2]" == "run" && "$words[CURRENT]" != -* ]]; then
         local venv_binaries

@@ -3,6 +3,15 @@
 What's dotfiles:
 <https://dotfiles.github.io/>
 
+## History
+The initial setup was using Oh-My-Zsh, but it's too bloated and doesn't provide well optimized setup.
+Now it's using [Antidote](https://antidote.sh/) as plugin manager and [Zephyr](https://github.com/mattmc3/zephyr) for key plugins for proper defaults. It has limited support for non-core OMZ plugins if needed (with optional `getantidote/use-omz` for more). 
+
+Since the setup is constantly evolving, the following tools are considered deprecated:
+- `pyenv`, `pip` & friends (replaced by `uv`)
+- black, flake, etc (replaced by `ruff`)
+- nvm (replaced by `n`)
+
 ## Initial setup and configuration
 
 Configuration is automated with shell scripts (see below `Manual configuration` for details)
@@ -123,11 +132,13 @@ References:
 
 [fzf](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder.
 
+[forgit](https://github.com/wfxr/forgit) - interactive git aliases powered by `fzf` 
+
 [jq](https://stedolan.github.io/jq/) - jq is a lightweight and flexible command-line JSON processor.
 
 [ripgrep](https://github.com/BurntSushi/ripgrep) - ripgrep recursively searches directories for a regex pattern while respecting your gitignore (replacement for 'grep')
 
-[zoxide](https://github.com/ajeetdsouza/zoxide) - a smarter cd command. A faster alternative to z/z.lua
+[zoxide](https://github.com/ajeetdsouza/zoxide) - a smarter `cd` command. A faster alternative to z/z.lua
 
 ### Links
 

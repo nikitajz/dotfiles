@@ -1,6 +1,11 @@
 # This is sourced from the ~/.zshrc file
 export ZDOTDIR=${ZDOTDIR:-$HOME/.config/zsh}
 
+# Editor (set before plugins load to override their defaults)
+export EDITOR=vim
+export VISUAL=vim
+unset GIT_EDITOR  # Use EDITOR/VISUAL
+
 # General configs
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 export LANG=en_US.UTF-8
@@ -43,3 +48,11 @@ if [ -f "$CARGO_HOME/env" ]; then
   # shellcheck disable=SC1091
   source "$CARGO_HOME/env"
 fi
+
+# For OMZ plugins compatibility (or use 'getantidote/use-omz')
+[[ -n "$ZSH_CACHE_DIR" ]] || ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+
+# Create cache and completions dir and add to $fpath.
+mkdir -p "$ZSH_CACHE_DIR/completions"
+(( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
+
