@@ -1,0 +1,31 @@
+# apt package list for Ubuntu/Debian-based systems
+# Install with: xargs -a apt-pkglist sudo apt-get install -y
+
+# Build tools
+build-essential
+python3-dev
+
+# Essential utilities
+unzip
+curl
+wget
+
+# Version control
+git
+git-lfs
+
+# Shell
+zsh
+
+# CLI tools
+bat
+tree
+htop
+fd-find
+ripgrep
+jq
+keychain
+nvtop
+
+# System utilities
+software-properties-common

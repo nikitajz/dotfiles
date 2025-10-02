@@ -9,7 +9,6 @@ unset GIT_EDITOR  # Use EDITOR/VISUAL
 # General configs
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 export LANG=en_US.UTF-8
-export DOTFILES=$HOME/.dotfiles
 
 # XDG configs
 export XDG_CONFIG_HOME=$HOME/.config
@@ -49,10 +48,6 @@ if [ -f "$CARGO_HOME/env" ]; then
   source "$CARGO_HOME/env"
 fi
 
-# For OMZ plugins compatibility (or use 'getantidote/use-omz')
-[[ -n "$ZSH_CACHE_DIR" ]] || ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-
-# Create cache and completions dir and add to $fpath.
-mkdir -p "$ZSH_CACHE_DIR/completions"
-(( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
+# OMZ plugins/* compatibility
+export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 
