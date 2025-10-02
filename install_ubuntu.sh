@@ -424,19 +424,24 @@ config_lazyvim() {
     return
   fi
 
-  print_step "Configuring neovim with LazyVim config"
-  if command -v nvim >/dev/null 2>&1 &&
-    ! [[ -d $HOME/.config/nvim ]]; then
-    print_warning "Skipping nvim configuration with LazyVim"
+  print_step "Configuring neovim with LazyVim"
+  if ! command -v nvim >/dev/null 2>&1; then
+    print_warning "Neovim not installed, skipping LazyVim configuration"
     return
   fi
 
-  mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null || true
-  mv ~/.local/share/nvim ~/.local/share/nvim.bak 2>/dev/null || true
+  # Backup existing config (required by LazyVim)
+  mv ~/.config/nvim{,.bak} 2>/dev/null || true
+
+  # Backup data/state/cache (optional but recommended by LazyVim)
+  mv ~/.local/share/nvim{,.bak} 2>/dev/null || true
+  mv ~/.local/state/nvim{,.bak} 2>/dev/null || true
+  mv ~/.cache/nvim{,.bak} 2>/dev/null || true
 
   git clone --depth 1 https://github.com/LazyVim/starter ~/.config/nvim
-
   rm -rf ~/.config/nvim/.git
+
+  print_step "LazyVim installed. Run 'nvim' to complete setup"
 }
 
 
@@ -471,12 +476,12 @@ main() {
 
   echo "Setting up your Ubuntu machine"
 
-  print_step "Installing the packages"
-
+  print_step "Updating package lists"
   sudo apt-get update -q > /dev/null 2>&1
-  sudo apt-get install -y python3-dev unzip jq nvtop keychain zsh
 
-  # Bootstrap dotfiles FIRST - sources env vars and creates directory structure
+  print_step "Installing essential packages"
+  sudo apt-get install -y python3-dev unzip
+
   bootstrap_dotfiles
 
   setup_shell
