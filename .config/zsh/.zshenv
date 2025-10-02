@@ -9,7 +9,6 @@ unset GIT_EDITOR  # Use EDITOR/VISUAL
 # General configs
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 export LANG=en_US.UTF-8
-export DOTFILES=$HOME/.dotfiles
 
 # XDG configs
 export XDG_CONFIG_HOME=$HOME/.config

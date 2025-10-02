@@ -1,7 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-# Ensure this script runs on Ubuntu/Debian systems only
 if [ -f /etc/os-release ]; then
   . /etc/os-release
   if ! { [ "$ID" = "ubuntu" ] || [ "$ID" = "debian" ] || [[ "$ID_LIKE" == *debian* ]]; }; then
@@ -16,13 +15,7 @@ fi
 bootstrap_dotfiles() {
   print_step "Bootstrapping dotfiles"
 
-  DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
-
-  if [[ ! -d "$DOTFILES" ]]; then
-    print_warning "Dotfiles directory not found at: $DOTFILES"
-    print_warning "Please clone dotfiles first or set DOTFILES environment variable"
-    return 1
-  fi
+  DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 
   # Source .zshenv for XDG_* and other environment variables
   if [ -f "$DOTFILES/.config/zsh/.zshenv" ]; then
@@ -133,19 +126,15 @@ install_cargo() {
     return
   fi
 
-  # Install Rust with proper XDG paths (already set by bootstrap_dotfiles)
   print_step "Installing Rust to $CARGO_HOME"
-  # Ensure the CARGO_HOME and RUSTUP_HOME directories exist
   mkdir -p "$CARGO_HOME"
   mkdir -p "$RUSTUP_HOME"
 
   # Use --no-modify-path to prevent rustup from modifying profile files
   curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
 
-  # Source the cargo environment file
   source "$CARGO_HOME/env"
 
-  # Verify installation
   if [ -f "$CARGO_HOME/bin/cargo" ]; then
     echo "✅ Cargo installed successfully to $CARGO_HOME/bin/cargo"
   else
@@ -158,7 +147,6 @@ install_awscli() {
     print_step "Installing aws cli"
     cd /tmp/
 
-    # Get architecture
     ARCH=$(uname -m)
     case $ARCH in
     x86_64)
@@ -200,7 +188,6 @@ install_fzf() {
     # Add fzf to PATH for the current session (PATH is managed by zsh config)
     PATH="$HOME/.fzf/bin:$PATH"
 
-    # Verify installation
     if command -v fzf >/dev/null; then
       print_step "fzf installed, version $(fzf --version)"
     else
@@ -232,7 +219,6 @@ install_zoxide() {
     return
   fi
 
-  # Ensure cargo is installed and available
   if ! command -v cargo >/dev/null; then
     print_warning "Cargo not found, installing Rust first"
     install_cargo
@@ -244,11 +230,9 @@ install_zoxide() {
   fi
 
   if command -v cargo >/dev/null; then
-    # Install zoxide with cargo using XDG paths
     print_step "Installing zoxide via cargo (to $CARGO_HOME/bin)"
     cargo install zoxide --locked
 
-    # Verify installation
     if [ -f "$CARGO_HOME/bin/zoxide" ]; then
       echo "✅ zoxide installed successfully to $CARGO_HOME/bin/zoxide"
       return 0
@@ -256,15 +240,12 @@ install_zoxide() {
   fi
 
   print_warning "Failed to install zoxide using cargo, trying alternative method"
-
-  # Fallback to curl installation to ~/.local/bin
   mkdir -p "$HOME/.local/bin"
   print_step "Attempting to install zoxide to $HOME/.local/bin via curl"
 
   curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh |
     ZOXIDE_INSTALL_DIR="$HOME/.local/bin" sh
 
-  # Verify installation
   if [ -f "$HOME/.local/bin/zoxide" ]; then
     echo "✅ zoxide installed successfully to $HOME/.local/bin/zoxide"
     return 0
@@ -294,7 +275,6 @@ install_aliastips() {
   fi
 
   print_step "Installing alias-tips"
-  # The alias-tips plugin will be installed via antidote
   print_warning "alias-tips will be installed via antidote, skipping manual installation"
 }
 
@@ -315,13 +295,11 @@ install_nvim() {
     return
   fi
 
-  # Add Neovim repository
   sudo apt-get install -y software-properties-common
   sudo add-apt-repository -y ppa:neovim-ppa/stable
   sudo apt-get update -q >/dev/null 2>&1
   sudo apt-get install -y neovim
 
-  # Verify installation
   if ! command -v nvim >/dev/null; then
     print_warning "Neovim installation verification failed"
     return 1
@@ -341,10 +319,8 @@ config_lazyvim() {
     return
   fi
 
-  # Backup existing config (required by LazyVim)
   mv ~/.config/nvim{,.bak} 2>/dev/null || true
 
-  # Backup data/state/cache (optional but recommended by LazyVim)
   mv ~/.local/share/nvim{,.bak} 2>/dev/null || true
   mv ~/.local/state/nvim{,.bak} 2>/dev/null || true
   mv ~/.cache/nvim{,.bak} 2>/dev/null || true
@@ -373,7 +349,6 @@ install_nvidia() {
 main() {
   setup_color
 
-  # Parse arguments
   while [ $# -gt 0 ]; do
     case $1 in
     --optional) OPTIONAL=yes ;;
@@ -389,25 +364,8 @@ main() {
   print_step "Updating package lists"
   sudo apt-get update -q >/dev/null 2>&1
 
-  print_step "Installing packages from apt"
-  sudo apt-get install -y \
-    build-essential \
-    python3-dev \
-    unzip \
-    git \
-    git-lfs \
-    curl \
-    wget \
-    zsh \
-    bat \
-    tree \
-    htop \
-    fd-find \
-    ripgrep \
-    jq \
-    keychain \
-    nvtop \
-    software-properties-common
+  print_step "Installing packages from apt-pkglist"
+  sudo apt-get install -y $(sed -e 's/#.*//' "$(dirname "$0")/apt-pkglist")
 
   bootstrap_dotfiles
   setup_shell
