@@ -66,8 +66,6 @@ bootstrap_dotfiles() {
   echo "✅ Dotfiles bootstrapped, environment ready"
 }
 
-# install optional, e.g. ripgrep, zoxide
-OPTIONAL=${OPTIONAL:-yes}
 DOTF=${DOTF:-yes}
 NVIDIA=${NVIDIA:-no}
 NVIDIA_VERSION=${NVIDIA_VERSION:-550}
@@ -208,10 +206,6 @@ setup_fd_symlink() {
 }
 
 install_zoxide() {
-  if [ "$OPTIONAL" = no ]; then
-    return
-  fi
-
   print_step "Installing Zoxide"
 
   if command -v zoxide >/dev/null; then
@@ -256,9 +250,6 @@ install_zoxide() {
 }
 
 install_uv() {
-  if [ "$OPTIONAL" = no ]; then
-    return
-  fi
   print_step "Installing uv"
 
   if command -v uv >/dev/null; then
@@ -270,10 +261,6 @@ install_uv() {
 }
 
 install_aliastips() {
-  if [ "$OPTIONAL" = no ]; then
-    return
-  fi
-
   print_step "Installing alias-tips"
   print_warning "alias-tips will be installed via antidote, skipping manual installation"
 }
@@ -309,10 +296,6 @@ install_nvim() {
 }
 
 config_lazyvim() {
-  if [[ "$OPTIONAL" = no ]]; then
-    return
-  fi
-
   print_step "Configuring neovim with LazyVim"
   if ! command -v nvim >/dev/null 2>&1; then
     print_warning "Neovim not installed, skipping LazyVim configuration"
@@ -351,7 +334,6 @@ main() {
 
   while [ $# -gt 0 ]; do
     case $1 in
-    --optional) OPTIONAL=yes ;;
     --dotfiles) DOTF=yes ;;
     --nvidia) NVIDIA=yes ;;
     --nvidia-version=*) NVIDIA_VERSION="${1#*=}" ;;
