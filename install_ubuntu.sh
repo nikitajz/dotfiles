@@ -154,8 +154,8 @@ install_awscli() {
       curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
       ;;
     *)
-      echo "Unsupported architecture: $ARCH"
-      return 1
+      print_warning "Unsupported architecture: $ARCH, skipping AWS CLI"
+      return
       ;;
     esac
 
@@ -242,10 +242,8 @@ install_zoxide() {
 
   if [ -f "$HOME/.local/bin/zoxide" ]; then
     echo "✅ zoxide installed successfully to $HOME/.local/bin/zoxide"
-    return 0
   else
     print_warning "Failed to install zoxide"
-    return 1
   fi
 }
 
@@ -266,11 +264,17 @@ install_aliastips() {
 }
 
 install_antidote() {
-  if [ ! -d "${XDG_DATA_HOME}/antidote" ]; then
-    print_step "Installing Antidote (Zsh plugin manager)"
-    git clone --depth=1 https://github.com/mattmc3/antidote.git "${XDG_DATA_HOME}/antidote"
-  else
+  if [ -d "${XDG_DATA_HOME}/antidote" ]; then
     print_warning "Antidote already installed, skipping"
+    return
+  fi
+
+  print_step "Installing Antidote (Zsh plugin manager)"
+  git clone --depth=1 https://github.com/mattmc3/antidote.git "${XDG_DATA_HOME}/antidote"
+
+  if [ ! -d "${XDG_DATA_HOME}/antidote" ]; then
+    print_warning "Critical: Antidote installation failed"
+    return 1
   fi
 }
 
@@ -287,12 +291,11 @@ install_nvim() {
   sudo apt-get update -q >/dev/null 2>&1
   sudo apt-get install -y neovim
 
-  if ! command -v nvim >/dev/null; then
+  if command -v nvim >/dev/null; then
+    nvim --version
+  else
     print_warning "Neovim installation verification failed"
-    return 1
   fi
-
-  nvim --version
 }
 
 config_lazyvim() {
@@ -318,6 +321,7 @@ install_nvidia() {
   if [ "$NVIDIA" = no ]; then
     return
   fi
+
   print_step "Installing NVIDIA drivers"
 
   if dpkg -l | grep -q nvidia-driver; then
@@ -327,6 +331,11 @@ install_nvidia() {
 
   print_step "Installing NVIDIA driver version ${NVIDIA_VERSION}"
   sudo apt install -y nvidia-driver-${NVIDIA_VERSION}
+
+  if ! dpkg -l | grep -q nvidia-driver-${NVIDIA_VERSION}; then
+    print_warning "Critical: NVIDIA driver installation failed"
+    return 1
+  fi
 }
 
 main() {
@@ -362,6 +371,21 @@ main() {
   install_nvim
   config_lazyvim
   install_nvidia
+
+  echo
+  print_step "Verifying installation..."
+  command -v zsh >/dev/null && echo "✅ zsh" || echo "❌ zsh"
+  command -v git >/dev/null && echo "✅ git" || echo "❌ git"
+  [ -d "${XDG_DATA_HOME}/antidote" ] && echo "✅ antidote" || echo "❌ antidote"
+  command -v fzf >/dev/null && echo "✅ fzf" || echo "❌ fzf"
+  command -v cargo >/dev/null && echo "✅ cargo" || echo "⚠️  cargo (optional)"
+  command -v zoxide >/dev/null && echo "✅ zoxide" || echo "⚠️  zoxide (optional)"
+  command -v uv >/dev/null && echo "✅ uv" || echo "⚠️  uv (optional)"
+  command -v nvim >/dev/null && echo "✅ nvim" || echo "⚠️  nvim (optional)"
+  command -v aws >/dev/null && echo "✅ aws" || echo "⚠️  aws (optional)"
+  if [ "$NVIDIA" = yes ]; then
+    dpkg -l | grep -q nvidia-driver-${NVIDIA_VERSION} && echo "✅ nvidia-driver-${NVIDIA_VERSION}" || echo "❌ nvidia-driver-${NVIDIA_VERSION}"
+  fi
 }
 
 main
