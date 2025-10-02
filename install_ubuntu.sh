@@ -13,33 +13,64 @@ else
   exit 1
 fi
 
-# Set up environment
-setup_environment() {
-  # Environment variables are already sourced from dotfiles in config_dotfiles()
-  # Just create the necessary directories
-  
-  # Create XDG directories if they don't exist
-  mkdir -p "$XDG_CONFIG_HOME"
-  mkdir -p "$XDG_DATA_HOME"
-  mkdir -p "$XDG_CACHE_HOME"
-  mkdir -p "$XDG_STATE_HOME"
-  mkdir -p "$XDG_CONFIG_HOME/zsh"
-  mkdir -p "$XDG_CONFIG_HOME/git"
-  mkdir -p "$XDG_CACHE_HOME/zsh"
-  mkdir -p "$XDG_STATE_HOME/zsh"
-  
-  # Create Cargo and Rustup directories if they don't exist
-  mkdir -p "$CARGO_HOME"
-  mkdir -p "$RUSTUP_HOME"
-  
-  # Set timezone to avoid interactive prompts
+bootstrap_dotfiles() {
+  print_step "Bootstrapping dotfiles"
+
+  DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
+
+  if [[ ! -d "$DOTFILES" ]]; then
+    print_warning "Dotfiles directory not found at: $DOTFILES"
+    print_warning "Please clone dotfiles first or set DOTFILES environment variable"
+    return 1
+  fi
+
+  # Source .zshenv for XDG_* and other environment variables
+  if [ -f "$DOTFILES/.config/zsh/.zshenv" ]; then
+    # shellcheck disable=SC1090
+    source "$DOTFILES/.config/zsh/.zshenv"
+    print_step "Environment variables loaded from dotfiles"
+  else
+    print_warning "Critical: .zshenv not found in dotfiles"
+    return 1
+  fi
+
+  mkdir -p "$XDG_CONFIG_HOME" "$XDG_DATA_HOME" "$XDG_CACHE_HOME" "$XDG_STATE_HOME"
+  mkdir -p "$XDG_CONFIG_HOME"/{zsh,git,ghostty,ripgrep,fd}
+  mkdir -p "$XDG_CACHE_HOME/zsh" "$XDG_STATE_HOME/zsh"
+  mkdir -p "$CARGO_HOME" "$RUSTUP_HOME"
+
   export TZ=UTC
-  # Skip system-wide timezone setup if not root
   if [ "$(id -u)" = "0" ]; then
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
   fi
-  
-  # Locale is already set in .zshenv (LANG=en_US.UTF-8)
+
+  link_file() {
+    local src=$1
+    local dest=$2
+
+    if [[ -L "$dest" ]]; then
+      print_warning "$(basename "$dest") already linked, skipping"
+      return
+    fi
+
+    if [[ -f "$dest" ]] || [[ -d "$dest" ]]; then
+      echo "Backing up existing $(basename "$dest") to $(basename "$dest")_old"
+      mv "$dest" "${dest}_old"
+    fi
+
+    mkdir -p "$(dirname "$dest")"
+    ln -s "$src" "$dest"
+    echo "Symlinked $(basename "$dest")"
+  }
+
+  link_file "$DOTFILES/.zshenv" "$HOME/.zshenv"
+  link_file "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
+  link_file "$DOTFILES/.config/ripgrep/.ripgreprc" "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
+  link_file "$DOTFILES/.config/git/ignore" "$XDG_CONFIG_HOME/git/ignore"
+  link_file "$DOTFILES/.config/fd/ignore" "$XDG_CONFIG_HOME/fd/ignore"
+  link_file "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"
+
+  echo "✅ Dotfiles bootstrapped, environment ready"
 }
 
 # install optional, e.g. ripgrep, zoxide
@@ -102,7 +133,7 @@ install_cargo() {
     return
   fi
 
-  # Install Rust with proper XDG paths (already set by setup_environment)
+  # Install Rust with proper XDG paths (already set by bootstrap_dotfiles)
   print_step "Installing Rust to $CARGO_HOME"
   # Ensure the CARGO_HOME and RUSTUP_HOME directories exist
   mkdir -p "$CARGO_HOME"
@@ -408,71 +439,6 @@ config_lazyvim() {
   rm -rf ~/.config/nvim/.git
 }
 
-config_dotfiles() {
-  print_step "Configuring dotfiles"
-  if [[ $"DOTF" = no ]]; then
-    echo "Skipping dotfiles setup as disabled step"
-    return
-  fi
-
-  # Set DOTFILES for initial setup (before .zshenv is available)
-  DOTFILES="$HOME/.dotfiles"
-  
-  if [[ -d "$DOTFILES" ]]; then
-    print_warning "Dotfiles already exist"
-  else
-    echo "Clonning dotfiles github repo"
-    git clone --depth 1 git@github.com:nikitajz/dotfiles.git "$DOTFILES"
-  fi
-
-  if [[ ! -d "$DOTFILES" ]]; then
-    print_warning "Dotfiles do not exist"
-    return
-  fi
-
-  # Source environment variables directly from dotfiles repo (before symlinking)
-  if [ -f "$DOTFILES/.config/zsh/.zshenv" ]; then
-    # shellcheck disable=SC1090
-    source "$DOTFILES/.config/zsh/.zshenv"
-    print_step "Sourced environment variables from dotfiles"
-  else
-    print_warning "No .config/zsh/.zshenv found in dotfiles"
-    return 1
-  fi
-
-  # Helper function to create symlink with checks
-  link_file() {
-    local src=$1
-    local dest=$2
-
-    if [[ -L "$dest" ]]; then
-      print_warning "$(basename $dest) already linked, skipping"
-      return
-    fi
-
-    if [[ -f "$dest" ]]; then
-      echo "Backing up existing $(basename $dest) to $(basename $dest)_old"
-      mv "$dest" "${dest}_old"
-    fi
-
-    # Create parent directory if it doesn't exist
-    mkdir -p "$(dirname "$dest")"
-
-    # Create the symlink
-    ln -s "$src" "$dest"
-    echo "Symlinked $(basename $dest)"
-  }
-
-  # Link dotfiles to the config locations (XDG variables are now available)
-  link_file "$DOTFILES/.zshenv" "$HOME/.zshenv"
-  link_file "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
-  link_file "$DOTFILES/.config/ripgrep/.ripgreprc" "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
-  link_file "$DOTFILES/.config/git/ignore" "$XDG_CONFIG_HOME/git/ignore"
-  link_file "$DOTFILES/.config/fd/ignore" "$XDG_CONFIG_HOME/fd/ignore"
-  
-  # Symlink the entire zsh directory rather than individual files
-  link_file "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"
-}
 
 install_nvidia() {
   if [ "$NVIDIA" = no ]; then
@@ -491,7 +457,7 @@ install_nvidia() {
 
 main() {
   setup_color
-  
+
   # Parse arguments
   while [ $# -gt 0 ]; do
     case $1 in
@@ -510,11 +476,8 @@ main() {
   sudo apt-get update -q > /dev/null 2>&1
   sudo apt-get install -y python3-dev unzip jq nvtop keychain zsh
 
-  # Configure dotfiles FIRST so we can source environment variables
-  config_dotfiles
-  
-  # Now set up environment with proper sourcing
-  setup_environment
+  # Bootstrap dotfiles FIRST - sources env vars and creates directory structure
+  bootstrap_dotfiles
 
   setup_shell
   install_cargo
