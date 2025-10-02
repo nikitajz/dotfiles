@@ -120,4 +120,3 @@ source <(fzf --zsh)
 
 # TODO: remove benchmarking
 # zprof
-

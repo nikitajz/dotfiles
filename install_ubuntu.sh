@@ -31,11 +31,7 @@ bootstrap_dotfiles() {
   mkdir -p "$XDG_CONFIG_HOME"/{zsh,git,ghostty,ripgrep,fd}
   mkdir -p "$XDG_CACHE_HOME/zsh" "$XDG_STATE_HOME/zsh"
   mkdir -p "$CARGO_HOME" "$RUSTUP_HOME"
-
-  export TZ=UTC
-  if [ "$(id -u)" = "0" ]; then
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ >/etc/timezone
-  fi
+  mkdir -p "$HOME/.local/bin"
 
   link_file() {
     local src=$1
@@ -179,14 +175,11 @@ setup_shell() {
 install_fzf() {
   print_step "Installing fzf"
   if ! command -v fzf >/dev/null; then
-    # Install fzf using the official installation script
     git clone -q --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --no-fish --no-bash --no-update-rc
+    ~/.fzf/install --bin
 
-    # Add fzf to PATH for the current session (PATH is managed by zsh config)
-    PATH="$HOME/.fzf/bin:$PATH"
-
-    if command -v fzf >/dev/null; then
+    if [ -f "$HOME/.fzf/bin/fzf" ]; then
+      ln -sf "$HOME/.fzf/bin/fzf" "$HOME/.local/bin/fzf"
       print_step "fzf installed, version $(fzf --version)"
     else
       print_warning "fzf installation may have failed"
@@ -286,10 +279,10 @@ install_nvim() {
     return
   fi
 
-  sudo apt-get install -y software-properties-common
-  sudo add-apt-repository -y ppa:neovim-ppa/stable
-  sudo apt-get update -q >/dev/null 2>&1
-  sudo apt-get install -y neovim
+  sudo apt-get install -yqq software-properties-common
+  sudo add-apt-repository -y ppa:neovim-ppa/stable >/dev/null
+  sudo apt-get update -qq >/dev/null
+  sudo apt-get install -yqq neovim
 
   if command -v nvim >/dev/null; then
     nvim --version
@@ -330,7 +323,7 @@ install_nvidia() {
   fi
 
   print_step "Installing NVIDIA driver version ${NVIDIA_VERSION}"
-  sudo apt install -y nvidia-driver-${NVIDIA_VERSION}
+  sudo apt-get install -yqq nvidia-driver-${NVIDIA_VERSION}
 
   if ! dpkg -l | grep -q nvidia-driver-${NVIDIA_VERSION}; then
     print_warning "Critical: NVIDIA driver installation failed"
@@ -352,11 +345,18 @@ main() {
 
   echo "Setting up your Ubuntu machine"
 
+  # Set timezone non-interactively before apt install
+  export DEBIAN_FRONTEND=noninteractive
+  export TZ=UTC
+  if [ "$(id -u)" = "0" ]; then
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ >/etc/timezone
+  fi
+
   print_step "Updating package lists"
-  sudo apt-get update -q >/dev/null 2>&1
+  sudo apt-get update -qq >/dev/null
 
   print_step "Installing packages from apt-pkglist"
-  sudo apt-get install -y $(sed -e 's/#.*//' "$(dirname "$0")/apt-pkglist")
+  sudo apt-get install -yqq $(sed -e 's/#.*//' "$(dirname "$0")/apt-pkglist")
 
   bootstrap_dotfiles
   setup_shell
@@ -391,3 +391,4 @@ main() {
 main
 
 print_step "Setup successfully completed!"
+print_step "Don't forget to init 'zsh' shell!"
