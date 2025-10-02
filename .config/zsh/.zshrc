@@ -11,6 +11,10 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
+# OMZ plugins/* compatibility 
+mkdir -p "$ZSH_CACHE_DIR/completions"
+(( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
+
 ## Antidote (Zsh plugin manager)
 # Configure plugins with 'zstyle' BEFORE loading them
 # Proper zsh defaults are enabled by 'zephyr' plugins:

@@ -49,10 +49,6 @@ if [ -f "$CARGO_HOME/env" ]; then
   source "$CARGO_HOME/env"
 fi
 
-# For OMZ plugins compatibility (or use 'getantidote/use-omz')
-[[ -n "$ZSH_CACHE_DIR" ]] || ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-
-# Create cache and completions dir and add to $fpath.
-mkdir -p "$ZSH_CACHE_DIR/completions"
-(( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
+# OMZ plugins/* compatibility
+export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 

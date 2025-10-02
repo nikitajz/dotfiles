@@ -15,7 +15,6 @@ if command -v eza &>/dev/null; then
   alias ls="eza"
   alias ll="eza -lh"
   alias la="eza -alh"
-  alias tree="eza --tree"
 fi
 
 alias tt="tree -L 2"
