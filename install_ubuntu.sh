@@ -41,7 +41,7 @@ bootstrap_dotfiles() {
 
   export TZ=UTC
   if [ "$(id -u)" = "0" ]; then
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ >/etc/timezone
   fi
 
   link_file() {
@@ -138,13 +138,13 @@ install_cargo() {
   # Ensure the CARGO_HOME and RUSTUP_HOME directories exist
   mkdir -p "$CARGO_HOME"
   mkdir -p "$RUSTUP_HOME"
-  
+
   # Use --no-modify-path to prevent rustup from modifying profile files
   curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
-  
+
   # Source the cargo environment file
   source "$CARGO_HOME/env"
-  
+
   # Verify installation
   if [ -f "$CARGO_HOME/bin/cargo" ]; then
     echo "✅ Cargo installed successfully to $CARGO_HOME/bin/cargo"
@@ -157,22 +157,22 @@ install_awscli() {
   if ! command -v aws >/dev/null; then
     print_step "Installing aws cli"
     cd /tmp/
-    
+
     # Get architecture
     ARCH=$(uname -m)
     case $ARCH in
-      x86_64)
-        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        ;;
-      aarch64)
-        curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
-        ;;
-      *)
-        echo "Unsupported architecture: $ARCH"
-        return 1
-        ;;
+    x86_64)
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      ;;
+    aarch64)
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
+      ;;
+    *)
+      echo "Unsupported architecture: $ARCH"
+      return 1
+      ;;
     esac
-    
+
     unzip -q awscliv2.zip && sudo ./aws/install
   else
     print_warning "Skipping awscli, already installed"
@@ -181,16 +181,11 @@ install_awscli() {
 }
 
 setup_shell() {
-  # If this user's login shell is already "zsh", do not attempt to switch.
   if [ "$(basename -- "$SHELL")" = "zsh" ]; then
     return
   fi
-  print_step "Installing zsh"
-  sudo apt-get install -y zsh
 
-  # Set zsh as default shell
   print_step "Setting zsh as default shell"
-  # Check if USER is set, otherwise use the current username
   local username="${USER:-$(whoami)}"
   sudo chsh -s $(which zsh) $username
 }
@@ -204,7 +199,7 @@ install_fzf() {
 
     # Add fzf to PATH for the current session (PATH is managed by zsh config)
     PATH="$HOME/.fzf/bin:$PATH"
-    
+
     # Verify installation
     if command -v fzf >/dev/null; then
       print_step "fzf installed, version $(fzf --version)"
@@ -216,51 +211,13 @@ install_fzf() {
   fi
 }
 
-install_fd() {
-  if [ "$OPTIONAL" = no ]; then
-    return
-  fi
-  print_step "Installing fd-find"
-
+setup_fd_symlink() {
   if command -v fd >/dev/null; then
-    print_warning "fd-find has already been installed, skipping"
     return
   fi
 
-  # Install fd-find using apt
-  sudo apt-get install -y fd-find
-
-  # Create symlink as per official documentation
-  if ! command -v fd >/dev/null; then
-    sudo ln -s $(which fdfind) /usr/local/bin/fd
-  fi
-
-  # Verify installation
-  if ! command -v fd >/dev/null; then
-    print_warning "fd installation verification failed"
-    return 1
-  fi
-}
-
-install_ripgrep() {
-  if [ "$OPTIONAL" = no ]; then
-    return
-  fi
-  print_step "Installing ripgrep"
-
-  if command -v rg >/dev/null; then
-    print_warning "ripgrep has already been installed, skipping"
-    return
-  fi
-
-  # Install ripgrep using apt as per official instructions
-  sudo apt-get install -y ripgrep
-
-  # Verify installation
-  if ! command -v rg >/dev/null; then
-    print_warning "ripgrep installation verification failed"
-    return 1
-  fi
+  print_step "Creating fd symlink"
+  sudo ln -s $(which fdfind) /usr/local/bin/fd
 }
 
 install_zoxide() {
@@ -269,7 +226,7 @@ install_zoxide() {
   fi
 
   print_step "Installing Zoxide"
-  
+
   if command -v zoxide >/dev/null; then
     print_warning "zoxide has already been installed, skipping"
     return
@@ -280,33 +237,33 @@ install_zoxide() {
     print_warning "Cargo not found, installing Rust first"
     install_cargo
   fi
-  
+
   # Source the cargo environment to ensure it's in PATH
   if [ -f "$CARGO_HOME/env" ]; then
     source "$CARGO_HOME/env"
   fi
-  
+
   if command -v cargo >/dev/null; then
     # Install zoxide with cargo using XDG paths
     print_step "Installing zoxide via cargo (to $CARGO_HOME/bin)"
     cargo install zoxide --locked
-    
-    # Verify installation 
+
+    # Verify installation
     if [ -f "$CARGO_HOME/bin/zoxide" ]; then
       echo "✅ zoxide installed successfully to $CARGO_HOME/bin/zoxide"
       return 0
     fi
   fi
-  
+
   print_warning "Failed to install zoxide using cargo, trying alternative method"
-  
+
   # Fallback to curl installation to ~/.local/bin
   mkdir -p "$HOME/.local/bin"
   print_step "Attempting to install zoxide to $HOME/.local/bin via curl"
-  
-  curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | \
+
+  curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh |
     ZOXIDE_INSTALL_DIR="$HOME/.local/bin" sh
-  
+
   # Verify installation
   if [ -f "$HOME/.local/bin/zoxide" ]; then
     echo "✅ zoxide installed successfully to $HOME/.local/bin/zoxide"
@@ -315,52 +272,6 @@ install_zoxide() {
     print_warning "Failed to install zoxide"
     return 1
   fi
-}
-
-install_jq() {
-  if [ "$OPTIONAL" = no ]; then
-    return
-  fi
-  print_step "Installing jq"
-
-  if command -v jq >/dev/null; then
-    print_warning "jq has already been installed, skipping"
-    return
-  fi
-
-  # Install jq using apt
-  sudo apt-get install -y jq
-  
-  # The jq plugin will be installed via antidote
-  print_warning "jq zsh plugin will be installed via antidote"
-}
-
-install_nvtop() {
-  if [ "$OPTIONAL" = no ]; then
-    return
-  fi
-  print_step "Installing nvtop"
-
-  if command -v nvtop >/dev/null; then
-    print_warning "nvtop has already been installed, skipping"
-    return
-  fi
-
-  sudo apt-get install -y nvtop
-}
-
-install_keychain() {
-  if [ "$OPTIONAL" = no ]; then
-    return
-  fi
-  print_step "Installing keychain"
-
-  if command -v keychain >/dev/null; then
-    print_warning "keychain has already been installed, skipping"
-    return
-  fi
-
-  sudo apt-get install -y keychain
 }
 
 install_uv() {
@@ -407,7 +318,7 @@ install_nvim() {
   # Add Neovim repository
   sudo apt-get install -y software-properties-common
   sudo add-apt-repository -y ppa:neovim-ppa/stable
-  sudo apt-get update -q > /dev/null 2>&1
+  sudo apt-get update -q >/dev/null 2>&1
   sudo apt-get install -y neovim
 
   # Verify installation
@@ -415,7 +326,7 @@ install_nvim() {
     print_warning "Neovim installation verification failed"
     return 1
   fi
-  
+
   nvim --version
 }
 
@@ -443,7 +354,6 @@ config_lazyvim() {
 
   print_step "LazyVim installed. Run 'nvim' to complete setup"
 }
-
 
 install_nvidia() {
   if [ "$NVIDIA" = no ]; then
@@ -477,25 +387,37 @@ main() {
   echo "Setting up your Ubuntu machine"
 
   print_step "Updating package lists"
-  sudo apt-get update -q > /dev/null 2>&1
+  sudo apt-get update -q >/dev/null 2>&1
 
-  print_step "Installing essential packages"
-  sudo apt-get install -y python3-dev unzip
+  print_step "Installing packages from apt"
+  sudo apt-get install -y \
+    build-essential \
+    python3-dev \
+    unzip \
+    git \
+    git-lfs \
+    curl \
+    wget \
+    zsh \
+    bat \
+    tree \
+    htop \
+    fd-find \
+    ripgrep \
+    jq \
+    keychain \
+    nvtop \
+    software-properties-common
 
   bootstrap_dotfiles
-
   setup_shell
+  setup_fd_symlink
   install_cargo
   install_antidote
   install_awscli
-  install_jq
   install_fzf
-  install_fd
-  install_ripgrep
   install_zoxide
   install_aliastips
-  install_nvtop
-  install_keychain
   install_uv
   install_nvim
   config_lazyvim
