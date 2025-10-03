@@ -27,6 +27,15 @@ zstyle ':antidote:bundle' use-friendly-names 'yes'
 [[ -f "${XDG_DATA_HOME}/antidote/antidote.zsh" ]] && source "${XDG_DATA_HOME}/antidote/antidote.zsh"
 antidote load ${XDG_CONFIG_HOME}/zsh/.zsh_plugins.txt
 
+## Key bindings (should be after Zephyr/Antidote)
+# always use emacs style for zsh
+# https://zsh.sourceforge.io/Guide/zshguide04.html#l75
+bindkey -e
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+bindkey '^ ' autosuggest-accept
+bindkey \^U backward-kill-line
+
+## Tools
 # Use (j, ji) as default commands instead of (z, zi)
 eval "$(zoxide init zsh --cmd j)"
 
@@ -50,14 +59,6 @@ _uv_run_mod() {
     fi
 }
 compdef _uv_run_mod uv
-
-## Key bindings
-# always use emacs style for zsh
-# https://zsh.sourceforge.io/Guide/zshguide04.html#l75
-bindkey -e
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-bindkey '^ ' autosuggest-accept
-bindkey \^U backward-kill-line
 
 ## fzf, fd and forgit configuration
 # Ripgrep uses git ignore: ~/.config/git/ignore
@@ -109,13 +110,12 @@ source <(fzf --zsh)
 
 ## Additional configs
 # Powerlevel10k should be sourced near the end of the file
-# [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 [[ -f $XDG_CONFIG_HOME/zsh/.p10k.zsh ]] && source $XDG_CONFIG_HOME/zsh/.p10k.zsh
 
-# Aliases
+## Aliases
 [[ -f "${XDG_CONFIG_HOME}/zsh/aliases.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/aliases.zsh"
 
-# Local config (do not commit, can contain secrets)
+## Local config (do not commit, can contain secrets)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # TODO: remove benchmarking
