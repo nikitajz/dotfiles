@@ -1,0 +1,39 @@
+# Stow uses Perl-like syntax
+# PATTERNS WITH SLASH (/) → Match against FULL PATH (from package root)
+# PATTERNS WITHOUT SLASH → Match against BASENAME only
+# ^/ to anchor to package root
+
+# Root-level files
+^/\.idea$
+^/\.claude$
+^/\.cursor$
+^/\.git$
+^/\.gitignore$
+^/\.github$
+
+# Documentation, scripts, log
+LICENSE
+.*\.md$
+.*\.sh$
+.*\.log$
+.*\.template$
+
+#  Build, install, test files
+Dockerfile
+^/tests
+^/Brewfile.*
+^/.*pkglist$
+
+# Ignore some configs for now
+RectangleConfig.json
+RectangleProConfig.json
+karabiner.json
+
+# system files (anywhere)
+\.DS_Store$
+
+# Editor temporary files (Stow defaults - basename match)
+\.sw[a-z]$          # Vim swap files
+\.\#.+              # Emacs lock files
+.+~$                # Backup files (file~)
+

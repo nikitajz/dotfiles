@@ -1,9 +1,9 @@
 alias g=git
 alias gsla="git --no-pager log --oneline --decorate --all --graph -35"
 
-alias zconf="$EDITOR ${ZDOTDIR:-~}/.zshrc"
-alias zsource="source $XDG_CONFIG_HOME/zsh/.zshrc"
-alias dot="cd ~/.dotfiles/"
+alias zconf="$EDITOR ${ZDOTDIR:-${HOME}}/.zshrc"
+alias zload="source ${XDG_CONFIG_HOME}/zsh/.zshrc"
+alias dot="cd ${DOTFILES:-${HOME}/.dotfiles}"
 alias vscode="code"
 alias diff="code --diff" # use vscode for diff file
 alias lg="lazygit"
@@ -55,3 +55,10 @@ function ea() {
     fi
 }
 alias ed="deactivate"
+
+# stow/link dotfiles
+# '-nv' -> dry-run mode
+# '--no-folding' -> file-level symlinks
+alias dotlink="cd \${DOTFILES:-\${HOME}/.dotfiles} && stow --restow --no-folding -t ~ ."
+alias dotdrylink="cd \${DOTFILES:-\${HOME}/.dotfiles} && stow -nv --restow --no-folding -t ~ ."
+
