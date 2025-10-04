@@ -12,19 +12,14 @@ else
   exit 1
 fi
 
-bootstrap_dotfiles() {
-  print_step "Bootstrapping dotfiles"
+link_dotfiles() {
+  print_step "Linking dotfiles"
 
   DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 
-  # Source .zshenv for XDG_* and other environment variables
   if [ -f "$DOTFILES/.config/zsh/.zshenv" ]; then
     # shellcheck disable=SC1090
     source "$DOTFILES/.config/zsh/.zshenv"
-    print_step "Environment variables loaded from dotfiles"
-  else
-    print_warning "Critical: .zshenv not found in dotfiles"
-    return 1
   fi
 
   mkdir -p "$XDG_CONFIG_HOME" "$XDG_DATA_HOME" "$XDG_CACHE_HOME" "$XDG_STATE_HOME"
@@ -33,33 +28,16 @@ bootstrap_dotfiles() {
   mkdir -p "$CARGO_HOME" "$RUSTUP_HOME"
   mkdir -p "$HOME/.local/bin"
 
-  link_file() {
-    local src=$1
-    local dest=$2
+  hash -r  # Refresh command hash after package installation
 
-    if [[ -L "$dest" ]]; then
-      print_warning "$(basename "$dest") already linked, skipping"
-      return
-    fi
-
-    if [[ -f "$dest" ]] || [[ -d "$dest" ]]; then
-      echo "Backing up existing $(basename "$dest") to $(basename "$dest")_old"
-      mv "$dest" "${dest}_old"
-    fi
-
-    mkdir -p "$(dirname "$dest")"
-    ln -s "$src" "$dest"
-    echo "Symlinked $(basename "$dest")"
-  }
-
-  link_file "$DOTFILES/.zshenv" "$HOME/.zshenv"
-  link_file "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
-  link_file "$DOTFILES/.config/ripgrep/.ripgreprc" "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
-  link_file "$DOTFILES/.config/git/ignore" "$XDG_CONFIG_HOME/git/ignore"
-  link_file "$DOTFILES/.config/fd/ignore" "$XDG_CONFIG_HOME/fd/ignore"
-  link_file "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"
-
-  echo "✅ Dotfiles bootstrapped, environment ready"
+  if command -v stow >/dev/null 2>&1; then
+    cd "$DOTFILES"
+    stow --restow --no-folding -t "$HOME" .
+    echo "✅ Dotfiles linked"
+  else
+    print_warning "stow not found, skipping dotfiles linking"
+    print_warning "Install stow for automatic symlinks: sudo apt-get install stow"
+  fi
 }
 
 DOTF=${DOTF:-yes}
@@ -358,7 +336,7 @@ main() {
   print_step "Installing packages from apt-pkglist"
   sudo apt-get install -yqq $(sed -e 's/#.*//' "$(dirname "$0")/apt-pkglist")
 
-  bootstrap_dotfiles
+  link_dotfiles
   setup_shell
   setup_fd_symlink
   install_cargo

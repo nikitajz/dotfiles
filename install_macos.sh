@@ -71,60 +71,17 @@ install_homebrew() {
   fi
 }
 
-create_symlink() {
-  local src="${1}"
-  local dest="${2}"
-  local dest_backup="${dest}.bk"
+stow_dotfiles() {
+  print_step "Linking dotfiles"
 
-  mkdir -p "$(dirname "${dest}")"
+  mkdir -p "$XDG_CONFIG_HOME"/{git,zsh,ghostty,fd,ripgrep}
 
-  if [[ -L "${dest}" ]]; then
-    print_warning "${dest} already symlinked, skipping"
-    return
-  fi
-
-  if [[ -f "${dest}" ]]; then
-    echo "Backing up existing ${dest} file to ${dest_backup}"
-    mv "${dest}" "${dest_backup}"
-  fi
-
-  ln -s "${src}" "${dest}"
-  echo "Symlinked ${dest}"
+  cd "$DOTFILES"
+  stow --restow --no-folding -t "$HOME" .
 }
 
-config_dotfiles() {
-  print_step "Configuring dotfiles"
-  # Check if the target DOTFILES directory exists
-  if [[ ! -d $DOTFILES ]]; then
-    print_warning "Dotfiles directory not found: $DOTFILES"
-    return
-  fi
-
-  # Source environment variables directly from dotfiles repo (before symlinking)
-  if [ -f "$DOTFILES/.config/zsh/.zshenv" ]; then
-    # shellcheck disable=SC1090
-    source "$DOTFILES/.config/zsh/.zshenv"
-    print_step "Sourced environment variables from dotfiles"
-  else
-    print_warning "No .config/zsh/.zshenv found in dotfiles"
-    return 1
-  fi
-
-  echo "Linking dotfiles from $DOTFILES"
-  create_symlink "$DOTFILES/.zshenv" "$HOME/.zshenv"
-  create_symlink "$DOTFILES/.config/ghostty/config" "$XDG_CONFIG_HOME/ghostty/config"
-  create_symlink "$DOTFILES/.config/ripgrep/.ripgreprc" "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
-  create_symlink "$DOTFILES/.config/git/ignore" "$XDG_CONFIG_HOME/git/ignore"
-  create_symlink "$DOTFILES/.config/fd/ignore" "$XDG_CONFIG_HOME/fd/ignore"
-  
-  # Symlink the entire zsh directory rather than individual files
-  create_symlink "$DOTFILES/.config/zsh" "$XDG_CONFIG_HOME/zsh"
-  # p10k.zsh is symlinked above
-  # create_symlink "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
-}
-
-install_brew_dependencies() {
-  print_step "Installing brew dependencies"
+install_packages() {
+  print_step "Installing packages"
 
   brew update
   
@@ -163,9 +120,9 @@ install_fzf() {
 main() {
   print_step "Setting up your Mac..."
   install_homebrew
-  install_brew_dependencies
+  install_packages
   install_antidote
-  config_dotfiles
+  stow_dotfiles
   install_fzf
 }
 

@@ -71,11 +71,10 @@ end_test_group "Shell Configuration"
 start_test_group "Dotfiles Configuration"
 assert_symlink "$HOME/.zshenv"
 
-assert_file "$XDG_CONFIG_HOME/git/ignore"
-assert_symlink "$XDG_CONFIG_HOME/zsh"
-# Ensure that .zshrc and .p10k.zsh files exist in the linked config directory
-assert_file "$XDG_CONFIG_HOME/zsh/.zshrc"
-assert_file "$XDG_CONFIG_HOME/zsh/.p10k.zsh"
+assert_symlink "$XDG_CONFIG_HOME/git/ignore"
+assert_directory "$XDG_CONFIG_HOME/zsh"
+assert_symlink "$XDG_CONFIG_HOME/zsh/.zshrc"
+assert_symlink "$XDG_CONFIG_HOME/zsh/.p10k.zsh"
 end_test_group "Dotfiles Configuration"
 
 # Test Neovim installation
