@@ -4,41 +4,66 @@ What's dotfiles:
 <https://dotfiles.github.io/>
 
 ## History
-The initial setup was using Oh-My-Zsh, but it's too bloated and doesn't provide well optimized setup.
-Now it's using [Antidote](https://antidote.sh/) as plugin manager and [Zephyr](https://github.com/mattmc3/zephyr) for key plugins for proper defaults. It has limited support for non-core OMZ plugins if needed (with optional `getantidote/use-omz` for more). 
+
+The initial setup was using Oh-My-Zsh, but it's too bloated and doesn't provide well-optimized setup.
+Now it's using [Antidote](https://antidote.sh/) as plugin manager and [Zephyr](https://github.com/mattmc3/zephyr) for key plugins for proper defaults. It has limited support for non-core OMZ plugins if needed (with optional `getantidote/use-omz` for more).
 
 Since the setup is constantly evolving, the following tools are considered deprecated:
+
 - `pyenv`, `pip` & friends (replaced by `uv`)
-- black, flake, etc (replaced by `ruff`)
-- nvm (replaced by `n`)
+- `black`, `flake`, etc (replaced by `ruff`)
+- `nvm`` (replaced by`n`)
 
 ## Initial setup and configuration
 
-Configuration is automated with shell scripts (see below `Manual configuration` for details)
-
 ### MacOS
 
-There are 2 main scripts to configure fresh setup:
+```bash
+git clone https://github.com/nikitajz/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+./install_macos.sh
+```
 
-[install_macos.sh](install_macos.sh)
-Install Brew, Antidote, fzf, uv and other packages using [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle)
+Installs Homebrew, packages (via Brewfile), Antidote, and links dotfiles using [GNU Stow](https://www.gnu.org/software/stow/).
 
-[setup-macos.sh](setup-macos.sh)
-Configure macos using [defaults](https://macos-defaults.com/)
+Optional: [setup-macos.sh](setup-macos.sh) - Configure macOS defaults
 
 ### Ubuntu
 
-[install_ubuntu.sh](install_ubuntu.sh)
-Similar to macos setup, but uses apt or manual installation (depending on the package)
+```bash
+git clone https://github.com/nikitajz/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+./install_ubuntu.sh
+```
+
+Installs packages via apt (from apt-pkglist), sets up shell tools, and links dotfiles using Stow (if available).
+
+## Dotfiles Management
+
+Dotfiles are managed with [GNU Stow](https://www.gnu.org/software/stow/), creating symlinks from `~/.dotfiles` to your home directory.
+
+**Aliases** (available after installation):
+
+- `dotlink` - Apply/update dotfiles symlinks
+- `dotdrylink` - Dry-run (preview changes without applying)
+
+**Manual linking**:
+
+```bash
+cd ~/.dotfiles
+stow --restow --no-folding -t ~ .
+```
 
 ## Configuration Structure
 
-The dotfiles try to follow the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) for configuration files:
+Follows the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html):
 
-- Main configuration files are stored in `$XDG_CONFIG_HOME` (defaults to `~/.config`)
-- Shell-specific files are in `$XDG_CONFIG_HOME/zsh`
+- `$XDG_CONFIG_HOME` (`~/.config`) - Configuration files
+- `$XDG_DATA_HOME` (`~/.local/share`) - Data files
+- `$XDG_CACHE_HOME` (`~/.cache`) - Cache files
+- `$XDG_STATE_HOME` (`~/.local/state`) - State files
 
-There is awesome tool [xdg-ninja](https://github.com/b3nj5m1n/xdg-ninja) to help setup the configuration
+Tool: [xdg-ninja](https://github.com/b3nj5m1n/xdg-ninja) helps audit XDG compliance
 
 ### Zsh Configuration
 
@@ -52,72 +77,25 @@ The shell configuration uses [Antidote](https://github.com/mattmc3/antidote) for
 
 Antidote supports Oh My Zsh plugins seamlessly (specified in `zsh_plugins.txt`).
 
-## Manual configuration
+## Windows manager
+
+[Rectangle](https://rectangleapp.com/) or Rectangle Pro
 
 <details>
-<summary>Previous manual instructions</summary>
+<summary> Alternative option using built-in macOS functions, but limited to basic </summary>
 
-### Homebrew
+| Menu Title                          | Keyboard Shortcut  |
+|-------------------------------------|--------------------|
+| Move Window to Left Side of Screen  | Cmd + Shift + <-   |
+| Move Window to Right Side of Screen | Cmd + Shift + ->   |
+| Tile Window to Left of Screen       | Cmd + Alt + <-     |
+| Tile Window to Right of Screen      | Cmd + Alt + ->     |
+| Move to LG HDR 4K Display           | Cmd + Ctrl + ->    |
+| Move to Built-in Retina Display     | Cmd + Ctrl + <-    |
+| Revert                              | Cmd + Shift + Down |
 
-Install all apps using [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) listed in Brewfile and Brewfile.extras
-`brew bundle` (part of [setup_macos.sh](setup_macos.sh))
-
-[Brew Bundle Brewfile Tips](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
-
-### Fonts
-
-[Fira Code](https://github.com/tonsky/FiraCode) is a good choice
-
-Use a patched version (`*--nerd-font`) to include various glyphs and icons (already included in Brewfile)
-
-Patched variant
-
-```shell
-brew cask install font-firacode-nerd-font
-```
-
-Original font
-
-```shell
-brew cask install font-fira-code
-```
-
-Might require additional [setup in other apps, e.g. JetBrains products, VSCode, etc](https://github.com/romkatv/powerlevel10k/blob/master/README.md#manual-font-installation)
-
-### Fonts smoothing
-
-```shell
-defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
-defaults -currentHost write -g AppleFontSmoothing -int 0
-```
-
-<https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antialiasing/>
-<https://osxdaily.com/2022/04/06/change-remove-font-smoothing-macos/>
-
-### Spellchecking
-
-Install Ukrainian spellchecking (included in installation script)
-<https://github.com/titoBouzout/Dictionaries>
-copy to $HOME/Library/Spelling
-
-### Useful links
-
-[Selected fonts by Joshukraine](https://github.com/joshukraine/dotfiles#my-favorite-programming-fonts)
-[Programming fonts - Test Drive](https://app.programmingfonts.org/)
-
-### Conda autocomplete for zsh
-
-<https://github.com/esc/conda-zsh-completion>
-
-### MacOS System Preferences
-
-Most of the settings can be set using `defaults` command line. See [setup-macos.sh](setup-macos.sh) for details.
-
-References:
-<https://www.defaults-write.com/>
-<https://macos-defaults.com/>
-[macOS Commands Reference.md](https://gist.github.com/nikitajz/8ff97fb3e10a8949a2833c0ead7c8263)
-
+<https://apple.stackexchange.com/a/212607>
+<https://apple.stackexchange.com/a/377092>
 </details>
 
 ## CLI tools
@@ -132,7 +110,7 @@ References:
 
 [fzf](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder.
 
-[forgit](https://github.com/wfxr/forgit) - interactive git aliases powered by `fzf` 
+[forgit](https://github.com/wfxr/forgit) - interactive git aliases powered by `fzf`
 
 [jq](https://stedolan.github.io/jq/) - jq is a lightweight and flexible command-line JSON processor.
 
@@ -210,28 +188,7 @@ Shortcuts in `fzf`:
 `j`/`z` `+tab` - disambiguate (choose) if z has few options where to jump
 Tip: Using the same command twice jump to the next directory that matches
 
-## Windows manager
-
-[Rectangle](https://rectangleapp.com/) or Rectangle Pro
-
-<details>
-<summary> Alternative option using built-in macOS functions, but limited to basic </summary>
-
-| Menu Title                          | Keyboard Shortcut  |
-|-------------------------------------|--------------------|
-| Move Window to Left Side of Screen  | Cmd + Shift + <-   |
-| Move Window to Right Side of Screen | Cmd + Shift + ->   |
-| Tile Window to Left of Screen       | Cmd + Alt + <-     |
-| Tile Window to Right of Screen      | Cmd + Alt + ->     |
-| Move to LG HDR 4K Display           | Cmd + Ctrl + ->    |
-| Move to Built-in Retina Display     | Cmd + Ctrl + <-    |
-| Revert                              | Cmd + Shift + Down |
-
-<https://apple.stackexchange.com/a/212607>
-<https://apple.stackexchange.com/a/377092>
-</details>
-
-### Karabiner Elements
+## Karabiner Elements
 
 [Karabiner Elements](https://karabiner-elements.pqrs.org/) (KE) allows to supercharge keyboard shortcuts to maximum.
 See example: <https://wiki.nikiv.dev/macOS/apps/karabiner/>
@@ -353,3 +310,67 @@ Despite it's possible to [make it faster by using lazy load](https://dev.to/thra
 
 [Add key to keychain](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
 `git config --global core.excludesfile ~/.gitignore`
+
+## Manual configuration
+
+<details>
+<summary>Previous manual instructions</summary>
+
+### Homebrew
+
+Install all apps using [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) listed in Brewfile and Brewfile.extras
+`brew bundle` (part of [setup_macos.sh](setup_macos.sh))
+
+[Brew Bundle Brewfile Tips](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
+
+### Fonts
+
+[Fira Code](https://github.com/tonsky/FiraCode) is a good choice
+
+Use a patched version (`*--nerd-font`) to include various glyphs and icons (already included in Brewfile)
+
+Patched variant
+
+```shell
+brew cask install font-firacode-nerd-font
+```
+
+Original font
+
+```shell
+brew cask install font-fira-code
+```
+
+Might require additional [setup in other apps, e.g. JetBrains products, VSCode, etc](https://github.com/romkatv/powerlevel10k/blob/master/README.md#manual-font-installation)
+
+### Fonts smoothing
+
+```shell
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+defaults -currentHost write -g AppleFontSmoothing -int 0
+```
+
+<https://www.reddit.com/r/MacOSBeta/comments/jiwwga/big_sur_font_smoothing_antialiasing/>
+<https://osxdaily.com/2022/04/06/change-remove-font-smoothing-macos/>
+
+### Spellchecking
+
+Install Ukrainian spellchecking (included in installation script)
+<https://github.com/titoBouzout/Dictionaries>
+copy to $HOME/Library/Spelling
+
+### Useful links
+
+[Selected fonts by Joshukraine](https://github.com/joshukraine/dotfiles#my-favorite-programming-fonts)
+[Programming fonts - Test Drive](https://app.programmingfonts.org/)
+
+### MacOS System Preferences
+
+Most of the settings can be set using `defaults` command line. See [setup-macos.sh](setup-macos.sh) for details.
+
+References:
+<https://www.defaults-write.com/>
+<https://macos-defaults.com/>
+[macOS Commands Reference.md](https://gist.github.com/nikitajz/8ff97fb3e10a8949a2833c0ead7c8263)
+
+</details>
