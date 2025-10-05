@@ -1,5 +1,5 @@
+# Git base alias (other git aliases in git-aliases.zsh)
 alias g=git
-alias gsla="git --no-pager log --oneline --decorate --all --graph -35"
 
 alias zconf="$EDITOR ${ZDOTDIR:-${HOME}}/.zshrc"
 alias zload="source ${XDG_CONFIG_HOME}/zsh/.zshrc"

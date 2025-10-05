@@ -114,6 +114,7 @@ source <(fzf --zsh)
 
 ## Aliases
 [[ -f "${XDG_CONFIG_HOME}/zsh/aliases.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/aliases.zsh"
+[[ -f "${XDG_CONFIG_HOME}/zsh/git-aliases.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/git-aliases.zsh"
 
 ## Local config (do not commit, can contain secrets)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
