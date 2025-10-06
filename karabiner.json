@@ -30,6 +30,335 @@
         },
         "rules": [
           {
+            "description": "Fn + F-keys = Standard function keys (on-demand, all apps except IDEs)",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "f1",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f1"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f2",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f2"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f3",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f3"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f4",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f4"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f5",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f5"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f6",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f6"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f7",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f7"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f8",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f8"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f9",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f9"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f10",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f10"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f11",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f11"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f12",
+                  "modifiers": {
+                    "mandatory": ["fn"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [{"key_code": "f12"}],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_unless",
+                    "bundle_identifiers": [
+                      "com.github.atom",
+                      "com.googlecode.iterm2",
+                      "com.jetbrains.pycharm",
+                      "com.sublime.4",
+                      "com.microsoft.VSCode",
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
             "description": "Toggle CAPSLOCK by pressing Left Shift then Right Shift",
             "manipulators": [
               {
@@ -95,7 +424,7 @@
             ]
           },
           {
-            "description": "Function keys work as Fn keys on selected apps: (Atom, iTerm2, Sublime Text, PyCharm, VSCode)",
+            "description": "Function keys work as Fn keys on selected apps: (Atom, iTerm2, Sublime Text, PyCharm, VSCode, Zed, Cursor, Xcode)",
             "manipulators": [
               {
                 "conditions": [
@@ -106,7 +435,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -139,7 +471,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -172,7 +507,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -205,7 +543,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -238,7 +579,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -271,7 +615,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -304,7 +651,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -337,7 +687,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -370,7 +723,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -403,7 +759,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -436,7 +795,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",
@@ -469,7 +831,10 @@
                       "com.jetbrains.pycharm",
                       "com.sublime.4",
                       "com.microsoft.VSCode",
-                      "com.visualstudio.code.oss"
+                      "com.visualstudio.code.oss",
+                      "dev.zed.Zed",
+                      "com.todesktop.230313mzl4w4u92",
+                      "com.apple.dt.Xcode"
                     ],
                     "file_paths": [
                       "ck2\\.app",

@@ -144,6 +144,15 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
+# Disable "Use F1, F2, etc. keys as standard function keys"
+# This ensures multimedia keys work by default (brightness, volume, etc.)
+# Karabiner-Elements will handle per-app function key behavior
+# Refs:
+#   - https://github.com/pqrs-org/Karabiner-Elements/issues/3954
+#   - https://karabiner-elements.pqrs.org/docs/help/how-to/function-keys/
+#   - Karabiner v15.2.0+ requires this to be set via System Settings for proper function key handling
+defaults write NSGlobalDomain com.apple.keyboard.fnState -bool false
+
 ###############################################################################
 # Language & Region                                                           #
 ###############################################################################
