@@ -3,8 +3,19 @@
 # Adapted from https://mths.be/macos
 # Useful docs: https://macos-defaults.com/
 
+# Interactive consent
+SKIP_PROMPT=false
+[[ "$1" == "-y" || "$1" == "--yes" ]] && SKIP_PROMPT=true
+
+if [[ "$SKIP_PROMPT" == false ]]; then
+  echo "⚠️  This will modify your macOS system settings."
+  read -p "Continue? (y/n) " -n 1 -r
+  echo
+  [[ ! $REPLY =~ ^[Yy]$ ]] && exit 0
+fi
+
 # Close any open System Preferences panes, to prevent them from overriding
-# settings we’re about to change
+# settings we're about to change
 osascript -e 'tell application "System Preferences" to quit'
 
 # Ask for the administrator password upfront
@@ -27,11 +38,8 @@ osascript -e 'tell application "System Preferences" to quit'
 # Appearance & General                                                        #
 ###############################################################################
 
-# Set standby delay to 3 hours (default is 1 hour)
-# sudo pmset -a standbydelay 10800
-
-# Disable the sound effects on boot
-sudo nvram SystemAudioVolume=" "
+# Disable the sound effects on boot (requires sudo)
+# sudo nvram SystemAudioVolume=" "
 
 # Disable transparency in the menu bar and elsewhere on Yosemite
 # defaults write com.apple.universalaccess reduceTransparency -bool true
@@ -54,12 +62,6 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 # defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 # defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-# Automatically quit printer app once the print jobs complete
-# defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
-# Disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
-
 # Display ASCII control characters using caret notation in standard text views
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 # defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
@@ -80,8 +82,8 @@ defaults write com.apple.helpviewer DevMode -bool true
 # in the login window
 # sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
-# Restart automatically if the computer freezes
-sudo systemsetup -setrestartfreeze off 2>/dev/null
+# Restart automatically if the computer freezes (default: on, recommended)
+sudo systemsetup -setrestartfreeze on 2>/dev/null
 
 # Never go into computer sleep mode
 # sudo systemsetup -setcomputersleep Off > /dev/null
@@ -130,6 +132,9 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
+echo "Current keyboard repeat rate:
+  InitialKeyRepeat=$(defaults read NSGlobalDomain InitialKeyRepeat 2>/dev/null || echo 'not set')
+  KeyRepeat=$(defaults read NSGlobalDomain KeyRepeat 2>/dev/null || echo 'not set')"
 defaults write NSGlobalDomain InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
 defaults write NSGlobalDomain KeyRepeat -int 3         # normal minimum is 2 (30 ms)
 
@@ -144,32 +149,9 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-# Disable "Use F1, F2, etc. keys as standard function keys"
-# This ensures multimedia keys work by default (brightness, volume, etc.)
-# Karabiner-Elements will handle per-app function key behavior
-# Refs:
-#   - https://github.com/pqrs-org/Karabiner-Elements/issues/3954
-#   - https://karabiner-elements.pqrs.org/docs/help/how-to/function-keys/
-#   - Karabiner v15.2.0+ requires this to be set via System Settings for proper function key handling
-defaults write NSGlobalDomain com.apple.keyboard.fnState -bool false
-
-###############################################################################
-# Language & Region                                                           #
-###############################################################################
-
-# System Preferences > Language & Region
-# Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
-# `Inches`, `en_GB` with `en_US`, and `true` with `false`.
-defaults write NSGlobalDomain AppleLanguages -array "en" "uk"
-defaults write NSGlobalDomain AppleLocale -string "en_PT@currency=EUR"
-defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-# Measurement System: Metric
-defaults write NSGlobalDomain AppleMetricUnits -bool true
-# Weeks starts on Monday
-defaults write NSGlobalDomain AppleFirstWeekday -dict "gregorian" -int 2
-
-# Set the timezone; see `systemsetup -listtimezones` for other values
-systemsetup -settimezone "Europe/Lisbon" >/dev/null
+# Function keys: Set manually in System Settings > Keyboard > Keyboard Shortcuts > Function Keys
+# Karabiner v15.2.0+ requires this to be configured via UI, not command line
+# defaults write NSGlobalDomain com.apple.keyboard.fnState -bool false
 
 ###############################################################################
 # Screen                                                                      #
@@ -273,9 +255,9 @@ defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 # Expand the following File Info panes:
 # “General”, “Open with”, and “Sharing & Permissions”
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
-	General -bool true \
-	OpenWith -bool true \
-	Privileges -bool true
+  General -bool true \
+  OpenWith -bool true \
+  Privileges -bool true
 
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #
@@ -573,10 +555,6 @@ defaults write com.apple.DiskUtility advanced-image-options -bool true
 # defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
 # defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
 
-# Use the system-native print preview dialog
-defaults write com.google.Chrome DisablePrintPreview -bool true
-defaults write com.google.Chrome.canary DisablePrintPreview -bool true
-
 # Expand the print dialog by default
 defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
 defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
@@ -595,3 +573,21 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 
 # Activate audible chime when power cable is plugged in.
 # defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app
+
+###############################################################################
+# Personal Settings (required to be setup manually for fresh configuration)   #
+###############################################################################
+
+# Language & Region
+# Note: if you're in the US, replace `EUR` with `USD`, `Centimeters` with
+# `Inches`, `en_GB` with `en_US`, and `true` with `false`.
+# defaults write NSGlobalDomain AppleLanguages -array "en" "uk"
+# defaults write NSGlobalDomain AppleLocale -string "en_PT@currency=EUR"
+# defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+# Measurement System: Metric
+# defaults write NSGlobalDomain AppleMetricUnits -bool true
+# Weeks starts on Monday
+# defaults write NSGlobalDomain AppleFirstWeekday -dict "gregorian" -int 2
+
+# Set the timezone; see `systemsetup -listtimezones` for other values
+# systemsetup -settimezone "Europe/Lisbon" >/dev/null
