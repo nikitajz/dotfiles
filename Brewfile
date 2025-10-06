@@ -3,7 +3,7 @@
 tap "buo/cask-upgrade"
 
 brew "awscli"
-brew "antidote"  # zsh plugin manager
+# "antidote" is installed by script  # zsh plugin manager
 brew "bat"
 brew "cheat"
 # brew "coreutils" # Those that come with macOS are outdated

@@ -54,10 +54,10 @@ print_warning() {
 }
 
 # Ukrainian spellchecking
-if [ ! -f $HOME/Library/Spelling/Ukrainian_uk_UA.dic ]; then
+if [ ! -f "$HOME/Library/Spelling/Ukrainian_uk_UA.dic" ]; then
   print_step "Installing Ukranian language spelling"
-  curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.aff --output-dir $HOME/Library/Spelling
-  curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.dic --output-dir $HOME/Library/Spelling
+  curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.aff --output-dir "$HOME/Library/Spelling"
+  curl -LJO https://raw.githubusercontent.com/titoBouzout/Dictionaries/master/Ukrainian_uk_UA.dic --output-dir "$HOME/Library/Spelling"
 fi
 
 # Check for Homebrew and install if we don't have it
@@ -118,6 +118,12 @@ install_fzf() {
 }
 
 main() {
+  # Validate macOS
+  if [[ ! "$OSTYPE" =~ ^darwin ]]; then
+    echo "${FMT_RED}Error: This script is for macOS only${FMT_RESET}" >&2
+    exit 1
+  fi
+
   print_step "Setting up your Mac..."
   install_homebrew
   install_packages

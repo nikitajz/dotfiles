@@ -15,7 +15,6 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
-export XDG_RUNTIME_DIR=/run/user/$UID
 
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/.ripgreprc
 
@@ -32,7 +31,7 @@ export PATH=$N_PREFIX/bin:$PATH
 export NODE_REPL_HISTORY="$XDG_STATE_HOME/node_repl_history"
 export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
-export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
+export NPM_CONFIG_TMP="${TMPDIR:-/tmp}/npm"
 
 # tldr, supports only C-client
 export TLDR_CACHE_DIR="$XDG_CACHE_HOME"/tldr

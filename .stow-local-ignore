@@ -31,6 +31,7 @@ karabiner.json
 
 # system files (anywhere)
 \.DS_Store$
+\.zsh_sessions$
 
 # Editor temporary files (Stow defaults - basename match)
 \.sw[a-z]$          # Vim swap files
