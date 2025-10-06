@@ -36,7 +36,7 @@ alias gau='git add --update' # only already tracked files
 ## Commit
 alias gc='git commit -v'
 alias gca='git commit -v --all' # auto-stage files
-alias gcm='git commit -m -v' # <commit message>
+alias gcm='git commit -v -m' # <commit message>
 alias gcam='git commit -am'
 alias gcu='git commit --amend --no-edit' # update
 
