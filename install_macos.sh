@@ -84,11 +84,11 @@ install_packages() {
   print_step "Installing packages"
 
   brew update
-  
+
   # Always install essential command-line tools
   print_step "Installing essential tools from Brewfile"
   brew bundle --file "$DOTFILES/Brewfile" --no-upgrade
-  
+
   # In CI environment, skip GUI apps
   if [ -z "${CI:-}" ]; then
     print_step "Installing GUI apps and fonts from Brewfile.extras"
@@ -124,6 +124,7 @@ main() {
   install_antidote
   stow_dotfiles
   install_fzf
+  print_step "Installation completed successfully"
 }
 
 main
