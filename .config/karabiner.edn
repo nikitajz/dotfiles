@@ -1,0 +1,250 @@
+{
+ ;; !  = mandatory command
+ ;; #  = optional any
+ ;; !! = mandatory command + control + optional + shift (hyper)
+ ;;
+ ;; C  = left_command
+ ;; T  = left_control
+ ;; O  = left_option
+ ;; S  = left_shift
+ ;; F  = fn
+ ;; Q  = right_command
+ ;; W  = right_control
+ ;; E  = right_option
+ ;; R  = right_shift
+ ;;
+ ;; need to prefix C T O S F with ! or #
+ ;;
+ ;; code for all keys
+ ;; https://github.com/pqrs-org/Karabiner-Elements/blob/main/src/apps/SettingsWindow/Resources/simple_modifications.json
+ ;;
+ ;; karabiner-elements JSON reference: https://karabiner-elements.pqrs.org/docs/json/
+
+ :profiles {
+   :Default-profile {
+     :default true
+     :sim     50    ;; simultaneous_threshold_milliseconds (def: 50)
+     :delay   500   ;; to_delayed_action_delay_milliseconds (def: 500)
+     :alone   1000  ;; to_if_alone_timeout_milliseconds (def: 1000)
+     :held    500   ;; to_if_held_down_threshold_milliseconds (def: 500)
+     "virtual_hid_keyboard" {"keyboard_type_v2" "ansi"}
+   }
+ }
+
+ ;; Concise definition for applications to use in rules
+ :applications {
+   :ides [
+     "^com\\.github\\.atom$"
+     "^com\\.googlecode\\.iterm2$"
+     "^com\\.jetbrains\\.pycharm$"
+     "^com\\.sublime\\.4$"
+     "^com\\.microsoft\\.VSCode$"
+     "^com\\.visualstudio\\.code\\.oss$"
+     "^dev\\.zed\\.Zed$"
+     "^com\\.todesktop\\.230313mzl4w4u92$"  ;; Cursor
+     "^com\\.apple\\.dt\\.Xcode$"
+   ]
+ }
+
+ ;; Custom modifiers 
+ :modifiers {
+   :hyper [:right_shift :right_control :right_option :right_command]
+ }
+
+ :main [
+   ;; ========================================
+   ;; 1: Fn + F-keys = Standard function keys (all apps except IDEs)
+   ;; ========================================
+   {
+     :des "Fn + F-keys = Standard function keys (on-demand, all apps except IDEs)"
+     :rules [
+       [:!F##f1  :f1  [:!ides]]
+       [:!F##f2  :f2  [:!ides]]
+       [:!F##f3  :f3  [:!ides]]
+       [:!F##f4  :f4  [:!ides]]
+       [:!F##f5  :f5  [:!ides]]
+       [:!F##f6  :f6  [:!ides]]
+       [:!F##f7  :f7  [:!ides]]
+       [:!F##f8  :f8  [:!ides]]
+       [:!F##f9  :f9  [:!ides]]
+       [:!F##f10 :f10 [:!ides]]
+       [:!F##f11 :f11 [:!ides]]
+       [:!F##f12 :f12 [:!ides]]
+     ]
+   }
+
+   ;; ========================================
+   ;; 2: Function keys work as Fn keys on selected apps (IDEs)
+   ;; ========================================
+   {
+     :des "Function keys work as Fn keys on selected apps: (Atom, iTerm2, Sublime Text, PyCharm, VSCode, Zed, Cursor, Xcode)"
+     :rules [
+       [:f1  :f1  :ides]
+       [:f2  :f2  :ides]
+       [:f3  :f3  :ides]
+       [:f4  :f4  :ides]
+       [:f5  :f5  :ides]
+       [:f6  :f6  :ides]
+       [:f7  :f7  :ides]
+       [:f8  :f8  :ides]
+       [:f9  :f9  :ides]
+       [:f10 :f10 :ides]
+       [:f11 :f11 :ides]
+       [:f12 :f12 :ides]
+     ]
+   }
+
+   ;; ========================================
+   ;; 3: CapsLock to Hyper (Right: Shift+Ctrl+Alt+Cmd) / Escape (Tap-Hold)
+   ;; ========================================
+   {
+     :des "CapsLock to Hyper (Right: Shift+Ctrl+Alt+Cmd)"
+     :rules [
+       ;; caps_lock = esc(tap) | hyper(hold)
+       [:##caps_lock
+        {:key :right_shift :modi [:right_command :right_control :right_option]}
+        nil
+        {:alone :escape}]
+
+       ;; Disable built-in macOS sysdiagnose (cmd+shift+opt+ctrl+,)
+       [:!QWERcomma :vk_none]
+
+       ;; Disable built-in macOS sysdiagnose (cmd+shift+opt+ctrl+.)
+       [:!QWERperiod :vk_none]
+
+       ;; escape with hyper = capslock toggle (with optional caps_lock modifier)
+       [:!QWER#Pescape :caps_lock]
+
+       ;; spacebar with hyper = language switch (Ctrl+Space)
+       [:!QWERspacebar [:spacebar :!Tvk_none]]
+
+       ;; command + spacebar with hyper = emoji (Ctrl+Cmd+Space)
+       [:!CQWERspacebar [:spacebar :!CTvk_none]]
+     ]
+   }
+
+   ;; ========================================
+   ;; 5: Hyper + <key>: Run/activate application
+   ;; ========================================
+   {
+     :des "Hyper + <key>: Run/activate application (RShift+RCtrl+ROpt+RCmd+<key>)"
+     :rules [
+       ;; f -> Finder
+       [:!QWERf [:oid "com.apple.finder"]]
+
+       ;; a -> Arc
+       [:!QWERa [:oid "company.thebrowser.Browser"]]
+
+       ;; s -> Spotify
+       [:!QWERs [:oid "com.spotify.client"]]
+
+       ;; w -> Chrome (Web surfing)
+       [:!QWERw [:oid "com.google.Chrome"]]
+
+       ;; e -> Chrome meet.google.com
+       [:!QWERe "open -na 'Google Chrome' --args --new-window 'http://meet.google.com'"]
+
+       ;; r -> Preview
+       [:!QWERr [:oid "com.apple.Preview"]]
+
+       ;; y -> Msty
+       [:!QWERy "open -a msty"]
+
+       ;; i -> Claude (ai chat)
+       [:!QWERi "open -a claude"]
+
+       ;; h -> Ghostty
+       [:!QWERh [:oid "com.mitchellh.ghostty"]]
+
+       ;; j -> ChatGPT
+       [:!QWERj [:oid "com.openai.chat"]]
+
+       ;; t -> iTerm2
+       [:!QWERt [:oid "com.googlecode.iterm2"]]
+
+       ;; u -> Cursor
+       [:!QWERu [:oid "com.todesktop.230313mzl4w4u92"]]
+
+       ;; o -> Orion Browser
+       [:!QWERo [:oid "com.kagi.kagimacOS"]]
+
+       ;; z -> Zed
+       [:!QWERz [:oid "dev.zed.Zed"]]
+
+       ;; x -> Notion
+       [:!QWERx [:oid "notion.id"]]
+
+       ;; c -> PyCharm (code)
+       [:!QWERc [:oid "com.jetbrains.pycharm"]]
+
+       ;; v -> VSCode
+       [:!QWERv [:oid "com.microsoft.VSCode"]]
+
+       ;; n -> Telegram
+       [:!QWERn "open -a telegram"]
+
+       ;; m -> Slack (messenger)
+       [:!QWERm [:oid "com.tinyspeck.slackmacgap"]]
+     ]
+   }
+
+   ;; ========================================
+   ;; 6: Hyper+Cmd+<key> (ijkl): Navigation
+   ;; ========================================
+   {
+     :des "Hyper+Cmd+<key> (ijkl): Navigation (RShift+RCtrl+ROpt+RCmd+<key>) + Selection (Hyper+Shift+<key>)"
+     :rules [
+       ;; Hyper+Cmd+j = left arrow
+       [:!CQWERj :left_arrow]
+
+       ;; Hyper+Cmd+l = right arrow
+       [:!CQWERl :right_arrow]
+
+       ;; Hyper+Cmd+i = up arrow
+       [:!CQWERi :up_arrow]
+
+       ;; Hyper+Cmd+k = down arrow
+       [:!CQWERk :down_arrow]
+
+       ;; Hyper+Cmd+u = Page Up
+       [:!CQWERu :page_up]
+
+       ;; Hyper+Cmd+o = Page Down
+       [:!CQWERo :page_down]
+
+       ;; Hyper+Shift+; = backspace (with optional Opt/Cmd modifiers)
+       [:!SQWERsemicolon :delete_or_backspace]
+
+       ;; Hyper+' = Escape
+       [:!QWERquote :escape]
+     ]
+   }
+
+   ;; ========================================
+   ;; 7: j+k -> Escape (simultaneous)
+   ;; ========================================
+   {
+     :des "j+k -> Escape"
+     :rules [
+       ;; Simultaneous j+k press = Escape
+       [[:j :k] :escape]
+     ]
+   }
+
+   ;; ========================================
+   ;; 8: Alias desktop/space switching (Ctrl+left/right arrow) to Ctrl+Opt+<key> (u/o)
+   ;; ========================================
+   {
+     :des "Alias desktop/space switching (Ctrl+left/right arrow) to Ctrl+Opt+<key> (u/o)"
+     ;; workaround for Rectangle app due to MacOS limitations
+     :rules [
+       ;; Ctrl+Opt+u = Ctrl+Left (previous desktop)
+       [:!TOu [:left_arrow :!Tvk_none]]
+
+       ;; Ctrl+Opt+o = Ctrl+Right (next desktop)
+       [:!TOo [:right_arrow :!Tvk_none]]
+     ]
+   }
+
+ ]
+}

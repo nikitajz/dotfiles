@@ -1,0 +1,855 @@
+{
+  "profiles" : [ {
+    "name" : "Default-profile",
+    "selected" : true,
+    "virtual_hid_keyboard" : {
+      "keyboard_type_v2" : "ansi"
+    },
+    "complex_modifications" : {
+      "parameters" : {
+        "basic.simultaneous_threshold_milliseconds" : 50,
+        "basic.to_delayed_action_delay_milliseconds" : 500,
+        "basic.to_if_alone_timeout_milliseconds" : 1000,
+        "basic.to_if_held_down_threshold_milliseconds" : 500
+      },
+      "rules" : [ {
+        "description" : "Fn + F-keys = Standard function keys (on-demand, all apps except IDEs)",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "f1",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f1"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f2",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f2"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f3",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f3"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f4",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f4"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f5",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f5"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f6",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f6"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f7",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f7"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f8",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f8"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f9",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f9"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f10",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f10"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f11",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f11"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f12",
+            "modifiers" : {
+              "mandatory" : [ "fn" ],
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f12"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_unless",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "Function keys work as Fn keys on selected apps: (Atom, iTerm2, Sublime Text, PyCharm, VSCode, Zed, Cursor, Xcode)",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "f1"
+          },
+          "to" : [ {
+            "key_code" : "f1"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f2"
+          },
+          "to" : [ {
+            "key_code" : "f2"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f3"
+          },
+          "to" : [ {
+            "key_code" : "f3"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f4"
+          },
+          "to" : [ {
+            "key_code" : "f4"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f5"
+          },
+          "to" : [ {
+            "key_code" : "f5"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f6"
+          },
+          "to" : [ {
+            "key_code" : "f6"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f7"
+          },
+          "to" : [ {
+            "key_code" : "f7"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f8"
+          },
+          "to" : [ {
+            "key_code" : "f8"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f9"
+          },
+          "to" : [ {
+            "key_code" : "f9"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f10"
+          },
+          "to" : [ {
+            "key_code" : "f10"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f11"
+          },
+          "to" : [ {
+            "key_code" : "f11"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f12"
+          },
+          "to" : [ {
+            "key_code" : "f12"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.github\\.atom$", "^com\\.googlecode\\.iterm2$", "^com\\.jetbrains\\.pycharm$", "^com\\.sublime\\.4$", "^com\\.microsoft\\.VSCode$", "^com\\.visualstudio\\.code\\.oss$", "^dev\\.zed\\.Zed$", "^com\\.todesktop\\.230313mzl4w4u92$", "^com\\.apple\\.dt\\.Xcode$" ]
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "CapsLock to Hyper (Right: Shift+Ctrl+Alt+Cmd)",
+        "manipulators" : [ {
+          "to_if_alone" : [ {
+            "key_code" : "escape"
+          } ],
+          "from" : {
+            "key_code" : "caps_lock",
+            "modifiers" : {
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "modifiers" : [ "right_command", "right_control", "right_option" ],
+            "key_code" : "right_shift"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "comma",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "vk_none"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "period",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "vk_none"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "escape",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ],
+              "optional" : [ "caps_lock" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "caps_lock"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "spacebar",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "spacebar"
+          }, {
+            "key_code" : "vk_none",
+            "modifiers" : [ "left_control" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "spacebar",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "spacebar"
+          }, {
+            "key_code" : "vk_none",
+            "modifiers" : [ "left_command", "left_control" ]
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "Hyper + <key>: Run/activate application (RShift+RCtrl+ROpt+RCmd+<key>)",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "f",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.apple.finder"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "a",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "company.thebrowser.Browser"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "s",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.spotify.client"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "w",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.google.Chrome"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "e",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "open -na 'Google Chrome' --args --new-window 'http://meet.google.com'"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "r",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.apple.Preview"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "y",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "open -a msty"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "i",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "open -a claude"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "h",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.mitchellh.ghostty"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "j",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.openai.chat"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "t",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.googlecode.iterm2"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "u",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.todesktop.230313mzl4w4u92"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "o",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.kagi.kagimacOS"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "z",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "dev.zed.Zed"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "x",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "notion.id"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "c",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.jetbrains.pycharm"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "v",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.microsoft.VSCode"
+              }
+            }
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "n",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "open -a telegram"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "m",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "software_function" : {
+              "open_application" : {
+                "bundle_identifier" : "com.tinyspeck.slackmacgap"
+              }
+            }
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "Hyper+Cmd+<key> (ijkl): Navigation (RShift+RCtrl+ROpt+RCmd+<key>) + Selection (Hyper+Shift+<key>)",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "j",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "left_arrow"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "l",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "right_arrow"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "i",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "up_arrow"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "k",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "down_arrow"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "u",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "page_up"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "o",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "page_down"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "semicolon",
+            "modifiers" : {
+              "mandatory" : [ "left_shift", "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "delete_or_backspace"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "quote",
+            "modifiers" : {
+              "mandatory" : [ "right_command", "right_control", "right_option", "right_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "escape"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "j+k -> Escape",
+        "manipulators" : [ {
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "j"
+            }, {
+              "key_code" : "k"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : false,
+              "key_down_order" : "insensitive",
+              "key_up_order" : "insensitive",
+              "key_up_when" : "any"
+            }
+          },
+          "to" : [ {
+            "key_code" : "escape"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "Alias desktop/space switching (Ctrl+left/right arrow) to Ctrl+Opt+<key> (u/o)",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "u",
+            "modifiers" : {
+              "mandatory" : [ "left_control", "left_option" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "left_arrow"
+          }, {
+            "key_code" : "vk_none",
+            "modifiers" : [ "left_control" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "o",
+            "modifiers" : {
+              "mandatory" : [ "left_control", "left_option" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "right_arrow"
+          }, {
+            "key_code" : "vk_none",
+            "modifiers" : [ "left_control" ]
+          } ],
+          "type" : "basic"
+        } ]
+      } ]
+    }
+  } ]
+}
