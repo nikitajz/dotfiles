@@ -13,8 +13,10 @@ alias zj=zellij
 ## eza
 if command -v eza &>/dev/null; then
   alias ls="eza"
-  alias ll="eza -lh"
-  alias la="eza -alh"
+  alias l="ls -1"
+  alias ll="eza -l --icons --group-directories-first --git"
+  alias la="eza -la --icons --group-directories-first"
+  alias lt="eza -T" # tree
 fi
 
 alias tt="tree -L 2"
