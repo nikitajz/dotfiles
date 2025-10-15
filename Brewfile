@@ -11,7 +11,7 @@ brew "curl"
 brew "eza"  # exa is not maintained
 brew "entr"
 brew "fd"
-brew "ffmpeg"
+# brew "ffmpeg"
 brew "fzf"
 brew "gh"
 brew "git"
