@@ -14,3 +14,7 @@ esac
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
 [[ -n $SSH_CONNECTION ]] && export EDITOR='vim'
+
+# Load local configuration (API keys, tokens, etc). 
+[[ -f "$HOME/.zprofile" ]] && source "$HOME/.zprofile"
+
