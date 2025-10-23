@@ -22,7 +22,9 @@ export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/.ripgreprc
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
-export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+# Docker doesn't handle properly DOCKER_CONFIG across installation and actual usage (macos Docker Desktop)
+# Regardless of the settings it's installed in `~/.docker/` folder
+# export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export GOPATH="$XDG_DATA_HOME/go"
 
 # Node / NPM / `n` package manager 
