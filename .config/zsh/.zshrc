@@ -35,6 +35,11 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 bindkey '^ ' autosuggest-accept
 bindkey \^U backward-kill-line
 
+# Use Ctrl+X Ctrl+E to edit command line in $EDITOR (vim)
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
 ## Tools
 # Use (j, ji) as default commands instead of (z, zi)
 eval "$(zoxide init zsh --cmd j)"
