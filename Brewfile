@@ -25,6 +25,7 @@ brew "pnpm"
 brew "ripgrep"
 brew "rsync"
 brew "starship"
+brew "tealdeer" # fast replacement for `tldr`
 brew "tree"
 brew "wget"
 brew "zoxide"
