@@ -27,6 +27,10 @@ ohmyzsh/ohmyzsh path:plugins/uv     kind:defer
 zsh-users/zsh-completions         path:src kind:fpath
 zsh-users/zsh-autosuggestions              kind:defer
 zsh-users/zsh-history-substring-search     kind:defer
+
+# Starship doesn't support transient prompt out of the box for zsh
+olets/zsh-transient-prompt                 kind:defer
+
 # faster alternative to 'zsh-users/zsh-syntax-highlighting' (MUST BE LAST)
 zdharma-continuum/fast-syntax-highlighting kind:defer
 

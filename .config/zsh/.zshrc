@@ -113,6 +113,11 @@ source <(fzf --zsh)
 ## Shell prompt (should be close to the end, after Antidote plugins)
 eval "$(starship init zsh)"
 
+# Transient prompt configuration (after Starship init)
+# Uses olets/zsh-transient-prompt plugin
+TRANSIENT_PROMPT_PROMPT=$PROMPT
+TRANSIENT_PROMPT_TRANSIENT_PROMPT='%(?:%B%F{green}❯%f%b:%B%F{red}✗%f%b) '
+
 ## Aliases
 [[ -f "${XDG_CONFIG_HOME}/zsh/aliases.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/aliases.zsh"
 [[ -f "${XDG_CONFIG_HOME}/zsh/git-aliases.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/git-aliases.zsh"
