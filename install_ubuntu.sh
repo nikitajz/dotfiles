@@ -229,6 +229,63 @@ install_uv() {
   curl -LsSf https://astral.sh/uv/install.sh | sh
 }
 
+install_nerd_fonts() {
+  print_step "Installing Nerd Fonts"
+
+  local fonts_dir="$HOME/.local/share/fonts"
+
+  # Check if fonts already exist
+  if command -v fc-list >/dev/null && fc-list | grep -qi "FiraCode Nerd Font" && fc-list | grep -qi "Hack Nerd Font"; then
+    print_warning "Nerd Fonts already installed, skipping"
+    return
+  fi
+
+  mkdir -p "$fonts_dir"
+  cd /tmp
+
+  # Download and install FiraCode Nerd Font
+  if [ ! -d "$fonts_dir/FiraCodeNerdFont" ]; then
+    print_step "Downloading FiraCode Nerd Font"
+    curl -LO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+    unzip -q FiraCode.zip -d "$fonts_dir/FiraCodeNerdFont"
+    rm FiraCode.zip
+  fi
+
+  # Download and install Hack Nerd Font
+  if [ ! -d "$fonts_dir/HackNerdFont" ]; then
+    print_step "Downloading Hack Nerd Font"
+    curl -LO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip
+    unzip -q Hack.zip -d "$fonts_dir/HackNerdFont"
+    rm Hack.zip
+  fi
+
+  # Refresh font cache if available
+  if command -v fc-cache >/dev/null; then
+    print_step "Refreshing font cache"
+    fc-cache -f "$fonts_dir"
+  fi
+
+  echo "✅ Nerd Fonts installed successfully to $fonts_dir"
+}
+
+install_starship() {
+  print_step "Installing Starship"
+
+  if command -v starship >/dev/null; then
+    print_warning "starship has already been installed, skipping"
+    return
+  fi
+
+  mkdir -p "$HOME/.local/bin"
+  curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir "$HOME/.local/bin" --yes
+
+  if [ -f "$HOME/.local/bin/starship" ]; then
+    echo "✅ starship installed successfully to $HOME/.local/bin/starship"
+  else
+    print_warning "Failed to install starship"
+  fi
+}
+
 install_aliastips() {
   print_step "Installing alias-tips"
   print_warning "alias-tips will be installed via antidote, skipping manual installation"
@@ -345,6 +402,8 @@ main() {
   install_fzf
   install_zoxide
   install_aliastips
+  install_nerd_fonts
+  install_starship
   install_uv
   install_nvim
   config_lazyvim
@@ -358,6 +417,8 @@ main() {
   command -v fzf >/dev/null && echo "✅ fzf" || echo "❌ fzf"
   command -v cargo >/dev/null && echo "✅ cargo" || echo "⚠️  cargo (optional)"
   command -v zoxide >/dev/null && echo "✅ zoxide" || echo "⚠️  zoxide (optional)"
+  [ -d "$HOME/.local/share/fonts/FiraCodeNerdFont" ] || [ -d "$HOME/.local/share/fonts/HackNerdFont" ] && echo "✅ nerd-fonts" || echo "⚠️  nerd-fonts (optional)"
+  command -v starship >/dev/null && echo "✅ starship" || echo "⚠️  starship (optional)"
   command -v uv >/dev/null && echo "✅ uv" || echo "⚠️  uv (optional)"
   command -v nvim >/dev/null && echo "✅ nvim" || echo "⚠️  nvim (optional)"
   command -v aws >/dev/null && echo "✅ aws" || echo "⚠️  aws (optional)"
