@@ -12,8 +12,6 @@ mattmc3/zephyr path:plugins/utility
 mattmc3/zephyr path:plugins/completion
 mattmc3/zephyr path:plugins/compstyle
 
-romkatv/powerlevel10k
-
 lukechilds/zsh-nvm                  kind:defer
 reegnz/jq-zsh-plugin                kind:defer
 djui/alias-tips                     kind:defer

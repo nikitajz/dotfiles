@@ -3,9 +3,6 @@
 
 # Environment variables (including XDG) are setup in ./.zshenv
 
-# Powerlevel10k Instant Prompt (should be at the top)
-[[ -r "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && source "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
-
 # Adding fpath for completions MUST BE before loading plugins (incl. completion)
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -113,9 +110,8 @@ _fzf_comprun() {
 
 source <(fzf --zsh)
 
-## Additional configs
-# Powerlevel10k should be sourced near the end of the file
-[[ -f $XDG_CONFIG_HOME/zsh/.p10k.zsh ]] && source $XDG_CONFIG_HOME/zsh/.p10k.zsh
+## Shell prompt (should be close to the end, after Antidote plugins)
+eval "$(starship init zsh)"
 
 ## Aliases
 [[ -f "${XDG_CONFIG_HOME}/zsh/aliases.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/aliases.zsh"

@@ -1,0 +1,59 @@
+# Cool resources to look up for inspiration
+# https://github.com/starship/starship/discussions/1107
+# https://github.com/starship/starship/discussions/1252
+
+# prompt
+format = """
+$username\
+$hostname\
+$localip\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$cmd_duration\
+$fill\
+$all\
+$line_break\
+$sudo\
+$character
+"""
+
+palette = 'gruvbox_dark'
+
+# `$fill` to move the rest of the prompt to the right
+[fill]
+symbol = ' '
+
+[line_break]
+disabled = false
+
+[cmd_duration]
+min_time = 500 # ms
+format = '⌛[$duration](bold yellow)'
+
+[git_status]
+up_to_date = '[✓](cyan)'
+stashed = "[*${count}](blue)"
+modified = "[!${count}](yellow)"
+staged = "[+${count}](green)"
+untracked = "[?${count}](blue)"
+deleted = "[-${count}](red)"
+
+[python]
+version_format = 'v${major}.${minor}'
+
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
+
