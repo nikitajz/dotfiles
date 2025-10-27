@@ -15,11 +15,12 @@ mattmc3/zephyr path:plugins/compstyle
 romkatv/powerlevel10k
 
 lukechilds/zsh-nvm                  kind:defer
-reegnz/jq-zsh-plugin
+reegnz/jq-zsh-plugin                kind:defer
 djui/alias-tips                     kind:defer
 junegunn/fzf                        path:shell
 junegunn/fzf.vim                    kind:clone
 wfxr/forgit                         kind:defer
+Aloxaf/fzf-tab                      kind:defer
 
 # OMZ plugins require $ZSH_CACHE_DIR (set in .zshenv) or enable 'use-omz'
 ohmyzsh/ohmyzsh path:plugins/aws    kind:defer
