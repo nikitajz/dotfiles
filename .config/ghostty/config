@@ -22,3 +22,6 @@ keybind = shift+enter=text:\n
 # SSH compatibility (fix "Error opening terminal: xterm-ghostty")
 shell-integration-features = ssh-env,ssh-terminfo
 
+# 5x default, bytes
+scrollback-limit = 50000000
+
