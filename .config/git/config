@@ -7,7 +7,7 @@
 [pager]
   diff = delta
 [diff]
-  tool = vscode
+  tool = difft
 [difftool "vscode"]
  	cmd = code --wait --diff $LOCAL $REMOTE
 [pretty]
@@ -80,4 +80,14 @@
   u = pull
   p = push
   pf = push --force-with-lease
+
+  # Difftastic
+  dlog = -c diff.external=difft log --ext-diff
+  dshow = -c diff.external=difft show --ext-diff
+  ddiff = -c diff.external=difft diff
+
+  # Difftastic short
+  tl = -c diff.external=difft log -p --ext-diff
+  ts = -c diff.external=difft show --ext-diff
+  td = -c diff.external=difft diff
 
