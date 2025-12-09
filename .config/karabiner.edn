@@ -239,10 +239,10 @@
      ;; workaround for Rectangle app due to MacOS limitations
      :rules [
        ;; Ctrl+Opt+u = Ctrl+Left (previous desktop)
-       [:!TOu [:left_arrow :!Tvk_none]]
+       [:!TOu :!Tleft_arrow]
 
        ;; Ctrl+Opt+o = Ctrl+Right (next desktop)
-       [:!TOo [:right_arrow :!Tvk_none]]
+       [:!TOo :!Tright_arrow]
      ]
    }
 

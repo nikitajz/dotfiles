@@ -1,10 +1,5 @@
 {
   "profiles" : [ {
-    "name" : "Default-profile",
-    "selected" : true,
-    "virtual_hid_keyboard" : {
-      "keyboard_type_v2" : "ansi"
-    },
     "complex_modifications" : {
       "parameters" : {
         "basic.simultaneous_threshold_milliseconds" : 50,
@@ -828,9 +823,7 @@
             }
           },
           "to" : [ {
-            "key_code" : "left_arrow"
-          }, {
-            "key_code" : "vk_none",
+            "key_code" : "left_arrow",
             "modifiers" : [ "left_control" ]
           } ],
           "type" : "basic"
@@ -842,14 +835,17 @@
             }
           },
           "to" : [ {
-            "key_code" : "right_arrow"
-          }, {
-            "key_code" : "vk_none",
+            "key_code" : "right_arrow",
             "modifiers" : [ "left_control" ]
           } ],
           "type" : "basic"
         } ]
       } ]
+    },
+    "name" : "Default-profile",
+    "selected" : true,
+    "virtual_hid_keyboard" : {
+      "keyboard_type_v2" : "ansi"
     }
   } ]
 }
