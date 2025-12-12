@@ -32,7 +32,7 @@ call plug#end()
 
 " Colorscheme
 set background=dark
-autocmd vimenter * ++nested colorscheme gruvbox
+colorscheme gruvbox
 
 " Basic editing settings
 set number                      " nu
