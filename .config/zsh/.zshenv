@@ -33,7 +33,6 @@ export PATH=$N_PREFIX/bin:$PATH
 export NODE_REPL_HISTORY="$XDG_STATE_HOME/node_repl_history"
 export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
-export NPM_CONFIG_TMP="${TMPDIR:-/tmp}/npm"
 
 # tldr, supports only C-client
 export TLDR_CACHE_DIR="$XDG_CACHE_HOME"/tldr
