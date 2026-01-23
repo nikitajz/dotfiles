@@ -27,9 +27,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 # export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export GOPATH="$XDG_DATA_HOME/go"
 
-# Node / NPM / `n` package manager 
-export N_PREFIX="$HOME/.local/bin"
-export PATH=$N_PREFIX/bin:$PATH
+# Node / NPM 
 export NODE_REPL_HISTORY="$XDG_STATE_HOME/node_repl_history"
 export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
