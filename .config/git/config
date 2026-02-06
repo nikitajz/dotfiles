@@ -91,3 +91,41 @@
   ts = -c diff.external=difft show --ext-diff
   td = -c diff.external=difft diff
 
+  ## branch status
+  # upstream deleted
+  gone = "!git branch -vv | grep ': gone]' | awk '{print $1}'"
+  # local only, never pushed
+  orphan = "!git for-each-ref --format='%(refname:short) %(upstream)' refs/heads | awk '$2 == \"\" {print $1}' | grep -Ev '^(main|master|dev)$'"
+  # detects base from origin/HEAD, fallback: main
+  merged = "!f() { \
+    base=${1:-$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')}; \
+    [ -z \"$base\" ] && base=main; \
+    git rev-parse --verify \"$base\" >/dev/null 2>&1 || base=\"origin/$base\"; \
+    git branch --merged \"$base\" | grep -Ev '^\\*|^[[:space:]]*(main|master|dev)$'; \
+  }; f"
+
+  ## branch cleanup
+  # branch cleanup (gone + merged, not orphan)
+  prune-gone = "!branches=$(git gone); \
+    if [ -n \"$branches\" ]; then \
+      echo \"Deleting gone branches:\"; echo \"$branches\"; \
+      echo \"$branches\" | xargs -I{} git branch -D {}; \
+    else \
+      echo \"No gone branches\"; \
+    fi"
+  # uses -d (safe), not -D
+  prune-merged = "!f() { \
+    branches=$(git merged \"$1\"); \
+    if [ -n \"$branches\" ]; then \
+      echo \"Deleting merged branches:\"; echo \"$branches\"; \
+      echo \"$branches\" | xargs -I{} git branch -d {}; \
+    else \
+      echo \"No merged branches\"; \
+    fi; \
+  }; f"
+  # fetch, prune remotes, delete gone + merged
+  prune = "!git fetch --prune && git prune-gone && git prune-merged"
+
+  # fetch and show branches by category
+  sweep = "!git fetch --prune && echo '── Gone (upstream deleted) ──' && git gone && echo && echo '── Merged ──' && git merged && echo && echo '── Orphan (local only) ──' && git orphan"
+
