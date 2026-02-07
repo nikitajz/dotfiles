@@ -16,6 +16,9 @@ background-opacity = 0.95
 # `bindkey \^U backward-kill-line`
 keybind = cmd+backspace=text:\x15
 
+# Rename tab title
+keybind = cmd+shift+r=prompt_surface_title
+
 # Claude Code compatibility
 keybind = shift+enter=text:\x1b\r
 
