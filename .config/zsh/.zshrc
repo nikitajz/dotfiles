@@ -28,6 +28,11 @@ antidote load ${XDG_CONFIG_HOME}/zsh/.zsh_plugins.txt
 # always use emacs style for zsh
 # https://zsh.sourceforge.io/Guide/zshguide04.html#l75
 bindkey -e
+
+# Bash-like word boundaries: treat all non-alphanumeric chars as word separators
+# Affects Opt+Delete, Opt+Left/Right, etc.
+autoload -Uz select-word-style
+select-word-style bash
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 bindkey '^ ' autosuggest-accept
 bindkey \^U backward-kill-line
