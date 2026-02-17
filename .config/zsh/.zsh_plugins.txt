@@ -20,7 +20,7 @@ wfxr/forgit                         kind:defer
 Aloxaf/fzf-tab                      kind:defer
 
 # OMZ plugins require $ZSH_CACHE_DIR (set in .zshenv) or enable 'use-omz'
-ohmyzsh/ohmyzsh path:plugins/aws    kind:defer
+# ohmyzsh/ohmyzsh path:plugins/aws    kind:defer  # replaced by aws-aliases.zsh
 # ohmyzsh/ohmyzsh path:plugins/uv     kind:defer  # replaced by uv-aliases.zsh
 
 zsh-users/zsh-completions         path:src kind:fpath
