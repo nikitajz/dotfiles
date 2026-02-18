@@ -91,41 +91,79 @@
   ts = -c diff.external=difft show --ext-diff
   td = -c diff.external=difft diff
 
-  ## branch status
-  # upstream deleted
-  gone = "!git branch -vv | grep ': gone]' | awk '{print $1}'"
-  # local only, never pushed
+  ## branch status (detection only, read-only)
+  # upstream deleted (remote was deleted after push)
+  # awk gsub strips leading '* ' and '+' (worktree) so branch name is captured correctly in all cases
+  gone = "!git branch -vv | grep ': gone]' | awk '{gsub(/^[* +]+/, \"\"); print $1}'"
+  # local only, never pushed – never auto-deleted
   orphan = "!git for-each-ref --format='%(refname:short) %(upstream)' refs/heads | awk '$2 == \"\" {print $1}' | grep -Ev '^(main|master|dev)$'"
-  # detects base from origin/HEAD, fallback: main
+  # branches fully merged into base via regular merge
   merged = "!f() { \
     base=${1:-$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')}; \
     [ -z \"$base\" ] && base=main; \
     git rev-parse --verify \"$base\" >/dev/null 2>&1 || base=\"origin/$base\"; \
-    git branch --merged \"$base\" | grep -Ev '^\\*|^[[:space:]]*(main|master|dev)$'; \
+    git branch --merged \"$base\" | awk '{gsub(/^[* +]+/, \"\"); print}' | grep -Ev '^(main|master|dev)$'; \
+  }; f"
+  # branches squash-merged into base (invisible to --merged):
+  # creates a throwaway squash commit from the branch tree and checks if it already landed in base via git cherry
+  # only checks branches with a configured upstream (i.e. were pushed) – orphans can't have been PR-merged
+  squashed = "!f() { \
+    base=${1:-$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')}; \
+    [ -z \"$base\" ] && base=main; \
+    git rev-parse --verify \"$base\" >/dev/null 2>&1 || base=\"origin/$base\"; \
+    regular=$(git branch --merged \"$base\" | awk '{gsub(/^[* +]+/, \"\"); print}'); \
+    git for-each-ref refs/heads/ --format='%(refname:short) %(upstream:short)' | while read branch upstream; do \
+      [ -z \"$upstream\" ] && continue; \
+      echo \"$regular\" | grep -qxF \"$branch\" && continue; \
+      mb=$(git merge-base \"$base\" \"$branch\" 2>/dev/null) || continue; \
+      sq=$(git commit-tree $(git rev-parse \"$branch^{tree}\") -p \"$mb\" -m _) || continue; \
+      git cherry \"$base\" \"$sq\" 2>/dev/null | grep -q '^-' && echo \"$branch\"; \
+    done | grep -Ev '^(main|master|dev)$'; \
+  }; f"
+  # branches with no commits in the last N months (default: 3) – informational only, never auto-deleted
+  stale = "!f() { \
+    period=${1:-3}; \
+    git for-each-ref refs/heads/ --format='%(refname:short)' | while read branch; do \
+      [ -z \"$(git log -1 --since=\"${period} months ago\" -s \"$branch\" 2>/dev/null)\" ] && echo \"$branch\"; \
+    done | grep -Ev '^(main|master|dev)$'; \
   }; f"
 
-  ## branch cleanup
-  # branch cleanup (gone + merged, not orphan)
-  prune-gone = "!branches=$(git gone); \
-    if [ -n \"$branches\" ]; then \
-      echo \"Deleting gone branches:\"; echo \"$branches\"; \
-      echo \"$branches\" | xargs -I{} git branch -D {}; \
-    else \
-      echo \"No gone branches\"; \
-    fi"
-  # uses -d (safe), not -D
+  ## branch cleanup – all commands skip branches active in any worktree
+  prune-gone = "!all=$(git gone); \
+    wt=$(git worktree list --porcelain 2>/dev/null | sed -n 's/^branch refs\\/heads\\///p'); \
+    if [ -n \"$wt\" ]; then branches=$(echo \"$all\" | grep -vxF \"$wt\"); skipped=$(echo \"$all\" | grep -xF \"$wt\"); \
+    else branches=$all; skipped=; fi; \
+    if [ -n \"$branches\" ]; then echo \"Deleting gone branches:\"; echo \"$branches\"; echo \"$branches\" | xargs -I{} git branch -D {}; fi; \
+    if [ -n \"$skipped\" ]; then echo \"Skipped (active in worktree):\"; echo \"$skipped\"; fi; \
+    [ -z \"$all\" ] && echo \"No gone branches\"; true"
+  # -d (safe): git refuses to delete branches not fully merged
   prune-merged = "!f() { \
-    branches=$(git merged \"$1\"); \
-    if [ -n \"$branches\" ]; then \
-      echo \"Deleting merged branches:\"; echo \"$branches\"; \
-      echo \"$branches\" | xargs -I{} git branch -d {}; \
-    else \
-      echo \"No merged branches\"; \
-    fi; \
+    all=$(git merged \"$1\"); \
+    wt=$(git worktree list --porcelain 2>/dev/null | sed -n 's/^branch refs\\/heads\\///p'); \
+    if [ -n \"$wt\" ]; then branches=$(echo \"$all\" | grep -vxF \"$wt\"); skipped=$(echo \"$all\" | grep -xF \"$wt\"); \
+    else branches=$all; skipped=; fi; \
+    if [ -n \"$branches\" ]; then echo \"Deleting merged branches:\"; echo \"$branches\"; echo \"$branches\" | xargs -I{} git branch -d {}; fi; \
+    if [ -n \"$skipped\" ]; then echo \"Skipped (active in worktree):\"; echo \"$skipped\"; fi; \
+    [ -z \"$all\" ] && echo \"No merged branches\"; true; \
   }; f"
-  # fetch, prune remotes, delete gone + merged
-  prune = "!git fetch --prune && git prune-gone && git prune-merged"
+  # -D (force): squash commits are not recognised as merged by git
+  prune-squashed = "!f() { \
+    all=$(git squashed \"$1\"); \
+    wt=$(git worktree list --porcelain 2>/dev/null | sed -n 's/^branch refs\\/heads\\///p'); \
+    if [ -n \"$wt\" ]; then branches=$(echo \"$all\" | grep -vxF \"$wt\"); skipped=$(echo \"$all\" | grep -xF \"$wt\"); \
+    else branches=$all; skipped=; fi; \
+    if [ -n \"$branches\" ]; then echo \"Deleting squash-merged branches:\"; echo \"$branches\"; echo \"$branches\" | xargs -I{} git branch -D {}; fi; \
+    if [ -n \"$skipped\" ]; then echo \"Skipped (active in worktree):\"; echo \"$skipped\"; fi; \
+    [ -z \"$all\" ] && echo \"No squash-merged branches\"; true; \
+  }; f"
+  # fetch + delete gone, merged, squash-merged (orphan and stale are never touched)
+  prune = "!git fetch --prune && git prune-gone && git prune-merged && git prune-squashed"
 
-  # fetch and show branches by category
-  sweep = "!git fetch --prune && echo '── Gone (upstream deleted) ──' && git gone && echo && echo '── Merged ──' && git merged && echo && echo '── Orphan (local only) ──' && git orphan"
+  # read-only overview of all branch categories; uses ';' + '|| true' so empty sections don't abort
+  sweep = "!git fetch --prune; \
+    echo '── Gone (upstream deleted) ──'; git gone || true; echo; \
+    echo '── Merged ──'; git merged || true; echo; \
+    echo '── Squash-merged ──'; git squashed || true; echo; \
+    echo '── Orphan (local only, never pushed) ──'; git orphan || true; echo; \
+    echo '── Stale (no commits in 3+ months) ──'; git stale || true"
 
