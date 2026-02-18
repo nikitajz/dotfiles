@@ -1,12 +1,15 @@
 # Git base alias (other git aliases in git-aliases.zsh)
 alias g=git
 
+alias c=claude
+alias x=codex
+alias lg="lazygit"
+
 alias zconf="$EDITOR ${ZDOTDIR:-${HOME}}/.zshrc"
 alias zload="source ${XDG_CONFIG_HOME}/zsh/.zshrc"
 alias dot="cd ${DOTFILES:-${HOME}/.dotfiles}"
 alias vscode="code"
 alias diff="code --diff" # use vscode for diff file
-alias lg="lazygit"
 alias pn=pnpm
 alias zj=zellij
 
@@ -28,9 +31,6 @@ alias z="j" # backward compatibility
 # jump to the previous directory
 alias jj="j -"
 alias zz="z -"
-
-# serverless
-alias sls=serverless
 
 # Open Pycharm app for the specified folder (similar to vscode: `code <dir>`)
 pycharm() {
