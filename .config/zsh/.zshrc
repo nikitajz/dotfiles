@@ -43,8 +43,8 @@ zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
 ## Tools
-# Use (j, ji) as default commands instead of (z, zi)
-eval "$(zoxide init zsh --cmd j)"
+# Use (d, di) as default commands instead of (z, zi)
+eval "$(zoxide init zsh --cmd d)"
 
 ## uv autocomplete
 # https://github.com/astral-sh/uv/issues/8432#issuecomment-2605216865
