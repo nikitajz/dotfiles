@@ -12,6 +12,7 @@ alias vscode="code"
 alias diff="code --diff" # use vscode for diff file
 alias pn=pnpm
 alias zj=zellij
+alias j=just
 
 ## eza
 if command -v eza &>/dev/null; then
@@ -27,9 +28,8 @@ alias t3="tree -L 3"
 alias t4="tree -L 4"
 
 ## zoxide
-alias z="j" # backward compatibility
+alias z="d" # backward compatibility
 # jump to the previous directory
-alias jj="j -"
 alias zz="z -"
 
 # Open Pycharm app for the specified folder (similar to vscode: `code <dir>`)
