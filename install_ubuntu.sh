@@ -235,7 +235,7 @@ install_nerd_fonts() {
   local fonts_dir="$HOME/.local/share/fonts"
 
   # Check if fonts already exist
-  if command -v fc-list >/dev/null && fc-list | grep -qi "FiraCode Nerd Font" && fc-list | grep -qi "Hack Nerd Font"; then
+  if command -v fc-list >/dev/null && fc-list | grep -qi "FiraCode Nerd Font"; then
     print_warning "Nerd Fonts already installed, skipping"
     return
   fi
@@ -249,14 +249,6 @@ install_nerd_fonts() {
     curl -LO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
     unzip -q FiraCode.zip -d "$fonts_dir/FiraCodeNerdFont"
     rm FiraCode.zip
-  fi
-
-  # Download and install Hack Nerd Font
-  if [ ! -d "$fonts_dir/HackNerdFont" ]; then
-    print_step "Downloading Hack Nerd Font"
-    curl -LO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip
-    unzip -q Hack.zip -d "$fonts_dir/HackNerdFont"
-    rm Hack.zip
   fi
 
   # Refresh font cache if available
@@ -417,7 +409,7 @@ main() {
   command -v fzf >/dev/null && echo "✅ fzf" || echo "❌ fzf"
   command -v cargo >/dev/null && echo "✅ cargo" || echo "⚠️  cargo (optional)"
   command -v zoxide >/dev/null && echo "✅ zoxide" || echo "⚠️  zoxide (optional)"
-  [ -d "$HOME/.local/share/fonts/FiraCodeNerdFont" ] || [ -d "$HOME/.local/share/fonts/HackNerdFont" ] && echo "✅ nerd-fonts" || echo "⚠️  nerd-fonts (optional)"
+  [ -d "$HOME/.local/share/fonts/FiraCodeNerdFont" ] && echo "✅ nerd-fonts" || echo "⚠️  nerd-fonts (optional)"
   command -v starship >/dev/null && echo "✅ starship" || echo "⚠️  starship (optional)"
   command -v uv >/dev/null && echo "✅ uv" || echo "⚠️  uv (optional)"
   command -v nvim >/dev/null && echo "✅ nvim" || echo "⚠️  nvim (optional)"
