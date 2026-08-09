@@ -1,0 +1,16 @@
+# https://herdr.dev/docs/configuration/
+# Agent multiplexer (tmux-like) for terminal panes + AI coding agents (Claude, Codex, etc.)
+# Full reference: `herdr --default-config`
+
+[theme]
+name = "gruvbox"  # matches the gruvbox palette used by starship/vim
+
+# [keys]
+# prefix = "ctrl+space"
+
+# [ui.toast]
+# delivery = "system"  # macOS notification when an agent needs input or finishes
+# delay_seconds = 1
+
+# [session]
+# resume_agents_on_restore = true  # reattach Claude/Codex panes after a herdr server restart
