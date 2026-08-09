@@ -31,6 +31,11 @@ The EDN file should be at `~/.config/karabiner.edn`.
 - `Hyper+Space` → Language switch
 - `Hyper+Cmd+Space` → Emoji picker
 
+### Right Shift → herdr prefix / Shift (built-in keyboard only)
+- **Tap**: Ctrl+B (herdr prefix)
+- **Hold + key**: normal Shift
+- Restricted to the built-in MacBook keyboard (`is_built_in_keyboard`); external keyboards are unaffected
+
 ### j+k → Escape
 - Press `j` and `k` simultaneously
 

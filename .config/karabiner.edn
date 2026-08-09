@@ -31,6 +31,11 @@
    }
  }
 
+ ;; Devices
+ :devices {
+   :built-in [{:is_built_in_keyboard true}]
+ }
+
  ;; Concise definition for applications to use in rules
  :applications {
    :ides [
@@ -120,6 +125,19 @@
 
        ;; command + spacebar with hyper = emoji (Ctrl+Cmd+Space)
        [:!CQWERspacebar [:spacebar :!CTvk_none]]
+     ]
+   }
+
+   ;; ========================================
+   ;; 4: Right Shift Tap-Hold -> herdr prefix (Ctrl+B) / Shift (built-in keyboard only)
+   ;; ========================================
+   {
+     :des "Right Shift alone = herdr prefix (Ctrl+B), held = normal Shift (built-in keyboard only)"
+     :rules [
+       ;; tap right_shift alone -> ctrl+b (herdr prefix)
+       ;; hold right_shift + key -> normal Shift
+       ;; only active on the built-in keyboard, external keyboards unaffected
+       [:##right_shift {:key :right_shift :lazy true} [:built-in] {:alone :!Tb :params {:alone 200}}]
      ]
    }
 
