@@ -5,8 +5,21 @@
 [theme]
 name = "gruvbox"  # matches the gruvbox palette used by starship/vim
 
-# [keys]
-# prefix = "ctrl+space"
+[keys]
+# Workspace: direct jump (mirrors switch_tab's plain 1..9, shift = one level up)
+switch_workspace = "prefix+shift+1..9"
+# Workspace: sequential cycle
+next_workspace = "prefix+alt+l"
+previous_workspace = "prefix+alt+h"
+
+# Agent: direct jump by priority-panel index
+focus_agent = "prefix+alt+1..9"
+# Agent: sequential cycle through the priority queue
+next_agent = "prefix+alt+j"
+previous_agent = "prefix+alt+k"
+
+# Snap back to whichever pane you last touched, anywhere
+last_pane = "prefix+backtick"
 
 # [ui.toast]
 # delivery = "system"  # macOS notification when an agent needs input or finishes
@@ -14,3 +27,7 @@ name = "gruvbox"  # matches the gruvbox palette used by starship/vim
 
 # [session]
 # resume_agents_on_restore = true  # reattach Claude/Codex panes after a herdr server restart
+
+[ui]
+show_agent_labels_on_pane_borders = true
+agent_panel_sort = "priority"
