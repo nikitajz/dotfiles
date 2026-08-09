@@ -3,6 +3,7 @@ alias g=git
 
 alias c=claude
 alias x=codex
+alias h=herdr
 alias lg="lazygit"
 
 alias zconf="$EDITOR ${ZDOTDIR:-${HOME}}/.zshrc"
