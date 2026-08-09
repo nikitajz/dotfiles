@@ -64,3 +64,9 @@ alias ed="deactivate"
 alias dotlink="cd \${DOTFILES:-\${HOME}/.dotfiles} && stow --restow --no-folding -t ~ ."
 alias dotdrylink="cd \${DOTFILES:-\${HOME}/.dotfiles} && stow -nv --restow --no-folding -t ~ ."
 
+# Homebrew
+alias bu="brew update && brew outdated"
+alias bup="brew update && brew upgrade && brew purge && brew cleanup --prune 30 && brew doctor"
+alias bs="brew search"
+alias bi="brew info"
+alias bl="brew ls"
