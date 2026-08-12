@@ -430,6 +430,34 @@
           "type" : "basic"
         } ]
       }, {
+        "description" : "Right Shift alone = herdr prefix (Ctrl+B), held = normal Shift (built-in keyboard only)",
+        "manipulators" : [ {
+          "to_if_alone" : [ {
+            "key_code" : "b",
+            "modifiers" : [ "left_control" ]
+          } ],
+          "parameters" : {
+            "basic.to_if_alone_timeout_milliseconds" : 200
+          },
+          "from" : {
+            "key_code" : "right_shift",
+            "modifiers" : {
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "right_shift",
+            "lazy" : true
+          } ],
+          "conditions" : [ {
+            "identifiers" : [ {
+              "is_built_in_keyboard" : true
+            } ],
+            "type" : "device_if"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
         "description" : "Hyper + <key>: Run/activate application (RShift+RCtrl+ROpt+RCmd+<key>)",
         "manipulators" : [ {
           "from" : {
