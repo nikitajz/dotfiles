@@ -592,7 +592,7 @@
           "to" : [ {
             "software_function" : {
               "open_application" : {
-                "bundle_identifier" : "com.openai.chat"
+                "bundle_identifier" : "com.openai.codex"
               }
             }
           } ],

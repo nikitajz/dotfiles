@@ -175,7 +175,7 @@
        [:!QWERh [:oid "com.mitchellh.ghostty"]]
 
        ;; j -> ChatGPT
-       [:!QWERj [:oid "com.openai.chat"]]
+       [:!QWERj [:oid "com.openai.codex"]]
 
        ;; t -> iTerm2
        [:!QWERt [:oid "com.googlecode.iterm2"]]
