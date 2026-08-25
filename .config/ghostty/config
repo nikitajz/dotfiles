@@ -21,9 +21,6 @@ keybind = cmd+backspace=text:\x15
 # Rename tab title
 keybind = cmd+shift+r=prompt_surface_title
 
-# Claude Code compatibility
-keybind = shift+enter=text:\x1b\r
-
 # SSH compatibility (fix "Error opening terminal: xterm-ghostty")
 shell-integration-features = ssh-env,ssh-terminfo
 
