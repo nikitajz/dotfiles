@@ -4,8 +4,9 @@
 # font-size = 14
 
 mouse-hide-while-typing = true
-window-height = 180
-window-width = 60
+# Initial dimensions are terminal grid cells: columns × rows.
+window-height = 60
+window-width = 150
 
 # Hyper+g - quick terminal
 keybind = global:cmd+ctrl+alt+shift+g=toggle_quick_terminal
