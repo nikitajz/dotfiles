@@ -67,7 +67,7 @@ alias dotdrylink="cd \${DOTFILES:-\${HOME}/.dotfiles} && stow -nv --restow --no-
 
 # Homebrew
 alias bu="brew update && brew outdated"
-alias bup="brew update && brew upgrade && brew purge && brew cleanup --prune 30 && brew doctor"
+alias bup="brew update && brew upgrade && brew cleanup --prune 30 && brew doctor"
 alias bs="brew search"
 alias bi="brew info"
 alias bl="brew ls"
